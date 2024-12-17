@@ -26,7 +26,6 @@ interface Congreso {
 export class CongresosComponent implements OnInit {
   congresos: Congreso[] = [];
   selectedCongreso: Congreso = this.initializeCongreso();
-  //nextId: number = 1; // Para asignar un ID único
 
   constructor(
     private modalService: NgbModal,
