@@ -1,0 +1,103 @@
+<div>
+  <h2>Lista de Congresos</h2>
+  <!-- Botón para agregar un nuevo congreso -->
+  <button class="btn btn-primary mb-3" (click)="open(content)">Agregar Congreso</button>
+
+  <!-- Tabla para mostrar la lista de congresos -->
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th>Ubicación</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let congreso of congresos">
+      <td>{{ congreso.id }}</td>
+      <td>{{ congreso.nombre }}</td>
+      <td>{{ congreso.fechaInicio }}</td>
+      <td>{{ congreso.fechaFin }}</td>
+      <td>{{ congreso.ubicacion }}</td>
+      <td>
+        <!-- Botón para editar el congreso -->
+        <button class="btn btn-sm btn-warning me-2" (click)="edit(content, congreso)">
+          Editar
+        </button>
+        <!-- Botón para eliminar el congreso -->
+        <button class="btn btn-sm btn-danger" (click)="delete(congreso)">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+    <!-- Mostrar mensaje si no hay congresos -->
+    <tr *ngIf="congresos.length === 0">
+      <td colspan="6" class="text-center">No hay congresos disponibles.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedCongreso.id ? 'Editar Congreso' : 'Agregar Congreso' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #congresoForm="ngForm">
+        <div class="form-group mb-2">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="fechaInicio">Fecha Inicio</label>
+          <input
+            type="date"
+            id="fechaInicio"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.fechaInicio"
+            name="fechaInicio"
+            required
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="fechaFin">Fecha Fin</label>
+          <input
+            type="date"
+            id="fechaFin"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.fechaFin"
+            name="fechaFin"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="ubicacion">Ubicación</label>
+          <input
+            type="text"
+            id="ubicacion"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.ubicacion"
+            name="ubicacion"
+            required
+          />
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" (click)="save()">Guardar</button>
+      <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+    </div>
+  </ng-template>
+
+</div>
