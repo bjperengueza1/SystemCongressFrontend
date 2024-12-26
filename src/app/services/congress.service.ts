@@ -2,12 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-interface Congress {
-  id: number;
-  nombre: string;
-  fechaInicio: string;
-  fechaFin: string;
-  ubicacion: string;
+export interface CongressItem {
+  congressId: number;
+  name: string;
+  startDate: string; // O usa Date si prefieres convertirla manualmente
+  endDate: string;
+  location: string;
+}
+
+export interface ApiResponse {
+  items: CongressItem[];
+  totalItems: number;
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 @Injectable({
@@ -19,36 +29,19 @@ export class CongressService {
   constructor(private http: HttpClient) {}
 
   // Obtener la lista de congresos y mapear propiedades
-  getCongresses(): Observable<Congress[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      map((response) =>
-        response.map((item) => ({
-          id: item.congressId,
-          nombre: item.name,
-          fechaInicio: item.startDate,
-          fechaFin: item.endDate,
-          ubicacion: item.location,
-        }))
-      )
-    );
+  getCongresses(page: number, size: number): Observable<ApiResponse> {
+    const params = { pageNumber: page.toString(), pageSize: size.toString() };
+    return this.http.get<ApiResponse>(`${this.apiUrl}`, { params });
+
   }
 
   // Obtener un congreso por ID
-  getCongress(id: number): Observable<Congress> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<any>(url).pipe(
-      map((item) => ({
-        id: item.congressId,
-        nombre: item.name,
-        fechaInicio: item.startDate,
-        fechaFin: item.endDate,
-        ubicacion: item.location,
-      }))
-    );
+  getCongress(id: number): Observable<CongressItem> {
+    return this.http.get<CongressItem>(`${this.apiUrl}/${id}`);
   }
 
   // Crear un congreso
-  createCongress(congreso: Congress): Observable<any> {
+  createCongress(congreso: any): Observable<any> {
     const payload = {
       congressId: congreso.id,
       name: congreso.nombre,
@@ -60,7 +53,7 @@ export class CongressService {
   }
 
   // Actualizar un congreso
-  updateCongress(congreso: Congress): Observable<any> {
+  updateCongress(congreso: any): Observable<any> {
     const url = `${this.apiUrl}/${congreso.id}`;
     const payload = {
       congressId: congreso.id,
