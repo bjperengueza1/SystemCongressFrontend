@@ -1,112 +1,82 @@
 <div>
-  <h2>Lista de Congresos</h2>
   <!-- Botón para agregar un nuevo congreso -->
   <button class="btn btn-primary mb-3" (click)="open(content)">Agregar Congreso</button>
 
-  <!-- Tabla para mostrar la lista de congresos -->
-  <table class="table table-bordered table-striped mt-3">
-    <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Fecha Inicio</th>
-      <th>Fecha Fin</th>
-      <th>Ubicación</th>
-      <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let congreso of congresos">
-      <td>{{ congreso.id }}</td>
-      <td>{{ congreso.nombre }}</td>
-      <td>{{ congreso.fechaInicio }}</td>
-      <td>{{ congreso.fechaFin }}</td>
-      <td>{{ congreso.ubicacion }}</td>
-      <td>
-        <!-- Botón para editar el congreso -->
-        <button class="btn btn-sm btn-warning me-2" (click)="edit(content, congreso)">
-          Editar
-        </button>
-        <!-- Botón para eliminar el congreso -->
-        <button class="btn btn-sm btn-danger" (click)="delete(congreso)">
-          Eliminar
-        </button>
-      </td>
-    </tr>
-    <!-- Mostrar mensaje si no hay congresos -->
-    <tr *ngIf="congresos.length === 0">
-      <td colspan="6" class="text-center">No hay congresos disponibles.</td>
-    </tr>
-    </tbody>
-  </table>
-
-
-
-  <div class="container mt-4">
-    <div *ngIf="congresses">
-      <!-- Selector para tamaño de página -->
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>Congresos</h4>
-        <div class="form-group">
-          <label for="pageSize" class="me-2">Elementos por página:</label>
-          <select id="pageSize" class="form-select d-inline-block w-auto"
-                  [(ngModel)]="pageSize"
-                  (change)="onPageSizeChange($event)">
-            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
-          </select>
-        </div>
+  <div *ngIf="response">
+    <!-- Selector para tamaño de página -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Congresos</h4>
+      <div class="form-group">
+        <label for="pageSize" class="me-2">Elementos por página:</label>
+        <select id="pageSize" class="form-select d-inline-block w-auto"
+                [(ngModel)]="pageSize"
+                (change)="onPageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
       </div>
-
-      <!-- Lista de congresos -->
-      <div class="list-group">
-        <a
-          class="list-group-item list-group-item-action"
-          *ngFor="let congress of congresses.items">
-          <h5 class="mb-1">{{ congress.name }}</h5>
-          <p class="mb-1">
-            <strong>Fecha:</strong> {{ congress.startDate | date: 'shortDate' }} - {{ congress.endDate | date: 'shortDate' }}<br />
-            <strong>Lugar:</strong> {{ congress.location }}
-          </p>
-        </a>
-      </div>
-
-      <!-- Paginación usando ng-bootstrap -->
-      <nav class="mt-4" *ngIf="congresses.totalPages > 1">
-        <ngb-pagination
-          [collectionSize]="congresses.totalItems"
-          [(page)]="currentPage"
-          [pageSize]="pageSize"
-          (pageChange)="loadCongresses($event, pageSize)">
-        </ngb-pagination>
-      </nav>
     </div>
 
-    <!-- Spinner de carga -->
-    <div *ngIf="!congresses" class="text-center mt-5">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-      <p>Cargando congresos...</p>
-    </div>
+    <!-- Tabla para mostrar la lista de congresos -->
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Ubicación</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let congress of response.items">
+        <td>{{ congress.name }}</td>
+        <td>{{ congress.startDate }}</td>
+        <td>{{ congress.endDate }}</td>
+        <td>{{ congress.location }}</td>
+        <td>
+          <!-- Botón para editar el congreso -->
+          <button class="btn btn-sm btn-warning me-2" (click)="edit(content, congress)">
+            Editar
+          </button>
+          <!-- Botón para eliminar el congreso -->
+          <button class="btn btn-sm btn-danger" (click)="delete(congress)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+      <!-- Mostrar mensaje si no hay congresos -->
+      <tr *ngIf="response.items.length === 0">
+        <td colspan="6" class="text-center">No hay congresos disponibles.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginación usando ng-bootstrap -->
+    <nav class="mt-4" *ngIf="response.totalPages > 1">
+      <ngb-pagination
+        [collectionSize]="response.totalItems"
+        [(page)]="currentPage"
+        [pageSize]="pageSize"
+        (pageChange)="loadCongresses($event, pageSize)">
+      </ngb-pagination>
+    </nav>
+
+
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
+  <!-- Spinner de carga -->
+  <div *ngIf="!response" class="text-center mt-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p>Cargando congresos...</p>
+  </div>
 
 
   <!-- Modal -->
   <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">{{ selectedCongreso.id ? 'Editar Congreso' : 'Agregar Congreso' }}</h4>
+      <h4 class="modal-title">{{ selectedCongreso.congressId ? 'Editar Congreso' : 'Agregar Congreso' }}</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
@@ -117,7 +87,7 @@
             type="text"
             id="nombre"
             class="form-control"
-            [(ngModel)]="selectedCongreso.nombre"
+            [(ngModel)]="selectedCongreso.name"
             name="nombre"
             required
           />
@@ -128,7 +98,7 @@
             type="date"
             id="fechaInicio"
             class="form-control"
-            [(ngModel)]="selectedCongreso.fechaInicio"
+            [(ngModel)]="selectedCongreso.startDate"
             name="fechaInicio"
             required
           />
@@ -139,7 +109,7 @@
             type="date"
             id="fechaFin"
             class="form-control"
-            [(ngModel)]="selectedCongreso.fechaFin"
+            [(ngModel)]="selectedCongreso.endDate"
             name="fechaFin"
             required
           />
@@ -150,7 +120,7 @@
             type="text"
             id="ubicacion"
             class="form-control"
-            [(ngModel)]="selectedCongreso.ubicacion"
+            [(ngModel)]="selectedCongreso.location"
             name="ubicacion"
             required
           />

@@ -2,15 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
-import {CongressService,ApiResponse} from '../../services/congress.service';
-
-interface Congreso {
-  id: number;
-  nombre: string;
-  fechaInicio: string;
-  fechaFin: string;
-  ubicacion: string;
-}
+import {CongressService, ApiResponse, CongressItem} from '../../services/congress.service';
 
 @Component({
   selector: 'app-congresos',
@@ -19,20 +11,19 @@ interface Congreso {
     FormsModule,
     NgForOf,
     NgIf,
-    DatePipe,
     NgbPagination
   ],
   templateUrl: './congresos.component.html',
   styleUrl: './congresos.component.css'
 })
 export class CongresosComponent implements OnInit {
-  congresses: ApiResponse | null = null;
+  response: ApiResponse | null = null;
   currentPage = 1; // Página actual, para manejar la paginación
-  pageSize = 10; // Tamaño de página predeterminado
+  pageSize = 5; // Tamaño de página predeterminado
   pageSizes = [5, 10, 15, 20]; // Opciones para el tamaño de página
 
-  congresos: Congreso[] = [];
-  selectedCongreso: Congreso = this.initializeCongreso();
+  //congresos: CongressItem[] = [];
+  selectedCongreso: CongressItem = this.initializeCongreso();
 
   constructor(
     private modalService: NgbModal,
@@ -40,13 +31,22 @@ export class CongresosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadCongresses(this.currentPage,10);
+    this.loadCongresses(this.currentPage,this.pageSize);
   }
 
   // Cargar todos los congresos desde el servicio
   loadCongresses(page: number, size: number) {
     this.congressService.getCongresses(page, size).subscribe({
-      next: (response) => (this.congresses = response),
+      next: (response) => {
+        this.response = {
+          ...response,
+          items: response.items.map((item: CongressItem) => ({
+            ...item,
+            startDate: this.formatDate(item.startDate),
+            endDate: this.formatDate(item.endDate),
+          })),
+        };
+      },
       error: (err) => console.error('Error al cargar congresos', err),
     });
   }
@@ -59,8 +59,9 @@ export class CongresosComponent implements OnInit {
 
   // Método para inicializar un objeto Congreso vacío
   // Inicializar un congreso vacío
-  private initializeCongreso(): Congreso {
-    return { id: 0, nombre: '', fechaInicio: '', fechaFin: '', ubicacion: '' };
+  private initializeCongreso(): CongressItem {
+    //return { id: 0, nombre: '', fechaInicio: '', fechaFin: '', ubicacion: '' };
+    return {congressId: 0, endDate: '', location: '', name: '', startDate: ''}
   }
 
   open(content: any) {
@@ -69,17 +70,18 @@ export class CongresosComponent implements OnInit {
   }
 
   // Abrir modal para editar un congreso
-  edit(content: any, congreso: Congreso) {
+  edit(content: any, congreso: CongressItem) {
     this.selectedCongreso = { ...congreso }; // Clonar el objeto seleccionado
     this.modalService.open(content);
   }
 
   save() {
-    if (this.selectedCongreso.id) {
+    if (this.selectedCongreso.congressId) {
       // Editar congreso
       this.congressService.updateCongress(this.selectedCongreso).subscribe({
         next: () => {
-          //this.loadCongresses(); // Recargar la lista
+          //actualizar el response
+          this.loadCongresses(this.currentPage, this.pageSize); // Recargar la lista
           this.modalService.dismissAll();
         },
         error: (err) => console.error('Error al actualizar congreso', err),
@@ -88,23 +90,29 @@ export class CongresosComponent implements OnInit {
       // Crear nuevo congreso
       this.congressService.createCongress(this.selectedCongreso).subscribe({
         next: () => {
-          //this.loadCongresses(); // Recargar la lista
+          //this.loadCongresses(this.currentPage, this.pageSize); // Recargar la lista
           this.modalService.dismissAll();
         },
         error: (err) => console.error('Error al crear congreso', err),
       });
     }
+    //this.loadCongresses(1, this.pageSize);
+    //this.currentPage = 1;
   }
 
-  delete(congreso: Congreso) {
+  delete(congreso: CongressItem) {
     const confirmDelete = confirm(
-      `¿Estás seguro de eliminar el congreso "${congreso.nombre}"?`
+      `¿Estás seguro de eliminar el congreso "${congreso.name}"?`
     );
     if (confirmDelete) {
-      this.congressService.deleteCongress(congreso.id).subscribe({
+      this.congressService.deleteCongress(congreso.congressId).subscribe({
         //next: () => this.loadCongresses(), // Recargar la lista después de eliminar
         error: (err) => console.error('Error al eliminar congreso', err),
       });
     }
+  }
+
+  formatDate(isoDate: string): string {
+    return isoDate.split('T')[0];
   }
 }

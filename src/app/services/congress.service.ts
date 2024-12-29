@@ -1,6 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    Authorization: `Bearer ${JSON.parse(<string>localStorage.getItem('user')).token}`,
+  })
+}
 
 export interface CongressItem {
   congressId: number;
@@ -32,7 +38,6 @@ export class CongressService {
   getCongresses(page: number, size: number): Observable<ApiResponse> {
     const params = { pageNumber: page.toString(), pageSize: size.toString() };
     return this.http.get<ApiResponse>(`${this.apiUrl}`, { params });
-
   }
 
   // Obtener un congreso por ID
@@ -41,28 +46,14 @@ export class CongressService {
   }
 
   // Crear un congreso
-  createCongress(congreso: any): Observable<any> {
-    const payload = {
-      congressId: congreso.id,
-      name: congreso.nombre,
-      startDate: congreso.fechaInicio,
-      endDate: congreso.fechaFin,
-      location: congreso.ubicacion,
-    };
-    return this.http.post<any>(this.apiUrl, payload);
+  createCongress(congress: CongressItem): Observable<any> {
+    return this.http.post<any>(this.apiUrl, congress);
   }
 
   // Actualizar un congreso
-  updateCongress(congreso: any): Observable<any> {
-    const url = `${this.apiUrl}/${congreso.id}`;
-    const payload = {
-      congressId: congreso.id,
-      name: congreso.nombre,
-      startDate: congreso.fechaInicio,
-      endDate: congreso.fechaFin,
-      location: congreso.ubicacion,
-    };
-    return this.http.put<any>(url, payload);
+  updateCongress(congress: CongressItem): Observable<any> {
+    const url = `${this.apiUrl}/${congress.congressId}`;
+    return this.http.put<any>(url, congress);
   }
 
   // Eliminar un congreso
