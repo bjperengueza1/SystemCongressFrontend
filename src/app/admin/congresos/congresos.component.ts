@@ -70,8 +70,8 @@ export class CongresosComponent implements OnInit {
   }
 
   // Abrir modal para editar un congreso
-  edit(content: any, congreso: CongressItem) {
-    this.selectedCongreso = { ...congreso }; // Clonar el objeto seleccionado
+  edit(content: any, congressItem: CongressItem) {
+    this.selectedCongreso = { ...congressItem }; // Clonar el objeto seleccionado
     this.modalService.open(content);
   }
 
