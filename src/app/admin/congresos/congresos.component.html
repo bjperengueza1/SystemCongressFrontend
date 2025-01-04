@@ -42,7 +42,7 @@
           <!--<button class="btn btn-sm btn-danger" (click)="delete(congress)">
             Eliminar
           </button>-->
-          <button class="btn btn-sm btn-info" >
+          <button class="btn btn-sm btn-info" (click)="openListRoomsPage(contentListRooms,congress)">
             Gestionar Salas
           </button>
         </td>
@@ -63,8 +63,6 @@
         (pageChange)="loadCongresses($event, pageSize)">
       </ngb-pagination>
     </nav>
-
-
   </div>
 
   <!-- Spinner de carga -->
@@ -134,6 +132,57 @@
       <button class="btn btn-success" (click)="save()">Guardar</button>
       <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
     </div>
+  </ng-template>
+
+  <!-- Modal for list Rooms -->
+  <ng-template #contentListRooms let-modal>
+    <div class="modal-header">
+
+    </div>
+    <div class="modal-body">
+
+      <div *ngIf="results">
+        <table class="table table-bordered table-striped mt-3">
+          <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Capacidad</th>
+            <th>Ubicacion</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (roomsItem of results.items; track roomsItem.roomId ){
+              <tr>
+              <td>{{roomsItem.name}}</td>
+              <td>{{roomsItem.capacity}}</td>
+              <td>{{roomsItem.location}}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- Paginación usando ng-bootstrap -->
+        <nav class="mt-4" *ngIf="results.totalPages > 1">
+          <ngb-pagination
+            [collectionSize]="results.totalItems"
+            [(page)]="currentPageResults"
+            [pageSize]="pageSizeResults"
+            (pageChange)="loadRooms($event, pageSizeResults)">
+          </ngb-pagination>
+        </nav>
+
+      </div>
+
+      <!-- Spinner de carga -->
+      <div *ngIf="!results" class="text-center mt-5">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p>Cargando salas...</p>
+      </div>
+
+    </div>
+
   </ng-template>
 
 </div>

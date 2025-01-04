@@ -1,1 +1,119 @@
-<p>salas works!</p>
+<div>
+  <!-- Botón para agregar un nueva sala -->
+  <button class="btn btn-primary mb-3" (click)="open(content)">Agregar Sala</button>
+
+  <div *ngIf="response">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Salas</h4>
+      <div class="form-group">
+        <label for="pageSize" class="me-2">Elementos por página:</label>
+        <select id="pageSize" class="form-select d-inline-block w-auto"
+                [(ngModel)]="pageSize"
+                (change)="onPageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tabla para mostrar la lista de salas -->
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+      <tr>
+        <th>Congreso</th>
+        <th>Nombre</th>
+        <th>Capacidad</th>
+        <th>Ubicación</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (roomsWitchCongressItem of response.items; track roomsWitchCongressItem.roomId){
+          <tr>
+            <td>{{roomsWitchCongressItem.congressName}}</td>
+            <td>{{roomsWitchCongressItem.name}}</td>
+            <td>{{roomsWitchCongressItem.capacity}}</td>
+            <td>{{roomsWitchCongressItem.location}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="edit(content, roomsWitchCongressItem)">
+                Editar
+              </button>
+            </td>
+          </tr>
+        }
+
+        @if (response.items.length == 0) {
+          <td colspan="6" class="text-center">No hay salas disponibles.</td>
+        }
+      </tbody>
+    </table>
+
+    @if(response.totalPages > 1){
+      <nav class="mt-4">
+        <ngb-pagination
+          [collectionSize]="response.totalItems"
+          [(page)]="currentPage"
+          [pageSize]="pageSize"
+          (pageChange)="loadRooms($event, pageSize)">
+        </ngb-pagination>
+      </nav>
+    }
+  </div>
+
+  @if (!response){
+    <div class="text-center mt-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p>Cargando congresos...</p>
+    </div>
+  }
+
+  <!-- Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedRoomWitchCongres.congressId ? 'Editar Sala' : 'Agregar Sala' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group mb-2">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            [(ngModel)]="selectedRoomWitchCongres.name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="capacity">Capacidad</label>
+          <input
+            type="number"
+            id="capacity"
+            class="form-control"
+            [(ngModel)]="selectedRoomWitchCongres.capacity"
+            name="capacity"
+            required
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="location">Ubicación</label>
+          <input
+            type="text"
+            id="location"
+            class="form-control"
+            [(ngModel)]="selectedRoomWitchCongres.location"
+            name="location"
+            required
+          />
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" (click)="save()">Guardar</button>
+      <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+    </div>
+  </ng-template>
+</div>

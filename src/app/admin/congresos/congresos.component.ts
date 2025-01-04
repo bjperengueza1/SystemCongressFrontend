@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
-import {CongressService, ApiResponse, CongressItem} from '../../services/congress.service';
+import {NgForOf, NgIf} from '@angular/common';
+import {CongressService} from '../../services/congress.service';
+import {ApiResponse} from '../../interfaces/api-response';
+import {CongressItem, RoomsItem} from '../../interfaces/entities';
 
 @Component({
   selector: 'app-congresos',
@@ -17,10 +19,14 @@ import {CongressService, ApiResponse, CongressItem} from '../../services/congres
   styleUrl: './congresos.component.css'
 })
 export class CongresosComponent implements OnInit {
-  response: ApiResponse | null = null;
+  response: ApiResponse<CongressItem> | null = null;
   currentPage = 1; // Página actual, para manejar la paginación
   pageSize = 5; // Tamaño de página predeterminado
   pageSizes = [5, 10, 15, 20]; // Opciones para el tamaño de página
+
+  results: ApiResponse<RoomsItem> | null = null;
+  currentPageResults = 1; // Página actual, para manejar la paginación
+  pageSizeResults = 5; // Tamaño de página predeterminado
 
   //congresos: CongressItem[] = [];
   selectedCongreso: CongressItem = this.initializeCongreso();
@@ -49,6 +55,17 @@ export class CongresosComponent implements OnInit {
       },
       error: (err) => console.error('Error al cargar congresos', err),
     });
+  }
+
+  loadRooms(page: number, size: number) {
+
+    this.congressService.getRoomsByCongress(this.selectedCongreso.congressId,page,size).subscribe(
+      {
+        next: (response) =>{
+          this.results = response;
+        }
+      }
+    )
   }
 
   onPageSizeChange(event: Event): void {
@@ -100,12 +117,12 @@ export class CongresosComponent implements OnInit {
     //this.currentPage = 1;
   }
 
-  delete(congreso: CongressItem) {
+  delete(congressItem: CongressItem) {
     const confirmDelete = confirm(
-      `¿Estás seguro de eliminar el congreso "${congreso.name}"?`
+      `¿Estás seguro de eliminar el congreso "${congressItem.name}"?`
     );
     if (confirmDelete) {
-      this.congressService.deleteCongress(congreso.congressId).subscribe({
+      this.congressService.deleteCongress(congressItem.congressId).subscribe({
         //next: () => this.loadCongresses(), // Recargar la lista después de eliminar
         error: (err) => console.error('Error al eliminar congreso', err),
       });
@@ -114,5 +131,18 @@ export class CongresosComponent implements OnInit {
 
   formatDate(isoDate: string): string {
     return isoDate.split('T')[0];
+  }
+
+  openListRoomsPage(content: any, congressItem: CongressItem) {
+    this.selectedCongreso = { ...congressItem };
+    this.currentPageResults = 1;
+    this.congressService.getRoomsByCongress(congressItem.congressId,this.currentPageResults,this.pageSizeResults).subscribe(
+      {
+        next: (response) =>{
+          this.results = response;
+          this.modalService.open(content);
+        }
+      }
+    )
   }
 }
