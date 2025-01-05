@@ -13,8 +13,8 @@ export class CongressService {
   constructor(private http: HttpClient) {}
 
   // Obtener la lista de congresos y mapear propiedades
-  getCongresses(page: number, size: number): Observable<ApiResponse<CongressItem>> {
-    const params = { pageNumber: page.toString(), pageSize: size.toString() };
+  getCongresses(page: number, size: number, search: string): Observable<ApiResponse<CongressItem>> {
+    const params = { pageNumber: page.toString(), pageSize: size.toString(), search };
     return this.http.get<ApiResponse<CongressItem>>(`${this.apiUrl}`, { params });
   }
 

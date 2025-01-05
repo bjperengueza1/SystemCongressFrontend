@@ -19,6 +19,7 @@ import {CongressItem, RoomsItem} from '../../interfaces/entities';
   styleUrl: './congresos.component.css'
 })
 export class CongresosComponent implements OnInit {
+  searchTerm: string = '';
   response: ApiResponse<CongressItem> | null = null;
   currentPage = 1; // Página actual, para manejar la paginación
   pageSize = 5; // Tamaño de página predeterminado
@@ -37,12 +38,12 @@ export class CongresosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadCongresses(this.currentPage,this.pageSize);
+    this.loadCongresses(this.currentPage,this.pageSize, this.searchTerm);
   }
 
   // Cargar todos los congresos desde el servicio
-  loadCongresses(page: number, size: number) {
-    this.congressService.getCongresses(page, size).subscribe({
+  loadCongresses(page: number, size: number, searchTerm: string) {
+    this.congressService.getCongresses(page, size, searchTerm).subscribe({
       next: (response) => {
         this.response = {
           ...response,
@@ -55,6 +56,11 @@ export class CongresosComponent implements OnInit {
       },
       error: (err) => console.error('Error al cargar congresos', err),
     });
+  }
+
+  onSearchChange() {
+    this.currentPage = 1; // Reiniciar a la primera página
+    this.loadCongresses(this.currentPage, this.pageSize, this.searchTerm);
   }
 
   loadRooms(page: number, size: number) {
@@ -70,7 +76,7 @@ export class CongresosComponent implements OnInit {
 
   onPageSizeChange(event: Event): void {
     this.currentPage = 1; // Reinicia a la primera página
-    this.loadCongresses(this.currentPage, this.pageSize);
+    this.loadCongresses(this.currentPage, this.pageSize, this.searchTerm);
   }
 
 
@@ -98,7 +104,7 @@ export class CongresosComponent implements OnInit {
       this.congressService.updateCongress(this.selectedCongreso).subscribe({
         next: () => {
           //actualizar el response
-          this.loadCongresses(this.currentPage, this.pageSize); // Recargar la lista
+          this.loadCongresses(this.currentPage, this.pageSize, this.searchTerm); // Recargar la lista
           this.modalService.dismissAll();
         },
         error: (err) => console.error('Error al actualizar congreso', err),
