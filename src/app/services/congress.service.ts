@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {catchError, map, Observable, of} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
 import {CongressItem, RoomsItem} from '../interfaces/entities';
 
@@ -44,5 +44,15 @@ export class CongressService {
   getRoomsByCongress(id: number,page: number, size: number): Observable<ApiResponse<RoomsItem>> {
     const params = {pageNumber: page.toString(), pageSize: size.toString() };
     return this.http.get<ApiResponse<RoomsItem>>(`${this.apiUrl}/${id}/Rooms`, { params });
+  }
+
+  searchCongresses(search: string): Observable<CongressItem[]> {
+    const params = { search }
+    return this.http
+      .get<ApiResponse<CongressItem>>(`${this.apiUrl}`, { params })
+      .pipe(
+        map((response) => response.items || []),
+        catchError(() => of([]))
+      );
   }
 }

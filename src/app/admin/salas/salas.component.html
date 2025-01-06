@@ -4,7 +4,15 @@
 
   <div *ngIf="response">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4>Salas</h4>
+      <div class="form-group w-50">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar congresos..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange()"
+        />
+      </div>
       <div class="form-group">
         <label for="pageSize" class="me-2">Elementos por página:</label>
         <select id="pageSize" class="form-select d-inline-block w-auto"
@@ -53,7 +61,7 @@
           [collectionSize]="response.totalItems"
           [(page)]="currentPage"
           [pageSize]="pageSize"
-          (pageChange)="loadRooms($event, pageSize)">
+          (pageChange)="loadRooms($event, pageSize, searchTerm)">
         </ngb-pagination>
       </nav>
     }
@@ -64,18 +72,37 @@
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Cargando...</span>
       </div>
-      <p>Cargando congresos...</p>
+      <p>Cargando salas...</p>
     </div>
   }
+
+
 
   <!-- Modal -->
   <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">{{ selectedRoomWitchCongres.congressId ? 'Editar Sala' : 'Agregar Sala' }}</h4>
+      <h4 class="modal-title">{{ selectedRoomWitchCongres.roomId ? 'Editar Sala' : 'Agregar Sala' }}</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
       <form>
+        <div class="form-group mb-2">
+          <label for="congress">Sala</label>
+          <!-- Aqui quisiera poder biscar en el select y que consuma una api-->
+          <ng-select
+            id="congress"
+            name="congress"
+            [items]="congresses"
+            [typeahead]="searchCongresses$"
+            bindLabel="name"
+            bindValue="congressId"
+            [(ngModel)]="selectedRoomWitchCongres.congressId"
+            placeholder="Selecciona un congreso"
+            (search)="onSearchCongresses($event)"
+            [notFoundText]="'No se encontraron congresos'"
+          >
+          </ng-select>
+        </div>
         <div class="form-group mb-2">
           <label for="name">Nombre</label>
           <input

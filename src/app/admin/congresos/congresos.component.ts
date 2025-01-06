@@ -103,8 +103,8 @@ export class CongresosComponent implements OnInit {
       // Editar congreso
       this.congressService.updateCongress(this.selectedCongreso).subscribe({
         next: () => {
-          //actualizar el response
-          this.loadCongresses(this.currentPage, this.pageSize, this.searchTerm); // Recargar la lista
+          this.currentPage = 1;
+          this.loadCongresses(1, this.pageSize, this.searchTerm);
           this.modalService.dismissAll();
         },
         error: (err) => console.error('Error al actualizar congreso', err),
@@ -113,14 +113,14 @@ export class CongresosComponent implements OnInit {
       // Crear nuevo congreso
       this.congressService.createCongress(this.selectedCongreso).subscribe({
         next: () => {
-          //this.loadCongresses(this.currentPage, this.pageSize); // Recargar la lista
+          this.currentPage = 1;
+          this.loadCongresses(1, this.pageSize, this.searchTerm);
           this.modalService.dismissAll();
+
         },
         error: (err) => console.error('Error al crear congreso', err),
       });
     }
-    //this.loadCongresses(1, this.pageSize);
-    //this.currentPage = 1;
   }
 
   delete(congressItem: CongressItem) {
