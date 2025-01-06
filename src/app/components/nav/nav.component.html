@@ -15,11 +15,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="admin/congresos">Congresos</a>
-          <a class="nav-link" href="admin/salas">Salas</a>
-          <a class="nav-link" href="#">Presentaciones</a>
-          <a class="nav-link" href="#">Asistentes</a>
-          <a class="nav-link" href="#">Asistencia</a>
+          <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink]="['congresos']">Congresos</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['salas']">Salas</a>
+          <a class="nav-link" routerLinkActive="active" href="#">Presentaciones</a>
+          <a class="nav-link" routerLinkActive="active" href="#">Asistentes</a>
+          <a class="nav-link" routerLinkActive="active" href="#">Asistencia</a>
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </div>
         <div class="ms-auto">

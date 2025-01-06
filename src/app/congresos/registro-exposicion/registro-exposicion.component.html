@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h2>Formulario de Inserción de Exposición</h2>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Campo para el nombre de la exposición -->
+    <div class="form-group">
+      <label for="name">Nombre de la Exposición:</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="formData.name" name="name" required>
+    </div>
+
+    <!-- Campo para la línea de investigación -->
+    <div class="form-group">
+      <label for="researchLine">Línea de Investigación:</label>
+      <select class="form-control" id="researchLine" [(ngModel)]="formData.researchLine" name="researchLine" required>
+        @for (line of researchLines; track line.value){
+          <option [value]="line.value">{{ line.label }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Campo para subir un archivo PDF -->
+    <div class="form-group">
+      <label for="file">Subir Archivo PDF:</label>
+      <input type="file" class="form-control-file" id="file" (change)="onFileChange($event)" accept=".pdf" required>
+    </div>
+
+
+    <!-- Sección de autores -->
+    <h4>Autores (Máximo 3 Autores)</h4>
+
+    <!-- Botón para enviar el formulario -->
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>

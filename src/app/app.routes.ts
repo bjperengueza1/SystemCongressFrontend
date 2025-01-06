@@ -5,6 +5,7 @@ import {CongresosComponent} from './admin/congresos/congresos.component';
 import {SalasComponent} from './admin/salas/salas.component';
 import {LoginComponent} from './admin/login/login.component';
 import {authGuard} from './guards/auth.guard';
+import {RegistroExposicionComponent} from './congresos/registro-exposicion/registro-exposicion.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -17,5 +18,8 @@ export const routes: Routes = [
       { path: 'salas', component: SalasComponent, canActivate: [authGuard] },
     ]
   },
-  { path: 'landing', component: LandingComponent }
+  { path: 'landing', component: LandingComponent },
+  //registro exposicion por congreso
+  { path: 'registro-exposicion/:id', component: RegistroExposicionComponent},
+  { path: '**', redirectTo: '/' }, // Redirige a '/' si no hay coincidencia
 ];
