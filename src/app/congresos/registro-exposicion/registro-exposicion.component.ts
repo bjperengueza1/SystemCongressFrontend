@@ -1,67 +1,82 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ExposureService} from '../../services/exposure.service';
+import {academicDegrees, ExposureInsertItem, researchLines} from '../../interfaces/entities';
+import {ActivatedRoute} from '@angular/router';
+import {routes} from '../../app.routes';
+import {NgSelectComponent} from '@ng-select/ng-select';
 
 
 @Component({
   selector: 'app-registro-exposicion',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgSelectComponent
   ],
   templateUrl: './registro-exposicion.component.html',
   styleUrl: './registro-exposicion.component.css'
 })
 export class RegistroExposicionComponent {
 
-  researchLines = [
-    { value: -1, label: 'Seleccione...' },
-    { value: 0, label: 'Tecnologías de la Información y Comunicación' },
-    { value: 1, label: 'Educación Superior y modalidades de estudio' },
-    { value: 2, label: 'Administración, Marketing y Emprendimiento' },
-    { value: 3, label: 'Calidad e innovación educativa' },
-    { value: 4, label: 'Artes y Humanidades' },
-    { value: 5, label: 'Actividad física y deportiva' },
-    { value: 6, label: 'Servicios de protección, seguridad y transporte' },
-    { value: 7, label: 'Ingeniería, Industria y Construcción' }
-  ];
+  protected readonly researchLines = researchLines;
 
-  fileToUpload: File | null = null;
+  exposureInsertItem: ExposureInsertItem = this.initializeExposureInsertItem();
 
-  formData = {
-    name: '',
-    researchLine: this.researchLines[0].value,
-    congressGuid: '5d8df8b091554cd5bff69b82dc8ccfdc',
-    authors: [{
-      Position : 1,
-      Name: 'Autor',
-      IDNumber: '1234',
-      InstitutionalMail: 'autor@autor.com',
-      PersonalMail: 'autor@autor.com',
-      PhoneNumber: '1234',
-      Country: 'Guayaquil',
-      City: 'Ecuador'
-    }]
-  };
-
-
-  constructor(private exposureService: ExposureService) {
+  constructor(private exposureService: ExposureService,
+              private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.exposureInsertItem.CongressGuid = params['id'];
+    })
   }
 
   onSubmit(){
-    this.exposureService.createExposure(this.formData,this.fileToUpload).subscribe(
+    this.exposureService.createExposure(this.exposureInsertItem).subscribe(
       res => {
-        console.log(res);
+        this.exposureInsertItem = this.initializeExposureInsertItem();
       }
     )
   }
 
+
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file && file.type === 'application/pdf') {
-      this.fileToUpload = file;
+      this.exposureInsertItem.pdfFile = file;
     } else {
       alert('Por favor, selecciona un archivo PDF válido.');
     }
   }
+
+  addAuthor() {
+    if (this.exposureInsertItem.Authors.length < 3) {
+      this.exposureInsertItem.Authors.push({
+        AcademicDegree: -1,
+        City: '',
+        Country: '',
+        IDNumber: '',
+        InstitutionalMail: '',
+        Name: '',
+        PersonalMail: '',
+        PhoneNumber: '',
+        Position: 0
+      });
+    }
+  }
+
+  private initializeExposureInsertItem(): ExposureInsertItem {
+    return {Authors: [{
+        Position: 0,
+        Name: '',
+        IDNumber: '',
+        InstitutionalMail: '',
+        PersonalMail: '',
+        PhoneNumber: '',
+        Country: '',
+        City: '',
+        AcademicDegree: null
+      }], CongressGuid: '', ResearchLine: null, pdfFile: null, Name:""};
+  }
+
+  protected readonly academicDegrees = academicDegrees;
 }

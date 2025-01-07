@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ExposureInsertItem} from '../interfaces/entities';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,23 @@ export class ExposureService {
   constructor(private http: HttpClient) { }
 
   //Crear una exposicion
-  createExposure(formData: any, file: File | null): Observable<any> {
+  createExposure(exposureInsertItem: ExposureInsertItem): Observable<any> {
+    exposureInsertItem.Authors = exposureInsertItem.Authors.map(author => {
+      return {
+        ...author, // Copia el resto de las propiedades
+        AcademicDegree: parseInt(String(author.AcademicDegree), 10) // Convierte a entero
+      };
+    });
+
     const formDataToSend = new FormData();
     // Agregar los datos del formulario
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('status', formData.status);
-    formDataToSend.append('researchLine', formData.researchLine);
-    formDataToSend.append('congressGuid', formData.congressGuid);
-    formDataToSend.append('authors', "[]");
-
-    if (file) {
-      formDataToSend.append('pdfFile', file, file.name);  // 'pdfFile' es el nombre del campo para el archivo
-    }
-
-
+    formDataToSend.append("Name", exposureInsertItem.Name);
+    if(exposureInsertItem.ResearchLine)
+      formDataToSend.append("ResearchLine", exposureInsertItem.ResearchLine.toString());
+    formDataToSend.append("CongressGuid", exposureInsertItem.CongressGuid);
+    formDataToSend.append("Authors", JSON.stringify(exposureInsertItem.Authors,null, 2));
+    if(exposureInsertItem.pdfFile)
+      formDataToSend.append('pdfFile', exposureInsertItem.pdfFile, exposureInsertItem.pdfFile.name)
 
     return this.http.post(this.apiUrl, formDataToSend);
   }
