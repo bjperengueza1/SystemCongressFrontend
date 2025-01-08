@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {NgForOf, NgIf} from '@angular/common';
+import {DOCUMENT, NgForOf, NgIf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
 import {ApiResponse} from '../../interfaces/api-response';
 import {CongressItem, RoomsItem} from '../../interfaces/entities';
+import {Clipboard} from '@angular/cdk/clipboard';
+
 
 @Component({
   selector: 'app-congresos',
@@ -32,13 +34,18 @@ export class CongresosComponent implements OnInit {
   //congresos: CongressItem[] = [];
   selectedCongreso: CongressItem = this.initializeCongreso();
 
+  private domain = '';
+
   constructor(
     private modalService: NgbModal,
-    private congressService: CongressService
+    protected clipboard: Clipboard,
+    private congressService: CongressService,
+    @Inject(DOCUMENT) private document: any
   ) {}
 
   ngOnInit() {
     this.loadCongresses(this.currentPage,this.pageSize, this.searchTerm);
+    this.domain = this.document.location.origin;
   }
 
   // Cargar todos los congresos desde el servicio
@@ -84,7 +91,7 @@ export class CongresosComponent implements OnInit {
   // Inicializar un congreso vacío
   private initializeCongreso(): CongressItem {
     //return { id: 0, nombre: '', fechaInicio: '', fechaFin: '', ubicacion: '' };
-    return {congressId: 0, endDate: '', location: '', name: '', startDate: ''}
+    return {guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: ''}
   }
 
   open(content: any) {
@@ -150,5 +157,9 @@ export class CongresosComponent implements OnInit {
         }
       }
     )
+  }
+
+  copyUrlRegisterCongress(guid: string): void {
+    this.clipboard.copy(`${this.domain}/registro-exposicion/${guid}`);
   }
 }

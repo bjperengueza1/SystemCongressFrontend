@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ExposureService} from '../../services/exposure.service';
 import {academicDegrees, ExposureInsertItem, researchLines} from '../../interfaces/entities';
 import {ActivatedRoute} from '@angular/router';
-import {routes} from '../../app.routes';
 import {NgSelectComponent} from '@ng-select/ng-select';
+import {DOCUMENT} from '@angular/common';
 
 
 @Component({
@@ -20,13 +20,18 @@ import {NgSelectComponent} from '@ng-select/ng-select';
 export class RegistroExposicionComponent {
 
   protected readonly researchLines = researchLines;
+  protected readonly academicDegrees = academicDegrees;
 
   exposureInsertItem: ExposureInsertItem = this.initializeExposureInsertItem();
+  private domain = "";
+  private congressGuid: string = '';
 
   constructor(private exposureService: ExposureService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              ) {
     this.route.params.subscribe(params => {
-      this.exposureInsertItem.CongressGuid = params['id'];
+      this.congressGuid = params['id'];
+      this.exposureInsertItem.CongressGuid = this.congressGuid;
     })
   }
 
@@ -59,14 +64,15 @@ export class RegistroExposicionComponent {
         Name: '',
         PersonalMail: '',
         PhoneNumber: '',
-        Position: 0
+        Position: this.exposureInsertItem.Authors.length +1
       });
     }
   }
 
   private initializeExposureInsertItem(): ExposureInsertItem {
+    console.log(this.congressGuid)
     return {Authors: [{
-        Position: 0,
+        Position: 1,
         Name: '',
         IDNumber: '',
         InstitutionalMail: '',
@@ -75,8 +81,6 @@ export class RegistroExposicionComponent {
         Country: '',
         City: '',
         AcademicDegree: null
-      }], CongressGuid: '', ResearchLine: null, pdfFile: null, Name:""};
+      }], CongressGuid: this.congressGuid, ResearchLine: null, pdfFile: null, Name:""};
   }
-
-  protected readonly academicDegrees = academicDegrees;
 }

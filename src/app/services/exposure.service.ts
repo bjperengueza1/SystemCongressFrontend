@@ -16,7 +16,8 @@ export class ExposureService {
     exposureInsertItem.Authors = exposureInsertItem.Authors.map(author => {
       return {
         ...author, // Copia el resto de las propiedades
-        AcademicDegree: parseInt(String(author.AcademicDegree), 10) // Convierte a entero
+        AcademicDegree: parseInt(String(author.AcademicDegree), 10), // Convierte a entero
+        IDNumber: String(author.IDNumber),
       };
     });
 

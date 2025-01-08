@@ -37,37 +37,36 @@
     <h4>Autores (Máximo 3 Autores)</h4>
     @for (author of exposureInsertItem.Authors; track author.Position){
       <div>
-        <input type="text" class="form-control" [(ngModel)]="author.Position" name="author{{author.Position}}Position" required>
         <div class="form-group">
-          <label for="author{{author.Position}}Name">Nombre del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}Name">Nombre del Autor {{author.Position}}:</label>
           <input type="text" class="form-control" [(ngModel)]="author.Name" name="author{{author.Position}}Name" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}IDNumber">Número de Cédula del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}IDNumber">Número de Cédula del Autor {{author.Position}}:</label>
           <input type="number" class="form-control" [(ngModel)]="author.IDNumber" name="author{{author.Position}}IDNumber" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}InstitutionalMail">Correo institucional del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}InstitutionalMail">Correo institucional del Autor {{author.Position}}:</label>
           <input type="email" class="form-control" [(ngModel)]="author.InstitutionalMail" name="author{{author.Position}}InstitutionalMail" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}PersonalMail">Correo personal del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}PersonalMail">Correo personal del Autor {{author.Position}}:</label>
           <input type="email" class="form-control" [(ngModel)]="author.PersonalMail" name="author{{author.Position}}PersonalMail" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}PhoneNumber">Número de teléfono del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}PhoneNumber">Número de teléfono del Autor {{author.Position}}:</label>
           <input type="text" class="form-control" [(ngModel)]="author.PhoneNumber" name="author{{author.Position}}PhoneNumber" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}Country">País de origen del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}Country">País de origen del Autor {{author.Position}}:</label>
           <input type="text" class="form-control" [(ngModel)]="author.Country" name="author{{author.Position}}Country" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}City">Ciudad de residencia del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}City">Ciudad de residencia del Autor {{author.Position}}:</label>
           <input type="text" class="form-control" [(ngModel)]="author.City" name="author{{author.Position}}City" required>
         </div>
         <div class="form-group">
-          <label for="author{{author.Position}}AcademicDegree">Grado académico del Autor {{author.Position + 1}}:</label>
+          <label for="author{{author.Position}}AcademicDegree">Grado académico del Autor {{author.Position}}:</label>
           <ng-select
             id="academicDegree"
             name="author{{author.Position}}AcademicDegree"
@@ -82,6 +81,8 @@
         </div>
       </div>
     }
+
+    <button type="button" class="btn btn-secondary" (click)="addAuthor()">Agregar Autor</button>
 
     <!-- Botón para enviar el formulario -->
     <button type="submit" class="btn btn-primary">Enviar</button>

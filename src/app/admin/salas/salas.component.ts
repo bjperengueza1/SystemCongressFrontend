@@ -94,7 +94,8 @@ export class SalasComponent implements OnInit{
       name: roomWitchCongressItem.congressName,
       startDate: '',
       endDate: '',
-      location: ''
+      location: '',
+      guid: '',
     }];
       this.modalService.open(content);
 

@@ -4,6 +4,7 @@ export interface CongressItem {
   startDate: string; // O usa Date si prefieres convertirla manualmente
   endDate: string;
   location: string;
+  guid: string;
 }
 
 export interface RoomsItem {
