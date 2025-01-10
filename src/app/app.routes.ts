@@ -6,6 +6,7 @@ import {SalasComponent} from './admin/salas/salas.component';
 import {LoginComponent} from './admin/login/login.component';
 import {authGuard} from './guards/auth.guard';
 import {RegistroExposicionComponent} from './congresos/registro-exposicion/registro-exposicion.component';
+import {PresentacionesComponent} from './admin/presentaciones/presentaciones.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'congresos', component: CongresosComponent, canActivate: [authGuard] },
       { path: 'salas', component: SalasComponent, canActivate: [authGuard] },
+      { path: 'presentaciones', component: PresentacionesComponent, canActivate: [authGuard] },
     ]
   },
   { path: 'landing', component: LandingComponent },

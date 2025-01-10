@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ExposureInsertItem} from '../interfaces/entities';
+import {ExposureInsertItem, ExposureItem} from '../interfaces/entities';
+import {ApiResponse} from '../interfaces/api-response';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,12 @@ export class ExposureService {
   private apiUrl = 'http://localhost:5196/api/Exposures'; // Endpoint de la API
 
   constructor(private http: HttpClient) { }
+
+
+  getExposures(page: number, size: number, search: string): Observable<ApiResponse<ExposureItem>> {
+    const params = { pageNumber: page.toString(), pageSize: size.toString(), search };
+    return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
+  }
 
   //Crear una exposicion
   createExposure(exposureInsertItem: ExposureInsertItem): Observable<any> {
@@ -33,4 +40,6 @@ export class ExposureService {
 
     return this.http.post(this.apiUrl, formDataToSend);
   }
+
+
 }

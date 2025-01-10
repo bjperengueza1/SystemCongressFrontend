@@ -44,7 +44,13 @@ export let academicDegrees = [
   { value: 5, label: 'Estudiante' }
 ];
 
-export interface AuthorItem {
+export let statusExposure = [
+  { value: 0, label: 'Pendiente' },
+  { value: 1, label: 'Aprobada' },
+  { value: 2, label: 'Rechazada' }
+];
+
+export interface AuthorInsertItem {
   Position: number,
   Name: string,
   IDNumber: string,
@@ -60,6 +66,31 @@ export interface ExposureInsertItem {
   Name: string,
   ResearchLine: number | null,
   CongressGuid: string,
-  Authors: AuthorItem[],
+  Authors: AuthorInsertItem[],
   pdfFile: File | null,
+}
+
+export interface AuthorItem {
+  authorId: number,
+  position: number,
+  name: string,
+  idNumber: string,
+  institutionalMail:string,
+  personalMail: string,
+  phoneNumber: string,
+  country: string,
+  city: string,
+  academicDegree: number,
+  AcademicDegreeLabel: string,
+}
+
+export interface ExposureItem {
+  exposureId: number,
+  name: string,
+  statusExposure: number,
+  statusLabelExposure: string,
+  researchLine: number,
+  researchLineLabel: string,
+  congressId: number,
+  authors: AuthorItem[],
 }
