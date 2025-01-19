@@ -30,31 +30,43 @@
       <thead class="table-dark">
       <tr>
         <th>Nombre</th>
-        <th>Estado</th>
         <th>Línea de investigación</th>
         <th>Descargar presentación</th>
+        <th>Estado</th>
         <th>Acciones</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let congress of response.items">
-        <td>{{ congress.name }}</td>
-        <td>{{ congress.statusLabelExposure }}</td>
-        <td>{{ congress.researchLineLabel }}</td>
-        <td>{{ congress.name }}</td>
+      <tr *ngFor="let exposure of response.items">
+        <td>{{ exposure.name }}</td>
+        <td>{{ exposure.researchLineLabel }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="downloadSummary(exposure.exposureId,exposure.summaryFilePath)">
+            Descargar
+          </button>
+        </td>
+        <td>{{ exposure.statusLabelExposure }}</td>
         <td>
           <!-- Botón para editar el congreso -->
           <button class="btn btn-sm btn-warning me-2">
             Editar
           </button>
-          <!-- Botón para eliminar el congreso -->
-          <!--<button class="btn btn-sm btn-danger" (click)="delete(congress)">
-            Eliminar
-          </button>-->
-          <button class="btn btn-sm btn-info">
-            Gestionar Salas
-          </button>
-          <button class="btn btn-sm btn-secondary">Copiar url de registro</button>
+          @if (exposure.statusExposure == 0) {
+            <br>
+            <button class="btn btn-sm btn-info" (click)="approve(exposure.exposureId)">
+              Aprobar
+            </button>
+          }
+          @if (exposure.statusExposure == 1 || exposure.statusExposure == 0) {
+            <br>
+            <button class="btn btn-sm btn-info" (click)="reject(exposure.exposureId)">
+              Rechazar
+            </button>
+          }
+          <br>
+          <button class="btn btn-sm btn-secondary" (click)="showAuthors(exposure.authors, content)">Authores</button>
+          <br>
+          <button class="btn btn-sm btn-secondary">Copiar url de registro de asistencia</button>
         </td>
       </tr>
       <!-- Mostrar mensaje si no hay congresos -->
@@ -82,6 +94,49 @@
     </div>
     <p>Cargando congresos...</p>
   </div>
+
+  <ng-template #content let-modal class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h4 class="modal-title">Autores</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <div>
+        <table class="table table-bordered table-striped mt-3">
+          <thead class="table-dark">
+          <tr>
+            <th>Posición</th>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Correo institucional</th>
+            <th>Correo personal</th>
+            <th>Número telefónico</th>
+            <th>País de origen</th>
+            <th>Ciudad de residencia</th>
+            <th>Grado académico</th>
+          </tr>
+          </thead>
+          <tbody>
+          @for (author of authors; track author.authorId) {
+            <tr>
+              <td>{{author.position}}</td>
+              <td>{{author.name}}</td>
+              <td>{{author.idNumber}}</td>
+              <td>{{author.institutionalMail}}</td>
+              <td>{{author.personalMail}}</td>
+              <td>{{author.phoneNumber}}</td>
+              <td>{{author.country}}</td>
+              <td>{{author.city}}</td>
+              <td>{{author.AcademicDegreeLabel}}</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        </div>
+    </div>
+
+  </ng-template>
 
 
 </div>

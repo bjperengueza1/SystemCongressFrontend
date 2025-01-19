@@ -87,6 +87,7 @@ export interface AuthorItem {
 export interface ExposureItem {
   exposureId: number,
   name: string,
+  summaryFilePath: string,
   statusExposure: number,
   statusLabelExposure: string,
   researchLine: number,

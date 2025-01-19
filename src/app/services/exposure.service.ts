@@ -41,5 +41,17 @@ export class ExposureService {
     return this.http.post(this.apiUrl, formDataToSend);
   }
 
+  //actualizar estado
+  changeStatus(id: number, status: number): Observable<any> {
+    const body = {statusExposure: status};
+    return this.http.put(`${this.apiUrl}/${id}/status`, body);
+  }
 
+  //download pdf file
+  downloadExposure(id: number) {
+    return this.http.get(`${this.apiUrl}/${id}/summary`, {
+      responseType: 'blob',
+      observe: 'response' // Para acceder a headers y body
+    });
+  }
 }
