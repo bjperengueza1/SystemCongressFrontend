@@ -110,3 +110,10 @@ export interface AttendanceInsertItem {
   exposureId: number;
   attendee: AttendeeItem;
 }
+
+export interface AttendanceItem {
+  attendanceId: number,
+  date: string,
+  attendee:AttendeeItem,
+  exposure: ExposureItem,
+}

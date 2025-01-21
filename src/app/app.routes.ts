@@ -8,6 +8,7 @@ import {authGuard} from './guards/auth.guard';
 import {RegistroExposicionComponent} from './congresos/registro-exposicion/registro-exposicion.component';
 import {PresentacionesComponent} from './admin/presentaciones/presentaciones.component';
 import {RegistroAsistenciaComponent} from './congresos/registro-asistencia/registro-asistencia.component';
+import {AsistenciasComponent} from './admin/asistencias/asistencias.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -19,7 +20,7 @@ export const routes: Routes = [
       { path: 'congresos', component: CongresosComponent, canActivate: [authGuard] },
       { path: 'salas', component: SalasComponent, canActivate: [authGuard] },
       { path: 'presentaciones', component: PresentacionesComponent, canActivate: [authGuard] },
-      { path: 'asistencias', component: PresentacionesComponent, canActivate: [authGuard] },
+      { path: 'asistencias', component: AsistenciasComponent, canActivate: [authGuard] },
     ]
   },
   { path: 'landing', component: LandingComponent },

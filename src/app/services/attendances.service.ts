@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
-import {AttendanceInsertItem} from '../interfaces/entities';
+import {AttendanceInsertItem, AttendanceItem} from '../interfaces/entities';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class AttendancesService {
 
   constructor(private http: HttpClient) { }
 
-  getExposures(page: number, size: number, search: string): Observable<ApiResponse<AttendanceInsertItem>> {
+  getAttendances(page: number, size: number, search: string): Observable<ApiResponse<AttendanceItem>> {
     const params = { pageNumber: page.toString(), pageSize: size.toString(), search };
-    return this.http.get<ApiResponse<AttendanceInsertItem>>(this.apiUrl, { params });
+    return this.http.get<ApiResponse<AttendanceItem>>(this.apiUrl, { params });
   }
 
   createAttendance(attendance: AttendanceInsertItem): Observable<any>{
