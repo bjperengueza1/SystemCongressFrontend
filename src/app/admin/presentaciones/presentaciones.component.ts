@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgForOf, NgIf} from '@angular/common';
+import {DOCUMENT, NgForOf, NgIf} from '@angular/common';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {ApiResponse} from '../../interfaces/api-response';
 import {academicDegrees, AuthorItem, ExposureItem, researchLines, statusExposure} from '../../interfaces/entities';
 import {ExposureService} from '../../services/exposure.service';
 import {saveAs} from 'file-saver';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-presentaciones',
@@ -21,6 +22,8 @@ import {saveAs} from 'file-saver';
 })
 export class PresentacionesComponent implements OnInit {
 
+  private domain = '';
+
   searchTerm: string = '';
 
   response: ApiResponse<ExposureItem>  | null = null;
@@ -32,11 +35,14 @@ export class PresentacionesComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private exposureService: ExposureService
+    private exposureService: ExposureService,
+    protected clipboard: Clipboard,
+    @Inject(DOCUMENT) private document: any
   ) {}
 
   ngOnInit() {
     this.loadExposures(this.currentPage, this.pageSize, this.searchTerm);
+    this.domain = this.document.location.origin;
   }
 
   loadExposures(page: number, pageSize: number, searchTerm: string) {
@@ -94,7 +100,7 @@ export class PresentacionesComponent implements OnInit {
   showAuthors(authors: AuthorItem[],content: any ) {
     this.authors = authors.map((item: AuthorItem) => ({
       ...item,
-      AcademicDegreeLabel: this.getAcademicDegree(item.academicDegree)
+      academicDegreeLabel: this.getAcademicDegree(item.academicDegree)
     }))
     this.modalService.open(content,{size:'xl'});
   }
@@ -137,5 +143,9 @@ export class PresentacionesComponent implements OnInit {
         console.error('Error downloading the file:', err);
       }
     });
+  }
+
+  copyUrlRegisterAtendance(guid: string): void {
+    this.clipboard.copy(`${this.domain}/registro-asistencia/${guid}`);
   }
 }

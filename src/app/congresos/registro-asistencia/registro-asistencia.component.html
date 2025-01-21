@@ -1,0 +1,66 @@
+<script src="../../interfaces/entities.ts"></script>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Registro de Asistencia</h4>
+        </div>
+        <div class="card-body">
+          <!-- Información sobre la exposición -->
+          <h5>Información de la Exposición</h5>
+          <ul class="list-group mb-4">
+            <li class="list-group-item"><strong>Nombre:</strong> {{ exposure?.name }}</li>
+            <li class="list-group-item"><strong>Línea de investigación:</strong> {{ exposure?.researchLineLabel }}</li>
+            <li class="list-group-item"><strong>Autores:</strong>
+              <ul>
+                <li *ngFor="let author of exposure?.authors">
+                  {{ author.name }} ({{ author.academicDegreeLabel }}) - {{ author.institutionalMail }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Formulario de registro -->
+          <form (ngSubmit)="registerAttendance()" #attendanceForm="ngForm">
+            <div class="mb-3">
+              <label for="idNumber" class="form-label">No. Documento de dentidad</label>
+              <input type="text" class="form-control" id="idNumber" placeholder="Ingresa tu documento de identidad"
+                     required [(ngModel)]="attendance.attendee.idNumber" name="idNumber">
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre completo"
+                     required [(ngModel)]="attendance.attendee.name" name="name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico"
+                     required [(ngModel)]="attendance.attendee.email" name="email">
+            </div>
+            <div class="mb-3">
+              <label for="institution" class="form-label">Institución</label>
+              <input type="text" class="form-control" id="institution" placeholder="Ingresa la institución a la que perteneces"
+                     required [(ngModel)]="attendance.attendee.institution" name="institution">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Número Telefónico</label>
+              <input type="phone" class="form-control" id="phone" placeholder="Ingresa tu número telefónico"
+                     required [(ngModel)]="attendance.attendee.phone" name="phone">
+            </div>
+
+            <!--
+            <div class="mb-3">
+              <label for="comentarios" class="form-label">Comentarios (Opcional)</label>
+              <textarea class="form-control" id="comentarios" rows="3" placeholder="Escribe algún comentario"
+                        [(ngModel)]="attendanceData.comentarios" name="comentarios"></textarea>
+            </div> -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary" [disabled]="!attendanceForm.form.valid">Registrar Asistencia</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

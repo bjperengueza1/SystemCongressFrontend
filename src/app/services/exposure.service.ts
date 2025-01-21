@@ -18,6 +18,10 @@ export class ExposureService {
     return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
   }
 
+  getExposure(id: string): Observable<ExposureItem> {
+    return this.http.get<ExposureItem>(`${this.apiUrl}/guid/${id}`);
+  }
+
   //Crear una exposicion
   createExposure(exposureInsertItem: ExposureInsertItem): Observable<any> {
     exposureInsertItem.Authors = exposureInsertItem.Authors.map(author => {

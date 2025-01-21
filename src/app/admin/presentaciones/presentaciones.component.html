@@ -66,7 +66,7 @@
           <br>
           <button class="btn btn-sm btn-secondary" (click)="showAuthors(exposure.authors, content)">Authores</button>
           <br>
-          <button class="btn btn-sm btn-secondary">Copiar url de registro de asistencia</button>
+          <button class="btn btn-sm btn-secondary" (click)="copyUrlRegisterAtendance(exposure.guid)">Copiar url de registro de asistencia</button>
         </td>
       </tr>
       <!-- Mostrar mensaje si no hay congresos -->
@@ -128,7 +128,7 @@
               <td>{{author.phoneNumber}}</td>
               <td>{{author.country}}</td>
               <td>{{author.city}}</td>
-              <td>{{author.AcademicDegreeLabel}}</td>
+              <td>{{author.academicDegreeLabel}}</td>
             </tr>
           }
           </tbody>

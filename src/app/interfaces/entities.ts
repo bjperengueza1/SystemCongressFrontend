@@ -81,7 +81,7 @@ export interface AuthorItem {
   country: string,
   city: string,
   academicDegree: number,
-  AcademicDegreeLabel: string,
+  academicDegreeLabel: string,
 }
 
 export interface ExposureItem {
@@ -92,6 +92,21 @@ export interface ExposureItem {
   statusLabelExposure: string,
   researchLine: number,
   researchLineLabel: string,
+  guid: string,
   congressId: number,
   authors: AuthorItem[],
+}
+
+export interface AttendeeItem {
+  attendeeId: number,
+  name: string,
+  email: string,
+  phone: string,
+  institution: string,
+  idNumber: string
+}
+
+export interface AttendanceInsertItem {
+  exposureId: number;
+  attendee: AttendeeItem;
 }
