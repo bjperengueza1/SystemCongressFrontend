@@ -1,0 +1,60 @@
+<div>
+  <div *ngIf="response">
+    <!-- Selector para tamaño de página -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="form-group w-50">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar asistencias..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange()"
+        />
+      </div>
+      <!-- Selector para tamaño de página -->
+      <div class="form-group">
+        <label for="pageSize" class="me-2">Elementos por página:</label>
+        <select id="pageSize" class="form-select d-inline-block w-auto"
+                [(ngModel)]="pageSize"
+                (change)="onPageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tabla para mostrar la lista de asistencias -->
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+      <tr>
+        <th>Nombre Asistente</th>
+        <th>Documento de Identidad</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Institución</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (attendance of response.items; track attendance.attendeeId){
+          <tr>
+            <td>{{attendance.name}}</td>
+            <td>{{attendance.idNumber}}</td>
+            <td>{{attendance.email}}</td>
+            <td>{{attendance.phone}}</td>
+            <td>{{attendance.institution}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- Paginación usando ng-bootstrap -->
+    <nav class="mt-4" *ngIf="response.totalPages > 1">
+      <ngb-pagination
+        [collectionSize]="response.totalItems"
+        [(page)]="currentPage"
+        [pageSize]="pageSize"
+        (pageChange)="loadAttendees($event, pageSize, searchTerm)">
+      </ngb-pagination>
+    </nav>
+
+  </div>
+</div>

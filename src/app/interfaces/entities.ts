@@ -94,6 +94,7 @@ export interface ExposureItem {
   researchLineLabel: string,
   guid: string,
   congressId: number,
+  congressName: string,
   authors: AuthorItem[],
 }
 

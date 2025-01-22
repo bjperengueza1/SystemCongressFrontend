@@ -1,6 +1,5 @@
 <div>
-  <!-- Botón para agregar un nuevo congreso -->
-  <button class="btn btn-primary mb-3" (click)="open(content)">Agregar Congreso</button>
+
 
   <div *ngIf="response">
     <!-- Selector para tamaño de página -->
@@ -9,7 +8,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Buscar congresos..."
+          placeholder="Buscar presentaciones..."
           [(ngModel)]="searchTerm"
           (input)="onSearchChange()"
         />
@@ -29,6 +28,7 @@
     <table class="table table-bordered table-striped mt-3">
       <thead class="table-dark">
       <tr>
+        <th>Congreso</th>
         <th>Nombre</th>
         <th>Línea de investigación</th>
         <th>Descargar presentación</th>
@@ -38,6 +38,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let exposure of response.items">
+        <td>{{ exposure.congressName }}</td>
         <td>{{ exposure.name }}</td>
         <td>{{ exposure.researchLineLabel }}</td>
         <td>
@@ -47,10 +48,14 @@
         </td>
         <td>{{ exposure.statusLabelExposure }}</td>
         <td>
+          <button class="btn btn-sm btn-secondary" (click)="showAuthors(exposure.authors, content)">Authores</button>
           <!-- Botón para editar el congreso -->
-          <button class="btn btn-sm btn-warning me-2">
-            Editar
-          </button>
+          @if(false){
+            <button class="btn btn-sm btn-warning me-2">
+              Editar
+            </button>
+          }
+
           @if (exposure.statusExposure == 0) {
             <br>
             <button class="btn btn-sm btn-info" (click)="approve(exposure.exposureId)">
@@ -63,8 +68,7 @@
               Rechazar
             </button>
           }
-          <br>
-          <button class="btn btn-sm btn-secondary" (click)="showAuthors(exposure.authors, content)">Authores</button>
+
           <br>
           <button class="btn btn-sm btn-secondary" (click)="copyUrlRegisterAtendance(exposure.guid)">Copiar url de registro de asistencia</button>
         </td>
