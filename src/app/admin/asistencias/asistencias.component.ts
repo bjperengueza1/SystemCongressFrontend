@@ -64,7 +64,4 @@ export class AsistenciasComponent implements OnInit {
     return isoDate.split('T')[0];
   }
 
-
-
-
 }

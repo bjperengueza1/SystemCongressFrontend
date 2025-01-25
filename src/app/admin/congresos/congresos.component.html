@@ -33,6 +33,7 @@
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Ciudad</th>
+        <th>Horas Mínimas</th>
         <th>Acciones</th>
       </tr>
       </thead>
@@ -42,6 +43,7 @@
         <td>{{ congress.startDate }}</td>
         <td>{{ congress.endDate }}</td>
         <td>{{ congress.location }}</td>
+        <td>{{ congress.minHours }}</td>
         <td>
           <!-- Botón para editar el congreso -->
           <button class="btn btn-sm btn-warning me-2" (click)="edit(content, congress)">
@@ -91,7 +93,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form #congresoForm="ngForm">
+      <form #congressForm="ngForm" (ngSubmit)="save(congressForm)">
         <div class="form-group mb-2">
           <label for="nombre">Nombre</label>
           <input
@@ -101,7 +103,12 @@
             [(ngModel)]="selectedCongreso.name"
             name="nombre"
             required
+            minlength="3"
           />
+          <div *ngIf="congressForm.controls['nombre']?.invalid && congressForm.controls['nombre']?.touched" class="text-danger">
+            <small *ngIf="congressForm.controls['nombre']?.errors?.['required']">El nombre es requerido.</small>
+            <small *ngIf="congressForm.controls['nombre']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</small>
+          </div>
         </div>
         <div class="form-group mb-2">
           <label for="fechaInicio">Fecha Inicio</label>
@@ -113,6 +120,9 @@
             name="fechaInicio"
             required
           />
+          <div *ngIf="congressForm.controls['fechaInicio']?.invalid && congressForm.controls['fechaInicio']?.touched" class="text-danger">
+            <small>La fecha de inicio es requerida.</small>
+          </div>
         </div>
         <div class="form-group mb-2">
           <label for="fechaFin">Fecha Fin</label>
@@ -124,6 +134,9 @@
             name="fechaFin"
             required
           />
+          <div *ngIf="congressForm.controls['fechaFin']?.invalid && congressForm.controls['fechaFin']?.touched" class="text-danger">
+            <small>La fecha de fin es requerida.</small>
+          </div>
         </div>
         <div class="form-group mb-3">
           <label for="ubicacion">Ciudad</label>
@@ -135,14 +148,34 @@
             name="ubicacion"
             required
           />
+          <div *ngIf="congressForm.controls['ubicacion']?.invalid && congressForm.controls['ubicacion']?.touched" class="text-danger">
+            <small>La ciudad es requerida.</small>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="minHours">Horas Mínimas</label>
+          <input
+            type="number"
+            id="minHours"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.minHours"
+            name="minHours"
+            required
+            min="1"
+          />
+          <div *ngIf="congressForm.controls['minHours']?.invalid && congressForm.controls['minHours']?.touched" class="text-danger">
+            <small *ngIf="congressForm.controls['minHours']?.errors?.['required']">Las horas mínimas son requeridas.</small>
+            <small *ngIf="congressForm.controls['minHours']?.errors?.['min']">Debe ser al menos 1 hora.</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="congressForm.invalid">Guardar</button>
+          <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
         </div>
       </form>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-success" (click)="save()">Guardar</button>
-      <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
-    </div>
   </ng-template>
+
 
   <!-- Modal for list Rooms -->
   <ng-template #contentListRooms let-modal>

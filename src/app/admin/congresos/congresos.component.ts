@@ -1,12 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {DOCUMENT, NgForOf, NgIf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
 import {ApiResponse} from '../../interfaces/api-response';
 import {CongressItem, RoomsItem} from '../../interfaces/entities';
 import {Clipboard} from '@angular/cdk/clipboard';
-
+import Swal from 'sweetalert2';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-congresos',
@@ -40,6 +41,7 @@ export class CongresosComponent implements OnInit {
     private modalService: NgbModal,
     protected clipboard: Clipboard,
     private congressService: CongressService,
+    private alertService: AlertService,
     @Inject(DOCUMENT) private document: any
   ) {}
 
@@ -61,7 +63,9 @@ export class CongresosComponent implements OnInit {
           })),
         };
       },
-      error: (err) => console.error('Error al cargar congresos', err),
+      error: (err) => {
+        this.alertService.showError('Error inesperado','Ocurrió un error inesperado. Por favor, inténtalo nuevamente.');
+      },
     });
   }
 
@@ -76,6 +80,9 @@ export class CongresosComponent implements OnInit {
       {
         next: (response) =>{
           this.results = response;
+        },
+        error: (err) => {
+
         }
       }
     )
@@ -91,7 +98,7 @@ export class CongresosComponent implements OnInit {
   // Inicializar un congreso vacío
   private initializeCongreso(): CongressItem {
     //return { id: 0, nombre: '', fechaInicio: '', fechaFin: '', ubicacion: '' };
-    return {guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: ''}
+    return {minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: ''}
   }
 
   open(content: any) {
@@ -105,27 +112,46 @@ export class CongresosComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  save() {
+  save(congressForm: NgForm) {
+    if (!congressForm.valid) {
+      return;
+    }
     if (this.selectedCongreso.congressId) {
       // Editar congreso
       this.congressService.updateCongress(this.selectedCongreso).subscribe({
         next: () => {
+          this.alertService.showSuccess('Congreso', 'El congreso fue actualizado exitosamente.')
+
           this.currentPage = 1;
           this.loadCongresses(1, this.pageSize, this.searchTerm);
           this.modalService.dismissAll();
         },
-        error: (err) => console.error('Error al actualizar congreso', err),
+        error: (err) => {
+          if (err.status === 400 && err.error?.errors) {
+            this.alertService.showValidationErrors(err.error.errors)
+          } else {
+            this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente')
+          }
+        },
       });
     } else {
       // Crear nuevo congreso
       this.congressService.createCongress(this.selectedCongreso).subscribe({
         next: () => {
+          this.alertService.showSuccess('Congreso', 'El congreso fue creado exitosamente.')
+
           this.currentPage = 1;
           this.loadCongresses(1, this.pageSize, this.searchTerm);
           this.modalService.dismissAll();
 
         },
-        error: (err) => console.error('Error al crear congreso', err),
+        error: (err) => {
+          if (err.status === 400 && err.error?.errors) {
+            this.alertService.showValidationErrors(err.error.errors)
+          } else {
+            this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente')
+          }
+        },
       });
     }
   }
