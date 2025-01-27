@@ -4,7 +4,7 @@ import {ExposureService} from '../../services/exposure.service';
 import {academicDegrees, CongressItem, ExposureInsertItem, researchLines} from '../../interfaces/entities';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgSelectComponent} from '@ng-select/ng-select';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
 import {AlertService} from '../../services/alert.service';
 
