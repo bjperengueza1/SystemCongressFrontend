@@ -63,12 +63,20 @@ export interface AuthorInsertItem {
   AcademicDegree: number | null
 }
 
-export interface ExposureInsertItem {
+/*export interface ExposureInsertItem {
   Name: string,
   ResearchLine: number | null,
   CongressGuid: string,
   Authors: AuthorInsertItem[],
   pdfFile: File | null,
+}*/
+
+export type ExposureInsertItem = {
+  Name: string,
+  ResearchLine: number | null,
+  CongressGuid: string,
+  Authors: AuthorInsertItem[],
+  pdfFile: File | null
 }
 
 export interface AuthorItem {

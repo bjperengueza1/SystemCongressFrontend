@@ -1,10 +1,12 @@
-import {Component, Inject} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ExposureService} from '../../services/exposure.service';
-import {academicDegrees, ExposureInsertItem, researchLines} from '../../interfaces/entities';
-import {ActivatedRoute} from '@angular/router';
+import {academicDegrees, CongressItem, ExposureInsertItem, researchLines} from '../../interfaces/entities';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgSelectComponent} from '@ng-select/ng-select';
-import {DOCUMENT} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
+import {CongressService} from '../../services/congress.service';
+import {AlertService} from '../../services/alert.service';
 
 
 @Component({
@@ -12,35 +14,58 @@ import {DOCUMENT} from '@angular/common';
   standalone: true,
   imports: [
     FormsModule,
-    NgSelectComponent
+    NgSelectComponent,
+    NgForOf,
   ],
   templateUrl: './registro-exposicion.component.html',
   styleUrl: './registro-exposicion.component.css'
 })
-export class RegistroExposicionComponent {
+export class RegistroExposicionComponent implements OnInit {
 
   protected readonly researchLines = researchLines;
   protected readonly academicDegrees = academicDegrees;
 
-  exposureInsertItem: ExposureInsertItem = this.initializeExposureInsertItem();
-  private domain = "";
-  private congressGuid: string = '';
+  exposureInsertItem: ExposureInsertItem = {} as ExposureInsertItem;
+  congressItem: CongressItem =  {} as CongressItem;
 
-  constructor(private exposureService: ExposureService,
+  fileValid: boolean = false;
+
+  constructor(private congressService: CongressService,
+              private exposureService: ExposureService,
+              private alertService: AlertService,
+              private router: Router,
               private route: ActivatedRoute,
-              ) {
+              ) { }
+
+  ngOnInit() {
     this.route.params.subscribe(params => {
-      this.congressGuid = params['id'];
-      this.exposureInsertItem.CongressGuid = this.congressGuid;
+      this.congressService.getCongressByGuid(params['id']).subscribe({
+        next: data => {
+           this.congressItem = data;
+           this.exposureInsertItem = this.initializeExposureInsertItem(params['id']);
+        },
+        error: () => {
+          this.alertService.showError("Error","No se encontró el congreso")
+          this.router.navigate(['/'])
+        }
+      })
     })
   }
 
   onSubmit(){
-    this.exposureService.createExposure(this.exposureInsertItem).subscribe(
-      res => {
-        this.exposureInsertItem = this.initializeExposureInsertItem();
+    this.exposureService.createExposure(this.exposureInsertItem).subscribe({
+      next: () => {
+        this.alertService.showSuccess("Exitoso","Su exposicíón fué registrada con éxtio, espere su correo de confirmacíon sobre su aprobación");
+        this.router.navigate(['/'])
+      },
+      error: err => {
+        if (err.status === 400 && err.error.errors) {
+          this.alertService.showValidationErrors(err.error.errors)
+        } else {
+          this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente')
+        }
       }
-    )
+    })
   }
 
 
@@ -48,8 +73,9 @@ export class RegistroExposicionComponent {
     const file = event.target.files[0];
     if (file && file.type === 'application/pdf') {
       this.exposureInsertItem.pdfFile = file;
+      this.fileValid = true;
     } else {
-      alert('Por favor, selecciona un archivo PDF válido.');
+      this.fileValid = false;
     }
   }
 
@@ -69,8 +95,7 @@ export class RegistroExposicionComponent {
     }
   }
 
-  private initializeExposureInsertItem(): ExposureInsertItem {
-    console.log(this.congressGuid)
+  private initializeExposureInsertItem(congressGuid: string): ExposureInsertItem {
     return {Authors: [{
         Position: 1,
         Name: '',
@@ -81,6 +106,6 @@ export class RegistroExposicionComponent {
         Country: '',
         City: '',
         AcademicDegree: null
-      }], CongressGuid: this.congressGuid, ResearchLine: null, pdfFile: null, Name:""};
+      }], CongressGuid: congressGuid, ResearchLine: null, pdfFile: null, Name:""};
   }
 }

@@ -23,6 +23,11 @@ export class CongressService {
     return this.http.get<CongressItem>(`${this.apiUrl}/${id}`);
   }
 
+  //Obtener un congreso por guid
+  getCongressByGuid(guid: string): Observable<CongressItem> {
+    return this.http.get<CongressItem>(`${this.apiUrl}/guid/${guid}`);
+  }
+
   // Crear un congreso
   createCongress(congress: CongressItem): Observable<any> {
     return this.http.post<any>(this.apiUrl, congress);
