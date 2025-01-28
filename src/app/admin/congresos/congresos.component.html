@@ -44,19 +44,35 @@
         <td>{{ congress.endDate }}</td>
         <td>{{ congress.location }}</td>
         <td>{{ congress.minHours }}</td>
-        <td>
-          <!-- Botón para editar el congreso -->
-          <button class="btn btn-sm btn-warning me-2" (click)="edit(content, congress)">
-            Editar
-          </button>
-          <!-- Botón para eliminar el congreso -->
-          <!--<button class="btn btn-sm btn-danger" (click)="delete(congress)">
-            Eliminar
-          </button>-->
-          <button class="btn btn-sm btn-info" (click)="openListRoomsPage(contentListRooms,congress)">
-            Gestionar Salas
-          </button>
-          <button class="btn btn-sm btn-secondary" (click)="copyUrlRegisterCongress(congress.guid)">Copiar url de registro</button>
+        <td class="border border-gray-300 px-4 py-2 relative">
+          <div class="inline-block text-left">
+            <button
+              type="button"
+              data-bs-toggle="dropdown"
+              class="btn btn-primary dropdown-toggle show"
+            >
+              Opciones
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button class="btn btn-sm btn-warning me-2 dropdown-item" (click)="edit(content, congress)">
+                  Editar
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-info dropdown-item" (click)="openListRoomsPage(contentListRooms,congress)">
+                  Gestionar Salas
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="copyUrlRegisterCongress(congress.guid)">
+                  Copiar url de registro
+                </button>
+              </li>
+            </ul>
+          </div>
         </td>
       </tr>
       <!-- Mostrar mensaje si no hay congresos -->
