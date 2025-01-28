@@ -47,30 +47,43 @@
           </button>
         </td>
         <td>{{ exposure.statusLabelExposure }}</td>
-        <td>
-          <button class="btn btn-sm btn-secondary" (click)="showAuthors(exposure.authors, content)">Authores</button>
-          <!-- Botón para editar el congreso -->
-          @if(false){
-            <button class="btn btn-sm btn-warning me-2">
-              Editar
+        <td class="border border-gray-300 px-4 py-2 relative">
+          <div class="inline-block text-left">
+            <button
+              type="button"
+              data-bs-toggle="dropdown"
+              class="btn btn-primary dropdown-toggle show"
+            >
+              Opciones
             </button>
-          }
 
-          @if (exposure.statusExposure == 0) {
-            <br>
-            <button class="btn btn-sm btn-info" (click)="approve(exposure.exposureId)">
-              Aprobar
-            </button>
-          }
-          @if (exposure.statusExposure == 1 || exposure.statusExposure == 0) {
-            <br>
-            <button class="btn btn-sm btn-info" (click)="reject(exposure.exposureId)">
-              Rechazar
-            </button>
-          }
+              <ul class="dropdown-menu">
+                <li>
+                  <button class="btn btn-sm btn-secondary dropdown-item" (click)="showAuthors(exposure.authors, content)">Authores</button>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  @if (exposure.statusExposure == 0) {
+                    <button class="btn btn-sm btn-info dropdown-item" (click)="approve(exposure.exposureId)">
+                      Aprobar
+                    </button>
+                    <hr class="dropdown-divider">
+                  }
+                </li>
+                <li>
+                  @if (exposure.statusExposure == 1 || exposure.statusExposure == 0) {
+                    <button class="btn btn-sm btn-info dropdown-item" (click)="reject(exposure.exposureId)">
+                      Rechazar
+                    </button>
+                    <hr class="dropdown-divider">
+                  }
+                </li>
+                <li>
+                  <button class="btn btn-sm btn-secondary dropdown-item" (click)="copyUrlRegisterAtendance(exposure.guid)">Copiar url de registro de asistencia</button>
+                </li>
+              </ul>
 
-          <br>
-          <button class="btn btn-sm btn-secondary" (click)="copyUrlRegisterAtendance(exposure.guid)">Copiar url de registro de asistencia</button>
+          </div>
         </td>
       </tr>
       <!-- Mostrar mensaje si no hay congresos -->
