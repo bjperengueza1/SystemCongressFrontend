@@ -64,4 +64,11 @@ export class CongressService {
   getListCertificates(dni: string): Observable<ListCongressCertificate[]> {
     return this.http.get<ListCongressCertificate[]>(`${this.apiUrl}/certificates/${dni}`);
   }
+
+  downloadCertificateAttendance(id: number, dni:string) {
+    return this.http.get(`${this.apiUrl}/certificate/${id}/${dni}`, {
+      responseType: 'blob',
+      observe: 'response' // Para acceder a headers y body
+    });
+  }
 }

@@ -37,7 +37,7 @@
         <!-- Lista de Congresos -->
         <div *ngFor="let congreso of congresosCertificados" class="card mb-3 shadow">
           <div class="card-header bg-secondary text-white">
-            <h5 class="mb-0">{{ congreso.name }}</h5>
+            <h5 class="mb-0">Congreso: {{ congreso.name }}</h5>
           </div>
           <div class="card-body">
             <!-- Lista de Certificados -->
@@ -45,13 +45,14 @@
 
               @if (congreso.certificateAttendance) {
                 <h5>Certificado asistencia</h5>
-                <button class="btn-info" (click)="descargarCertificadoAsistencia(congreso.congressId)">Descargar</button>
+                <button class="btn btn-info" (click)="descargarCertificadoAsistencia(congreso.congressId)">Descargar</button>
               }
-
+              @if (false){
                 <h5>Certificados exposiciones</h5>
                 <li *ngFor="let certificado of congreso.exposure" class="list-group-item">
                   <strong>{{ certificado.name }}:</strong>
                 </li>
+              }
 
             </ul>
           </div>

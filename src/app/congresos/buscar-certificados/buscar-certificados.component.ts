@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
 import {ListCongressCertificate} from '../../interfaces/entities';
+import {saveAs} from 'file-saver';
 interface Certificado {
   tipo: string; // Ejemplo: 'Expositor', 'Participante', 'Oyente'
   descripcion: string; // Información adicional del certificado
@@ -45,6 +46,22 @@ export class BuscarCertificadosComponent {
   }
 
   descargarCertificadoAsistencia(congressId: number) {
+    this.congressService.downloadCertificateAttendance(congressId,this.cedula).subscribe({
+      next: (response:any) => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let fileName = "certificado.pdf"; // Valor por defecto
 
+        // Extraer el nombre del archivo del header Content-Disposition
+        if (contentDisposition) {
+          const matches = contentDisposition.match(/filename="(.+)"/);
+          if (matches && matches[1]) {
+            fileName = matches[1];
+          }
+        }
+        // Crear un blob y usar file-saver para descargar
+        const blob = new Blob([response.body], { type: response.headers.get('Content-Type') });
+        saveAs(blob, fileName);
+      }
+    })
   }
 }
