@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable, of} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
-import {CongressItem, RoomsItem} from '../interfaces/entities';
+import {CongressItem, ListCongressCertificate, RoomsItem} from '../interfaces/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -59,5 +59,9 @@ export class CongressService {
         map((response) => response.items || []),
         catchError(() => of([]))
       );
+  }
+
+  getListCertificates(dni: string): Observable<ListCongressCertificate[]> {
+    return this.http.get<ListCongressCertificate[]>(`${this.apiUrl}/certificates/${dni}`);
   }
 }

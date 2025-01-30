@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>Buscar Certificados</h3>
+        </div>
+        <div class="card-body">
+          <!-- Campo de Cédula -->
+          <div class="mb-3">
+            <label for="cedula" class="form-label">Cédula:</label>
+            <input
+              type="text"
+              id="cedula"
+              [(ngModel)]="cedula"
+              class="form-control"
+              placeholder="Ingrese su cédula"
+            />
+          </div>
+          <!-- Botón de Buscar -->
+          <div class="d-grid">
+            <button
+              (click)="buscarCertificados()"
+              class="btn btn-primary"
+            >
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultados -->
+      <div *ngIf="congresosCertificados.length > 0" class="mt-4">
+        <div class="alert alert-success text-center">
+          <strong>Certificados encontrados:</strong>
+        </div>
+        <!-- Lista de Congresos -->
+        <div *ngFor="let congreso of congresosCertificados" class="card mb-3 shadow">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">{{ congreso.name }}</h5>
+          </div>
+          <div class="card-body">
+            <!-- Lista de Certificados -->
+            <ul class="list-group list-group-flush">
+
+              @if (congreso.certificateAttendance) {
+                <h5>Certificado asistencia</h5>
+                <button class="btn-info" (click)="descargarCertificadoAsistencia(congreso.congressId)">Descargar</button>
+              }
+
+                <h5>Certificados exposiciones</h5>
+                <li *ngFor="let certificado of congreso.exposure" class="list-group-item">
+                  <strong>{{ certificado.name }}:</strong>
+                </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje si no hay resultados -->
+      <div *ngIf="congresosCertificados.length <= 0 && buscarRealizado" class="mt-4">
+        <div class="alert alert-warning text-center">
+          No se encontraron certificados para la cédula ingresada.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

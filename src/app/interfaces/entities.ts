@@ -127,3 +127,15 @@ export interface AttendanceItem {
   attendee:AttendeeItem,
   exposure: ExposureItem,
 }
+
+
+/*TEMPORAL*/
+export interface ListCongressCertificate {
+  congressId: number,
+  name: string,
+  startDate: string,
+  endDate: string,
+  location: string,
+  exposure: ExposureItem[],
+  certificateAttendance: boolean
+}

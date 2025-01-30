@@ -12,10 +12,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error) => {
       if (error.status === 401) {
         // Si el backend responde con 401
-        authService.logout(); // Opcional: Limpia el estado del usuario o tokens
-        router.navigate(['/admin/login']); // Redirige al login
+        authService.logout();
+        router.navigate(['/admin/login']);
       }
-      return throwError(() => error); // Propaga el error si es necesario
+      return throwError(() => error); // Propagar el error
     })
   );
   //return next(req);
