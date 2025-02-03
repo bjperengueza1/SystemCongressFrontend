@@ -26,23 +26,23 @@ export interface RoomWitchCongressItem {
 }
 
 export let researchLines = [
-  { value: 0, label: 'Tecnologías de la Información y Comunicación' },
-  { value: 1, label: 'Educación Superior y modalidades de estudio' },
-  { value: 2, label: 'Administración, Marketing y Emprendimiento' },
-  { value: 3, label: 'Calidad e innovación educativa' },
-  { value: 4, label: 'Artes y Humanidades' },
-  { value: 5, label: 'Actividad física y deportiva' },
-  { value: 6, label: 'Servicios de protección, seguridad y transporte' },
-  { value: 7, label: 'Ingeniería, Industria y Construcción' }
+  { value: 1, label: 'Tecnologías de la Información y Comunicación' },
+  { value: 2, label: 'Educación Superior y modalidades de estudio' },
+  { value: 3, label: 'Administración, Marketing y Emprendimiento' },
+  { value: 4, label: 'Calidad e innovación educativa' },
+  { value: 5, label: 'Artes y Humanidades' },
+  { value: 6, label: 'Actividad física y deportiva' },
+  { value: 7, label: 'Servicios de protección, seguridad y transporte' },
+  { value: 8, label: 'Ingeniería, Industria y Construcción' }
 ];
 
 export let academicDegrees = [
-  { value: 0, label: 'Doctor/a (PhD)' },
-  { value: 1, label: 'Magister' },
-  { value: 2, label: 'Especialización' },
-  { value: 3, label: 'Tercer Nivel de Grado (Licenciado/a, Ingeniero/a, otros)' },
-  { value: 4, label: 'Tercer Nivel Técnico o Tecnológico' },
-  { value: 5, label: 'Estudiante' }
+  { value: 1, label: 'Doctor/a (PhD)' },
+  { value: 2, label: 'Magister' },
+  { value: 3, label: 'Especialización' },
+  { value: 4, label: 'Tercer Nivel de Grado (Licenciado/a, Ingeniero/a, otros)' },
+  { value: 5, label: 'Tercer Nivel Técnico o Tecnológico' },
+  { value: 6, label: 'Estudiante' }
 ];
 
 export let statusExposure = [
@@ -74,6 +74,7 @@ export interface AuthorInsertItem {
 export type ExposureInsertItem = {
   Name: string,
   ResearchLine: number | null,
+  Type: number,
   CongressGuid: string,
   Authors: AuthorInsertItem[],
   pdfFile: File | null
@@ -101,6 +102,7 @@ export interface ExposureItem {
   statusLabelExposure: string,
   researchLine: number,
   researchLineLabel: string,
+  type: number,
   guid: string,
   congressId: number,
   congressName: string,

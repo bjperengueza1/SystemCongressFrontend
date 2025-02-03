@@ -11,6 +11,7 @@ import {RegistroAsistenciaComponent} from './congresos/registro-asistencia/regis
 import {AsistenciasComponent} from './admin/asistencias/asistencias.component';
 import {AsistentesComponent} from './admin/asistentes/asistentes.component';
 import {BuscarCertificadosComponent} from './congresos/buscar-certificados/buscar-certificados.component';
+import {RegistroConferenciaComponent} from './congresos/registro-conferencia/registro-conferencia.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -28,7 +29,8 @@ export const routes: Routes = [
   },
   { path: 'landing', component: LandingComponent },
   //registro exposicion por congreso
-  { path: 'registro-exposicion/:id', component: RegistroExposicionComponent},
+  { path: 'registro-ponencia/:id', component: RegistroExposicionComponent},
+  { path: 'registro-conferencia/:id', component: RegistroConferenciaComponent},
   { path: 'registro-asistencia/:id', component: RegistroAsistenciaComponent},
   { path: 'buscar-certificados', component: BuscarCertificadosComponent},
   { path: '**', redirectTo: '/' }, // Redirige a '/' si no hay coincidencia

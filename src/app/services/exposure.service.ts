@@ -24,6 +24,7 @@ export class ExposureService {
 
   //Crear una exposicion
   createExposure(exposureInsertItem: ExposureInsertItem): Observable<any> {
+
     exposureInsertItem.Authors = exposureInsertItem.Authors.map(author => {
       return {
         ...author, // Copia el resto de las propiedades
@@ -37,6 +38,7 @@ export class ExposureService {
     formDataToSend.append("Name", exposureInsertItem.Name);
     if(exposureInsertItem.ResearchLine)
       formDataToSend.append("ResearchLine", exposureInsertItem.ResearchLine.toString());
+    formDataToSend.append("Type", exposureInsertItem.Type.toString());
     formDataToSend.append("CongressGuid", exposureInsertItem.CongressGuid);
     formDataToSend.append("Authors", JSON.stringify(exposureInsertItem.Authors,null, 2));
     if(exposureInsertItem.pdfFile)

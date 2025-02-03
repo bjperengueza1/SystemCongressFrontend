@@ -185,7 +185,10 @@ export class CongresosComponent implements OnInit {
     )
   }
 
-  copyUrlRegisterCongress(guid: string): void {
-    this.clipboard.copy(`${this.domain}/registro-exposicion/${guid}`);
+  copyUrlRegisterPonencia(guid: string): void {
+    this.clipboard.copy(`${this.domain}/registro-ponencia/${guid}`);
+  }
+  copyUrlRegisterConferencia(guid: string): void {
+    this.clipboard.copy(`${this.domain}/registro-conferencia/${guid}`);
   }
 }

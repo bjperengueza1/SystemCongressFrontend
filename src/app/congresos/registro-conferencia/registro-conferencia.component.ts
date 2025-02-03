@@ -1,26 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {ExposureService} from '../../services/exposure.service';
-import {academicDegrees, CongressItem, ExposureInsertItem, researchLines} from '../../interfaces/entities';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgSelectComponent} from '@ng-select/ng-select';
 import {NgForOf} from '@angular/common';
+import {NgSelectComponent} from '@ng-select/ng-select';
+import {academicDegrees, CongressItem, ExposureInsertItem, researchLines} from '../../interfaces/entities';
 import {CongressService} from '../../services/congress.service';
+import {ExposureService} from '../../services/exposure.service';
 import {AlertService} from '../../services/alert.service';
-
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-registro-exposicion',
+  selector: 'app-registro-conferencia',
   standalone: true,
   imports: [
     FormsModule,
-    NgSelectComponent,
     NgForOf,
+    NgSelectComponent
   ],
-  templateUrl: './registro-exposicion.component.html',
-  styleUrl: './registro-exposicion.component.css'
+  templateUrl: './registro-conferencia.component.html',
+  styleUrl: './registro-conferencia.component.css'
 })
-export class RegistroExposicionComponent implements OnInit {
+export class RegistroConferenciaComponent implements OnInit {
 
   protected readonly researchLines = researchLines;
   protected readonly academicDegrees = academicDegrees;
@@ -35,14 +34,15 @@ export class RegistroExposicionComponent implements OnInit {
               private alertService: AlertService,
               private router: Router,
               private route: ActivatedRoute,
-              ) { }
+              ) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.congressService.getCongressByGuid(params['id']).subscribe({
         next: data => {
-           this.congressItem = data;
-           this.exposureInsertItem = this.initializeExposureInsertItem(params['id']);
+          this.congressItem = data;
+          this.exposureInsertItem = this.initializeExposureInsertItem(params['id']);
         },
         error: () => {
           this.alertService.showError("Error","No se encontró el congreso")
@@ -53,7 +53,6 @@ export class RegistroExposicionComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.exposureInsertItem);
     this.exposureService.createExposure(this.exposureInsertItem).subscribe({
       next: () => {
         this.alertService.showSuccess("Exitoso","Su exposicíón fué registrada con éxtio, espere su correo de confirmacíon sobre su aprobación");
@@ -83,7 +82,7 @@ export class RegistroExposicionComponent implements OnInit {
   addAuthor() {
     if (this.exposureInsertItem.Authors.length < 3) {
       this.exposureInsertItem.Authors.push({
-        AcademicDegree: -1,
+        AcademicDegree: null,
         City: '',
         Country: '',
         IDNumber: '',
@@ -107,6 +106,6 @@ export class RegistroExposicionComponent implements OnInit {
         Country: '',
         City: '',
         AcademicDegree: null
-      }], CongressGuid: congressGuid, ResearchLine: null, Type: 1, pdfFile: null, Name:""};
+      }], CongressGuid: congressGuid, ResearchLine: null, Type: 2, pdfFile: null, Name:""};
   }
 }

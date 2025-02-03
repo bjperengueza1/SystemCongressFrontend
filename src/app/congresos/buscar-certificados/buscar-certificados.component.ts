@@ -49,7 +49,47 @@ export class BuscarCertificadosComponent {
     this.congressService.downloadCertificateAttendance(congressId,this.cedula).subscribe({
       next: (response:any) => {
         const contentDisposition = response.headers.get('Content-Disposition');
-        let fileName = "certificado.pdf"; // Valor por defecto
+        let fileName = "certificado-asistencia.pdf"; // Valor por defecto
+
+        // Extraer el nombre del archivo del header Content-Disposition
+        if (contentDisposition) {
+          const matches = contentDisposition.match(/filename="(.+)"/);
+          if (matches && matches[1]) {
+            fileName = matches[1];
+          }
+        }
+        // Crear un blob y usar file-saver para descargar
+        const blob = new Blob([response.body], { type: response.headers.get('Content-Type') });
+        saveAs(blob, fileName);
+      }
+    })
+  }
+
+  descargarCertificadoExposicion(congressId: number) {
+    this.congressService.downloadCertificateExposure(congressId,this.cedula).subscribe({
+      next: (response:any) => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let fileName = "certificado-ponencia.pdf"; // Valor por defecto
+
+        // Extraer el nombre del archivo del header Content-Disposition
+        if (contentDisposition) {
+          const matches = contentDisposition.match(/filename="(.+)"/);
+          if (matches && matches[1]) {
+            fileName = matches[1];
+          }
+        }
+        // Crear un blob y usar file-saver para descargar
+        const blob = new Blob([response.body], { type: response.headers.get('Content-Type') });
+        saveAs(blob, fileName);
+      }
+    })
+  }
+
+  descargarCertificadoConferencia(congressId: number) {
+    this.congressService.downloadCertificateConference(congressId,this.cedula).subscribe({
+      next: (response:any) => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let fileName = "certificado-conferencia.pdf"; // Valor por defecto
 
         // Extraer el nombre del archivo del header Content-Disposition
         if (contentDisposition) {

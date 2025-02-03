@@ -66,7 +66,19 @@ export class CongressService {
   }
 
   downloadCertificateAttendance(id: number, dni:string) {
-    return this.http.get(`${this.apiUrl}/certificate/${id}/${dni}`, {
+    return this.http.get(`${this.apiUrl}/certificate-attendance/${id}/${dni}`, {
+      responseType: 'blob',
+      observe: 'response' // Para acceder a headers y body
+    });
+  }
+  downloadCertificateExposure(id: number, dni:string) {
+    return this.http.get(`${this.apiUrl}/certificate-exposure/${id}/${dni}`, {
+      responseType: 'blob',
+      observe: 'response' // Para acceder a headers y body
+    });
+  }
+  downloadCertificateConference(id: number, dni:string) {
+    return this.http.get(`${this.apiUrl}/certificate-conference/${id}/${dni}`, {
       responseType: 'blob',
       observe: 'response' // Para acceder a headers y body
     });

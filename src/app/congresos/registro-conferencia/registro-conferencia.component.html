@@ -1,0 +1,268 @@
+<div class="container mt-5 p-4 rounded shadow-lg bg-light">
+  <!-- Información del congreso -->
+  <div class="mb-4 p-4 rounded text-white" style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
+    <h1 class="text-center fw-bold" style="font-size: 2.5rem;">{{ congressItem.name }}</h1>
+    <p class="text-center mb-1" style="font-size: 1.2rem;">Fecha: {{ congressItem.startDate }} - {{ congressItem.endDate }}</p>
+    <p class="text-center" style="font-size: 1.2rem;">Ubicación: {{ congressItem.location }}</p>
+  </div>
+
+  <h2 class="text-center mb-4">Formulario de Inscripción de Conferencia</h2>
+  <form #expositionForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Campo para el nombre de la exposición -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre de la Exposición:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="exposureInsertItem.Name"
+        name="name"
+        required
+        minlength=3
+        maxlength="100"
+        placeholder="Ingrese el nombre de la exposición">
+    </div>
+    @if(expositionForm.controls['name'].invalid && expositionForm.controls['name']["touched"]){
+      <div class="text-danger">
+        @if(expositionForm.controls['name'].errors?.['required']) {
+          <small >El nombre es requerido.</small>
+        }
+        @if(expositionForm.controls['name'].errors?.['minlength'] || expositionForm.controls['name'].errors?.['maxlength']) {
+          <small >El nombre debe tener al menos 3 caracteres y máximo 100.</small>
+        }
+      </div>
+    }
+
+    <!-- Campo para la línea de investigación -->
+    <div class="mb-3">
+      <label for="researchLine" class="form-label">Línea de Investigación:</label>
+      <ng-select
+        id="researchLine"
+        name="researchLine"
+        [items]="researchLines"
+        bindLabel="label"
+        bindValue="value"
+        [(ngModel)]="exposureInsertItem.ResearchLine"
+        placeholder="Selecciona Línea de Investigación"
+        [notFoundText]="'No se encontraron Líneas de Investigación'"
+        required
+        class="form-control">
+      </ng-select>
+    </div>
+    @if(expositionForm.controls['researchLine'].invalid && expositionForm.controls['researchLine']["touched"]){
+      <div class="text-danger">
+        @if(expositionForm.controls['researchLine'].errors?.['required']) {
+          <small >La línea de investigación es requerida.</small>
+        }
+      </div>
+    }
+
+    <!-- Campo para subir un archivo PDF -->
+    <div class="mb-3">
+      <label for="file" class="form-label">Subir Archivo PDF:</label>
+      <input
+        type="file"
+        class="form-control"
+        id="file"
+        name="file"
+        (change)="onFileChange($event)"
+        accept=".pdf"
+        required>
+    </div>
+    @if(!fileValid){
+      <div class="text-danger">
+        <small >El archivo es requerido.</small>
+      </div>
+    }
+
+    <!-- Sección de autores -->
+    <h4 class="mb-3">Autores (Máximo 3 Autores)</h4>
+    <div *ngFor="let author of exposureInsertItem.Authors; let i = index" class="border rounded p-3 mb-3">
+      <h5>Autor {{ i + 1 }}</h5>
+      <div class="mb-3">
+        <label for="author{{i}}Name" class="form-label">Nombre:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="author.Name"
+          name="author{{i}}Name"
+          minlength="10"
+          maxlength="100"
+          required
+          placeholder="Nombre del autor">
+      </div>
+      @if(expositionForm.controls['author'+i+'Name'].invalid && expositionForm.controls['author'+i+'Name']["touched"]){
+        <div class="text-danger">
+          @if(expositionForm.controls['author'+i+'Name'].errors?.['required']) {
+            <small >El nombre es requerido.</small>
+          }
+          @if(expositionForm.controls['author'+i+'Name'].errors?.['minlength'] || expositionForm.controls['author'+i+'Name'].errors?.['maxlength']) {
+            <small >El nombre debe tener al menos 10 caracteres y máximo 100.</small>
+          }
+        </div>
+      }
+
+      <div class="mb-3">
+        <label for="author{{i}}IDNumber" class="form-label">Número de Cédula:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="author.IDNumber"
+          name="author{{i}}IDNumber"
+          minlength="10"
+          maxlength="13"
+          required
+          placeholder="Cédula del autor">
+      </div>
+      @if(expositionForm.controls['author'+i+'IDNumber'].invalid && expositionForm.controls['author'+i+'IDNumber']["touched"]){
+        <div class="text-danger">
+          @if(expositionForm.controls['author'+i+'IDNumber'].errors?.['required']) {
+            <small >El documento de identidad es requerido.</small>
+          }
+          @if(expositionForm.controls['author'+i+'IDNumber'].errors?.['minlength'] || expositionForm.controls['author'+i+'IDNumber'].errors?.['maxlength']) {
+            <small >El documento de identidad debe tener al menos 10 caracteres y máximo 13.</small>
+          }
+        </div>
+      }
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="author{{i}}InstitutionalMail" class="form-label">Correo institucional:</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="author.InstitutionalMail"
+            name="author{{i}}InstitutionalMail"
+            required
+            placeholder="Correo institucional">
+          @if(expositionForm.controls['author'+i+'InstitutionalMail'].invalid && expositionForm.controls['author'+i+'InstitutionalMail']["touched"]){
+            <div class="text-danger">
+              @if(expositionForm.controls['author'+i+'InstitutionalMail'].errors?.['required']) {
+                <small>El correo institucional es requerido.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="author{{i}}PersonalMail" class="form-label">Correo personal:</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="author.PersonalMail"
+            name="author{{i}}PersonalMail"
+            required
+            placeholder="Correo personal">
+          @if(expositionForm.controls['author'+i+'PersonalMail'].invalid && expositionForm.controls['author'+i+'PersonalMail']["touched"]){
+            <div class="text-danger">
+              @if(expositionForm.controls['author'+i+'PersonalMail'].errors?.['required']) {
+                <small>El correo personal es requerido.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="author{{i}}PhoneNumber" class="form-label">Teléfono:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="author.PhoneNumber"
+            id="author{{i}}PhoneNumber"
+            name="author{{i}}PhoneNumber"
+            required
+            minlength="10"
+            maxlength="13"
+            placeholder="Teléfono del autor">
+          @if(expositionForm.controls['author'+i+'PhoneNumber'].invalid && expositionForm.controls['author'+i+'PhoneNumber']["touched"]){
+            <div class="text-danger">
+              @if(expositionForm.controls['author'+i+'PhoneNumber'].errors?.['required']) {
+                <small >El numero telefónico es requerido.</small>
+              }
+              @if(expositionForm.controls['author'+i+'PhoneNumber'].errors?.['minlength'] || expositionForm.controls['author'+i+'PhoneNumber'].errors?.['maxlength']) {
+                <small >El numero telefónico debe tener al menos 10 caracteres y máximo 13.</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="author{{i}}Country" class="form-label">País:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="author.Country"
+            name="author{{i}}Country"
+            required
+            minlength="3"
+            maxlength="20"
+            placeholder="País de origen">
+          @if(expositionForm.controls['author'+i+'Country'].invalid && expositionForm.controls['author'+i+'Country']["touched"]){
+            <div class="text-danger">
+              @if(expositionForm.controls['author'+i+'Country'].errors?.['required']) {
+                <small >El país es requerido.</small>
+              }
+              @if(expositionForm.controls['author'+i+'Country'].errors?.['minlength'] || expositionForm.controls['author'+i+'Country'].errors?.['maxlength']) {
+                <small >El país debe tener al menos 3 caracteres y máximo 20.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="author{{i}}City" class="form-label">Ciudad:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="author.City"
+            name="author{{i}}City"
+            required
+            minlength="3"
+            maxlength="20"
+            placeholder="Ciudad de residencia">
+          @if(expositionForm.controls['author'+i+'City'].invalid && expositionForm.controls['author'+i+'City']["touched"]){
+            <div class="text-danger">
+              @if(expositionForm.controls['author'+i+'City'].errors?.['required']) {
+                <small >La ciudad es requerida.</small>
+              }
+              @if(expositionForm.controls['author'+i+'City'].errors?.['minlength'] || expositionForm.controls['author'+i+'City'].errors?.['maxlength']) {
+                <small >La ciudad debe tener al menos 3 caracteres y máximo 20.</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="author{{i}}AcademicDegree" class="form-label">Grado Académico:</label>
+          <ng-select
+            id="academicDegree"
+            name="author{{i}}AcademicDegree"
+            [items]="academicDegrees"
+            bindLabel="label"
+            bindValue="value"
+            [(ngModel)]="author.AcademicDegree"
+            placeholder="Selecciona un Grado académico"
+            [notFoundText]="'No se encontraron Grados académicos'"
+            required
+            class="form-control">
+          </ng-select>
+          @if(expositionForm.controls['author'+i+'AcademicDegree'].invalid && expositionForm.controls['author'+i+'AcademicDegree']["touched"]){
+            <div class="text-danger">
+              @if(expositionForm.controls['author'+i+'AcademicDegree'].errors?.['required']) {
+                <small >El grado académico es requerido.</small>
+              }
+            </div>
+          }
+        </div>
+
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-outline-secondary mb-3" (click)="addAuthor()">Agregar Autor</button>
+
+    <!-- Botón para enviar el formulario -->
+    <button type="submit" class="btn btn-primary w-100">Enviar</button>
+  </form>
+</div>
