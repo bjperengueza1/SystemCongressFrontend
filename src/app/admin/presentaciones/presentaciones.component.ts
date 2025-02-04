@@ -1,12 +1,24 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {DOCUMENT, NgForOf, NgIf} from '@angular/common';
 import {NgbModal, NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {ApiResponse} from '../../interfaces/api-response';
-import {academicDegrees, AuthorItem, ExposureItem, researchLines, statusExposure} from '../../interfaces/entities';
+import {
+  academicDegrees,
+  ApproveExposureModel,
+  AuthorItem,
+  ExposureItem, RejectExposureModel,
+  researchLines, RoomsItem,
+  statusExposure
+} from '../../interfaces/entities';
 import {ExposureService} from '../../services/exposure.service';
 import {saveAs} from 'file-saver';
 import {Clipboard} from '@angular/cdk/clipboard';
+import {FormatearFechaPipe} from '../../pipes/formatear-fecha.pipe';
+import {NgSelectComponent} from '@ng-select/ng-select';
+import {CongressService} from '../../services/congress.service';
+import {AlertService} from '../../services/alert.service';
+
 
 @Component({
   selector: 'app-presentaciones',
@@ -15,7 +27,9 @@ import {Clipboard} from '@angular/cdk/clipboard';
     FormsModule,
     NgForOf,
     NgIf,
-    NgbPagination
+    NgbPagination,
+    FormatearFechaPipe,
+    NgSelectComponent
   ],
   templateUrl: './presentaciones.component.html',
   styleUrl: './presentaciones.component.css'
@@ -33,9 +47,17 @@ export class PresentacionesComponent implements OnInit {
 
   authors: AuthorItem[] = [];
 
+  approveExposureModel:ApproveExposureModel = this.initializeApproveExposure();
+
+  rejectExposureModel:RejectExposureModel = {exposureId : 0, observation : ""};
+
+  roomsItems: RoomsItem[] = [];
+
   constructor(
     private modalService: NgbModal,
     private exposureService: ExposureService,
+    private congressService: CongressService,
+    private alertService: AlertService,
     protected clipboard: Clipboard,
     @Inject(DOCUMENT) private document: any
   ) {}
@@ -74,10 +96,6 @@ export class PresentacionesComponent implements OnInit {
     this.loadExposures(this.currentPage, this.pageSize, this.searchTerm);
   }
 
-  open(content: any) {
-
-  }
-
   openAuthors(content: any) {
 
   }
@@ -105,20 +123,46 @@ export class PresentacionesComponent implements OnInit {
     this.modalService.open(content,{size:'xl'});
   }
 
-  approve(exposureId: number) {
-    this.exposureService.changeStatus(exposureId, 1).subscribe({
+  approve(form: NgForm) {
+    if(!form.valid) {
+      return
+    }
+    this.exposureService.approveExposure(this.approveExposureModel.exposureId,this.approveExposureModel).subscribe({
       next: (response) => {
         this.loadExposures(1, this.pageSize, this.searchTerm);
+        this.modalService.dismissAll();
+        this.alertService.showSuccess("Exitoso","Aprovado exitosamente");
       }
     });
   }
 
-  reject(exposureId: number) {
-    this.exposureService.changeStatus(exposureId, 2).subscribe({
+  openApproveExposure(content:any, exposure: ExposureItem) {
+    this.approveExposureModel = this.initializeApproveExposure();
+    this.congressService.getRoomsByCongress(exposure.congressId, 1, 100).subscribe({
+      next: (response) => {
+        this.roomsItems = response.items;
+        this.approveExposureModel.congressId = exposure.congressId;
+        this.approveExposureModel.exposureId = exposure.exposureId;
+        this.modalService.open(content);
+      }
+    })
+  }
+  openRejectExposure(content:any,exposure: ExposureItem) {
+    this.rejectExposureModel = {exposureId: exposure.exposureId ,observation : ""};
+    this.modalService.open(content);
+  }
+
+  reject(form: NgForm) {
+    if(!form.valid) {
+      return;
+    }
+    this.exposureService.rejectExposure(this.rejectExposureModel.exposureId,this.rejectExposureModel ).subscribe({
       next: (response) => {
         this.loadExposures(1, this.pageSize, this.searchTerm);
+        this.modalService.dismissAll();
+        this.alertService.showSuccess("Exitoso","Rechazado exitosamente");
       }
-    });
+    })
   }
 
   downloadSummary(exposureId: number, nameFile: string) {
@@ -147,5 +191,9 @@ export class PresentacionesComponent implements OnInit {
 
   copyUrlRegisterAtendance(guid: string): void {
     this.clipboard.copy(`${this.domain}/registro-asistencia/${guid}`);
+  }
+
+  initializeApproveExposure():ApproveExposureModel  {
+    return {roomId: null, exposureId: 0,congressId: 0,dateEnd: '', dateStart: '', observation: ''}
   }
 }

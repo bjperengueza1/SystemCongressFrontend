@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {catchError, map, Observable, of} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
-import {RoomsItem, RoomWitchCongressItem} from '../interfaces/entities';
+import {CongressItem, RoomsItem, RoomWitchCongressItem} from '../interfaces/entities';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,20 @@ export class RoomsService {
   updateRoom(room: RoomsItem): Observable<any> {
     const url = `${this.apiUrl}/${room.roomId}`;
     return this.http.put<any>(url, room);
+  }
+
+  searchRoomsByCongress(id: number): Observable<RoomsItem[]> {
+    return this.http
+      .get<ApiResponse<RoomsItem>>(`${this.apiUrl}/${id}/Rooms`)
+      .pipe(
+        map((response) => response.items || []),
+        catchError(() => of([]))
+      );
+  }
+
+  getRoomsByCongress(id: number,page: number, size: number): Observable<ApiResponse<RoomsItem>> {
+    const params = {pageNumber: page.toString(), pageSize: size.toString() };
+    return this.http.get<ApiResponse<RoomsItem>>(`${this.apiUrl}/${id}/Rooms`, { params });
   }
 
 

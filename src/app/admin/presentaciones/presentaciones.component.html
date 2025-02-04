@@ -31,8 +31,11 @@
         <th>Congreso</th>
         <th>Nombre</th>
         <th>Línea de investigación</th>
-        <th>Descargar presentación</th>
         <th>Estado</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Observación</th>
+        <th>Descargar presentación</th>
         <th>Acciones</th>
       </tr>
       </thead>
@@ -41,12 +44,16 @@
         <td>{{ exposure.congressName }}</td>
         <td>{{ exposure.name }}</td>
         <td>{{ exposure.researchLineLabel }}</td>
+        <td>{{ exposure.statusLabelExposure }}</td>
+        <td>{{ exposure.dateStart | formatearFecha }}</td>
+        <td>{{ exposure.dateEnd | formatearFecha }}</td>
+        <td>{{ exposure.observation }}</td>
         <td>
           <button class="btn btn-sm btn-info" (click)="downloadSummary(exposure.exposureId,exposure.summaryFilePath)">
             Descargar
           </button>
         </td>
-        <td>{{ exposure.statusLabelExposure }}</td>
+
         <td class="border border-gray-300 px-4 py-2 relative">
           <div class="inline-block text-left">
             <button
@@ -64,7 +71,7 @@
                 </li>
                 <li>
                   @if (exposure.statusExposure == 0) {
-                    <button class="btn btn-sm btn-info dropdown-item" (click)="approve(exposure.exposureId)">
+                    <button class="btn btn-sm btn-info dropdown-item" (click)="openApproveExposure(contentApproveExposure,exposure)">
                       Aprobar
                     </button>
                     <hr class="dropdown-divider">
@@ -72,7 +79,7 @@
                 </li>
                 <li>
                   @if (exposure.statusExposure == 1 || exposure.statusExposure == 0) {
-                    <button class="btn btn-sm btn-info dropdown-item" (click)="reject(exposure.exposureId)">
+                    <button class="btn btn-sm btn-info dropdown-item" (click)="openRejectExposure(contentRejectExposure,exposure)">
                       Rechazar
                     </button>
                     <hr class="dropdown-divider">
@@ -155,5 +162,94 @@
 
   </ng-template>
 
+  <ng-template #contentApproveExposure let-modalApproveExposure class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h4 class="modal-title">Aprobar exposición</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalApproveExposure.dismiss('Cross click')"></button>
+    </div>
 
+    <div class="modal-body">
+      <div class="container mt-5">
+        <form #approveForm="ngForm" (ngSubmit)="approve(approveForm)" class="p-4 border rounded shadow">
+          <div class="mb-3">
+            <label for="sala" class="form-label">Sala:</label>
+            <ng-select
+              id="sala"
+              name="sala"
+              [items]="roomsItems"
+              bindLabel="name"
+              bindValue="roomId"
+              [(ngModel)]="approveExposureModel.roomId"
+              placeholder="Selecciona una sala"
+              [notFoundText]="'No se encontraron salas'"
+              required
+              class="form-control"
+            >
+            </ng-select>
+          </div>
+
+          <div class="mb-3">
+            <label for="fecha_inicio" class="form-label">Fecha inicio:</label>
+            <input
+              type="datetime-local"
+              id="fecha_inicio"
+              name="fecha_inicio"
+              class="form-control"
+              [(ngModel)]="approveExposureModel.dateStart"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="fecha_fin" class="form-label">Fecha fin:</label>
+            <input
+              type="datetime-local"
+              id="fecha_fin"
+              name="fecha_fin"
+              class="form-control"
+              [(ngModel)]="approveExposureModel.dateEnd"
+              required>
+          </div>
+
+          <div class="mb-3">
+            <label for="observacion" class="form-label">Observación:</label>
+            <input
+              type="text"
+              id="observacion"
+              name="observacion"
+              class="form-control"
+              [(ngModel)]="approveExposureModel.observation"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <ng-template #contentRejectExposure let-modalRejectExposure class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h4 class="modal-title">Aprobar exposición</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalRejectExposure.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="container mt-5">
+        <form #rejectForm="ngForm" (ngSubmit)="reject(rejectForm)" class="p-4 border rounded shadow">
+
+          <div class="mb-3">
+            <label for="observacion_r" class="form-label">Observación:</label>
+            <input
+              type="text"
+              id="observacion_r"
+              name="observacion_r"
+              class="form-control"
+              [(ngModel)]="rejectExposureModel.observation"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  </ng-template>
 </div>

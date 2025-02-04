@@ -106,6 +106,9 @@ export interface ExposureItem {
   guid: string,
   congressId: number,
   congressName: string,
+  dateStart: string,
+  dateEnd: string,
+  observation: string,
   authors: AuthorItem[],
 }
 
@@ -140,4 +143,18 @@ export interface ListCongressCertificate {
   location: string,
   exposure: ExposureItem[],
   certificateAttendance: boolean
+}
+
+export type ApproveExposureModel = {
+  exposureId: number,
+  congressId: number,
+  roomId: number | null,
+  dateStart: string,
+  dateEnd: string,
+  observation: string,
+}
+
+export type RejectExposureModel = {
+  exposureId: number,
+  observation: string,
 }
