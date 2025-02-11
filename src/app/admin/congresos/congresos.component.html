@@ -33,7 +33,8 @@
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Ciudad</th>
-        <th>Horas Mínimas</th>
+        <th class="text-center">Horas Mínimas</th>
+        <th class="text-center">Activo</th>
         <th>Acciones</th>
       </tr>
       </thead>
@@ -43,7 +44,14 @@
         <td>{{ congress.startDate }}</td>
         <td>{{ congress.endDate }}</td>
         <td>{{ congress.location }}</td>
-        <td>{{ congress.minHours }}</td>
+        <td class="text-center">{{ congress.minHours }}</td>
+        <td class="text-center">
+          @if (congress.status){
+            SI
+          } @else {
+            NO
+          }
+          </td>
         <td class="border border-gray-300 px-4 py-2 relative">
           <div class="inline-block text-left">
             <button
@@ -75,6 +83,12 @@
               <li>
                 <button class="btn btn-sm btn-secondary dropdown-item" (click)="copyUrlRegisterConferencia(congress.guid)">
                   Copiar url de registro conferencia
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="activateCongress(congress.congressId)">
+                  Activar
                 </button>
               </li>
             </ul>

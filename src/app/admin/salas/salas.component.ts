@@ -97,6 +97,7 @@ export class SalasComponent implements OnInit{
       location: '',
       minHours: 0,
       guid: '',
+      status: 0
     }];
       this.modalService.open(content);
 

@@ -7,6 +7,7 @@ import {NgSelectComponent} from '@ng-select/ng-select';
 import {NgForOf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
 import {AlertService} from '../../services/alert.service';
+import {FormatearFechaPipe} from '../../pipes/formatear-fecha.pipe';
 
 
 @Component({
@@ -16,6 +17,7 @@ import {AlertService} from '../../services/alert.service';
     FormsModule,
     NgSelectComponent,
     NgForOf,
+    FormatearFechaPipe,
   ],
   templateUrl: './registro-exposicion.component.html',
   styleUrl: './registro-exposicion.component.css'

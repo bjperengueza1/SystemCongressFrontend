@@ -11,5 +11,4 @@ export class FormatearFechaPipe implements PipeTransform {
     }
     return value.split('T')[0]; // Formatea la fecha normal
   }
-
 }

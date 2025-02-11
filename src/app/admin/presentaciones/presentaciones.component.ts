@@ -18,6 +18,7 @@ import {FormatearFechaPipe} from '../../pipes/formatear-fecha.pipe';
 import {NgSelectComponent} from '@ng-select/ng-select';
 import {CongressService} from '../../services/congress.service';
 import {AlertService} from '../../services/alert.service';
+import {TipoExposicionPipe} from '../../pipes/tipo-exposicion.pipe';
 
 
 @Component({
@@ -29,7 +30,8 @@ import {AlertService} from '../../services/alert.service';
     NgIf,
     NgbPagination,
     FormatearFechaPipe,
-    NgSelectComponent
+    NgSelectComponent,
+    TipoExposicionPipe
   ],
   templateUrl: './presentaciones.component.html',
   styleUrl: './presentaciones.component.css'

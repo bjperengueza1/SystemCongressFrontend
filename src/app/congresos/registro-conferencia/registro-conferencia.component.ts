@@ -7,6 +7,7 @@ import {CongressService} from '../../services/congress.service';
 import {ExposureService} from '../../services/exposure.service';
 import {AlertService} from '../../services/alert.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormatearFechaPipe} from '../../pipes/formatear-fecha.pipe';
 
 @Component({
   selector: 'app-registro-conferencia',
@@ -14,7 +15,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   imports: [
     FormsModule,
     NgForOf,
-    NgSelectComponent
+    NgSelectComponent,
+    FormatearFechaPipe
   ],
   templateUrl: './registro-conferencia.component.html',
   styleUrl: './registro-conferencia.component.css'

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
@@ -25,7 +25,10 @@ interface Congreso {
   styleUrl: './buscar-certificados.component.css'
 })
 export class BuscarCertificadosComponent {
-  cedula: string = '';
+
+  @Input() cedula: string = '';
+
+  //cedula: string = '';
   congresos: { nombre: string; certificados: { tipo: string; descripcion: string }[] }[] = [];
   buscarRealizado: boolean = false;
 

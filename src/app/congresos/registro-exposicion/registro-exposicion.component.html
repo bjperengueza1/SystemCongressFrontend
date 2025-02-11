@@ -2,7 +2,7 @@
   <!-- Información del congreso -->
   <div class="mb-4 p-4 rounded text-white" style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
     <h1 class="text-center fw-bold" style="font-size: 2.5rem;">{{ congressItem.name }}</h1>
-    <p class="text-center mb-1" style="font-size: 1.2rem;">Fecha: {{ congressItem.startDate }} - {{ congressItem.endDate }}</p>
+    <p class="text-center mb-1" style="font-size: 1.2rem;">Fecha: {{ congressItem.startDate | formatearFecha }} - {{ congressItem.endDate | formatearFecha}}</p>
     <p class="text-center" style="font-size: 1.2rem;">Ubicación: {{ congressItem.location }}</p>
   </div>
 

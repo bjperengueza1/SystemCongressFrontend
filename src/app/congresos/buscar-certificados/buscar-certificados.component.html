@@ -1,40 +1,14 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card shadow">
-        <div class="card-header bg-primary text-white text-center">
-          <h3>Buscar Certificados</h3>
-        </div>
-        <div class="card-body">
-          <!-- Campo de Cédula -->
-          <div class="mb-3">
-            <label for="cedula" class="form-label">Cédula:</label>
-            <input
-              type="text"
-              id="cedula"
-              [(ngModel)]="cedula"
-              class="form-control"
-              placeholder="Ingrese su cédula"
-            />
-          </div>
-          <!-- Botón de Buscar -->
-          <div class="d-grid">
-            <button
-              (click)="buscarCertificados()"
-              class="btn btn-primary"
-            >
-              Buscar
-            </button>
-          </div>
-        </div>
-      </div>
+    <div class="">
+
 
       <!-- Resultados -->
       @if(congresosCertificados.length > 0){
         <div class="mt-4">
-          <div class="alert alert-success text-center">
+          <!--<div class="alert alert-success text-center">
             <strong>Certificados encontrados:</strong>
-          </div>
+          </div>-->
           <!-- Lista de Congresos -->
           @for(congreso of congresosCertificados; track congreso.congressId){
              @if(congreso.certificateAttendance || congreso.exposure.length > 0){

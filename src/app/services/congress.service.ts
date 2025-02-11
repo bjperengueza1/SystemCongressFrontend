@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable, of} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
-import {CongressItem, ListCongressCertificate, RoomsItem} from '../interfaces/entities';
+import {CongressItem, ExposureItem, ListCongressCertificate, RoomsItem} from '../interfaces/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -83,4 +83,19 @@ export class CongressService {
       observe: 'response' // Para acceder a headers y body
     });
   }
+
+  activeCongress(id: number) {
+    return this.http.put(`${this.apiUrl}/${id}/active`, {});
+  }
+
+  getActiveCongress() : Observable<CongressItem> {
+    return this.http.get<CongressItem>(`${this.apiUrl}/active`);
+  }
+
+  getExposures(id: number, page: number, size: number): Observable<ApiResponse<ExposureItem>> {
+    const params = {pageNumber: page.toString(), pageSize: size.toString() };
+    return this.http.get<ApiResponse<ExposureItem>>(`${this.apiUrl}/${id}/exposures`, { params });
+
+  }
+
 }

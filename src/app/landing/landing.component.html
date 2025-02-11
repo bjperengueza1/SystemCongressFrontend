@@ -1,2 +1,264 @@
-<app-nav></app-nav>
-<p>landing works!</p>
+<!-- Navigation Menu -->
+<nav class="nav-menu">
+  <div class="container nav-container">
+    <a href="#" class="nav-logo">CILAI</a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">Acerca de</a>
+      <a href="#conferences" class="nav-link">Conferencias</a>
+      <a href="#submit" class="nav-link">Postular Ponencia</a>
+      <a href="#certificates" class="nav-link">Certificados</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <h1 style="font-size: 3rem; color: #1f2937; margin-bottom: 1rem;">
+      {{congress.name}}
+    </h1>
+    <p style="font-size: 1.25rem; color: #4b5563; margin-bottom: 2rem; max-width: 800px; margin: 0 auto;">
+      Únete a nosotros en la mayor conferencia de innovación tecnológica de Latinoamérica.
+      Del {{ congress.startDate | obtenerDia}} de {{ congress.startDate | obtenerMesNombre}} al {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}, {{ congress.startDate | obtenerAnio}} - {{ congress.location }}
+    </p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown-container">
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.days }}</span>
+        <span class="countdown-label">Días</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.hours }}</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.minutes }}</span>
+        <span class="countdown-label">Minutos</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.seconds }}</span>
+        <span class="countdown-label">Segundos</span>
+      </div>
+    </div>
+
+    <div class="event-highlights">
+      <div class="highlight-item">
+        <strong>+{{ponencias?.totalItems}}</strong>
+        <span>Presentaciones</span>
+      </div>
+      <div class="highlight-item">
+        <strong>+1000</strong>
+        <span>Asistentes</span>
+      </div>
+      <div class="highlight-item">
+        <strong>{{counterDays}}</strong>
+        <span>Días</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h2 style="text-align: center; color: #1f2937; margin-bottom: 2rem;">¿Por qué participar?</h2>
+    <div class="about-section">
+      <div class="about-card">
+        <h3 style="color: #2563eb;">Networking</h3>
+        <p>Conecta con expertos y profesionales de la industria tecnológica de toda Latinoamérica. Oportunidades únicas para establecer contactos y colaboraciones.</p>
+      </div>
+      <div class="about-card">
+        <h3 style="color: #2563eb;">Conocimiento</h3>
+        <p>Accede a contenido exclusivo, las últimas tendencias en tecnología y casos de éxito presentados por líderes de la industria.</p>
+      </div>
+      <div class="about-card">
+        <h3 style="color: #2563eb;">Oportunidades</h3>
+        <p>Descubre nuevas oportunidades de colaboración, desarrollo profesional y conexiones con empresas líderes del sector tecnológico.</p>
+      </div>
+    </div>
+
+    <div class="event-details" style="display: none">
+      <h3 style="color: #1f2937; margin: 2rem 0 1rem;">Información del Evento</h3>
+      <div class="details-grid">
+        <div class="detail-item">
+          <strong>Sede:</strong>
+          <p>Centro de Convenciones Tecnológico<br/>Av. Reforma 123, CDMX</p>
+        </div>
+        <div class="detail-item">
+          <strong>Fechas Importantes:</strong>
+          <p>
+            Inicio de Registro: 1 de Mayo<br/>
+            Límite envío ponencias: 30 de Junio<br/>
+            Notificación aceptación: 15 de Julio
+          </p>
+        </div>
+        <div class="detail-item">
+          <strong>Modalidades:</strong>
+          <p>Presencial y Virtual<br/>Transmisión en vivo de todas las sesiones</p>
+        </div>
+        <div class="detail-item">
+          <strong>Incluye:</strong>
+          <p>
+            Material digital<br/>
+            Certificado de participación<br/>
+            Coffee breaks y almuerzo
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conferences Section -->
+  <section id="conferences" class="section">
+    <h2 style="text-align: center; color: #1f2937; margin-bottom: 2rem;">Conferencias Disponibles</h2>
+
+    <div *ngIf="ponencias">
+      <div *ngFor="let conference of ponencias.items" class="conference-card">
+        <h3 style="color: #1f2937; margin-bottom: 0.5rem;">{{ conference.name }}</h3>
+        <div class="conference-details">
+          <div class="conference-info">
+            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              <strong>Ponente:</strong> {{ conference.authors[0].name }} - {{ conference.authors[0].academicDegree | obtenerGradoAcademicoNombre }}
+            </p>
+            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              <strong>Fecha:</strong> {{ conference.dateStart | formatearFecha }} | <strong>Hora:</strong> {{ conference.dateStart | obtenerHoraFormateada }}
+            </p>
+            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              <strong>Linea de Investigación:</strong> {{ conference.researchLine | lineaInvestigacion }}
+            </p>
+            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              <strong>Tipo:</strong> {{ conference.type | tipoExposicion }}
+            </p>
+          </div>
+        </div>
+
+        <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
+          <div class="form-group" style="max-width: 300px;">
+            <input
+              type="email"
+              [id]="'email-' + conference.exposureId"
+              name="email"
+              [(ngModel)]="emailInputs[conference.exposureId]"
+              required
+              class="form-control"
+              placeholder="Ingresa tu correo para registrarte"
+            >
+          </div>
+          <button type="submit"
+                  class="btn"
+                  [disabled]="!emailInputs[conference.exposureId]">
+            Registrarme
+          </button>
+          <div *ngIf="submittedConferences[conference.exposureId]" class="success-message">
+            ¡Registro exitoso! Te enviaremos los detalles por correo.
+          </div>
+        </form>
+
+      </div>
+      <!-- Paginación usando ng-bootstrap -->
+      <nav class="mt-4" *ngIf="ponencias.totalPages > 1">
+        <ngb-pagination
+          [collectionSize]="ponencias.totalItems"
+          [(page)]="currentPage"
+          [pageSize]="pageSize"
+          (pageChange)="loadExposures($event, pageSize)">
+        </ngb-pagination>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Submit Presentation Section -->
+  <section id="submit" class="section" style="text-align: center;">
+    <h2 style="color: #1f2937; margin-bottom: 1rem;">¿Quieres ser ponente?</h2>
+    <div class="submit-info">
+      <p style="color: #4b5563; margin-bottom: 1.5rem;">
+        Comparte tu conocimiento y experiencia con la comunidad. Buscamos presentaciones sobre:
+      </p>
+      <ul class="topics-list">
+        <li>Inteligencia Artificial y Machine Learning</li>
+        <li>Desarrollo Web y Móvil</li>
+        <li>DevOps y Cloud Computing</li>
+        <li>Ciberseguridad</li>
+        <li>Blockchain y Criptomonedas</li>
+        <li>IoT y Edge Computing</li>
+      </ul>
+      <p style="color: #4b5563; margin: 1.5rem 0;">
+        <strong>Fecha límite:</strong> 30 de junio, 2024
+      </p>
+    </div>
+    <a href="{{urlRegistroPonencia}}"
+       target="_blank"
+       class="btn">
+      Enviar Propuesta de Ponencia
+    </a>
+  </section>
+
+  <!-- Certificates Section -->
+  <section id="certificates" class="certificates-section">
+    <div class="container">
+      <h2 style="color: #1f2937; margin-bottom: 1rem;">Certificados de Participación</h2>
+      <div class="certificates-info">
+        <p style="color: #4b5563; margin-bottom: 1rem;">
+          Los certificados estarán disponibles para:
+        </p>
+        <ul class="certificates-list">
+          <li>Asistentes a las conferencias</li>
+          <li>Ponentes</li>
+          <li>Participantes de talleres</li>
+        </ul>
+        <p style="color: #4b5563; margin: 1rem 0;">
+          Los certificados se emitirán digitalmente y contarán con un código QR para verificar su autenticidad.
+        </p>
+      </div>
+
+      <div class="certificates-form">
+        <h3 style="color: #1f2937; margin-bottom: 1rem;">Descarga tu Certificado</h3>
+        <p style="color: #4b5563; margin-bottom: 1rem;">
+          Los certificados estarán disponibles 48 horas después de cada sesión.
+        </p>
+        <form (ngSubmit)="onCertificateSubmit()" #certificateForm="ngForm">
+          <div class="form-group">
+            <input
+              type="text"
+              id="dni"
+              name="dni"
+              [(ngModel)]="dniInput"
+              required
+              pattern="[0-9]{13}"
+              class="form-control"
+              placeholder="Ingresa tu DNI (Máximo 13 dígitos)"
+            >
+          </div>
+          <button type="submit"
+                  class="btn"
+                  [disabled]="!dniInput || dniInput.length < 10">
+            Buscar Certificados
+          </button>
+          <div *ngIf="certificateError" class="error-message">
+            {{ certificateError }}
+          </div>
+          <div *ngIf="certificateSuccess" class="success-message">
+            {{ certificateSuccess }}
+          </div>
+        </form>
+      </div>
+      <app-buscar-certificados [cedula]="dniInput"></app-buscar-certificados>
+    </div>
+  </section>
+</div>
+
+
+
+<footer style="background: #1f2937; color: white; padding: 2rem 0; margin-top: 4rem;">
+  <div class="container" style="text-align: center;">
+    <p>© 2024 Congreso Internacional de Innovación y Tecnología</p>
+    <p>Contacto: gyugjuygh.com</p>
+    <div class="social-links">
+      <a href="#" class="social-link">Twitter</a>
+      <a href="#" class="social-link">LinkedIn</a>
+      <a href="#" class="social-link">Instagram</a>
+    </div>
+  </div>
+</footer>

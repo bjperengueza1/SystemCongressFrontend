@@ -6,6 +6,7 @@ export interface CongressItem {
   location: string;
   minHours: number;
   guid: string;
+  status: number;
 }
 
 export interface RoomsItem {

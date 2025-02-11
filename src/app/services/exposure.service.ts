@@ -70,4 +70,10 @@ export class ExposureService {
       observe: 'response' // Para acceder a headers y body
     });
   }
+
+  //register email in exposure
+  registerPrevious(id: number, email: string): Observable<any> {
+    const body = {email: email};
+    return this.http.post(`${this.apiUrl}/${id}/register-previous`, body);
+  }
 }

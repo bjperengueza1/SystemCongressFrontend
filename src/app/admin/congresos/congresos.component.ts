@@ -98,7 +98,7 @@ export class CongresosComponent implements OnInit {
   // Inicializar un congreso vacío
   private initializeCongreso(): CongressItem {
     //return { id: 0, nombre: '', fechaInicio: '', fechaFin: '', ubicacion: '' };
-    return {minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: ''}
+    return {minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: '', status: 0}
   }
 
   open(content: any) {
@@ -190,5 +190,17 @@ export class CongresosComponent implements OnInit {
   }
   copyUrlRegisterConferencia(guid: string): void {
     this.clipboard.copy(`${this.domain}/registro-conferencia/${guid}`);
+  }
+  activateCongress(congressId:number){
+    this.congressService.activeCongress(congressId).subscribe({
+      next: () => {
+        this.alertService.showSuccess("Exitoso","Activado exitosamente.");
+        this.currentPage = 1;
+        this.loadCongresses(1, this.pageSize, this.searchTerm);
+      },
+      error: (err) => {
+        this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente')
+      }
+    })
   }
 }
