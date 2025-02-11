@@ -111,6 +111,7 @@ export interface ExposureItem {
   dateEnd: string,
   observation: string,
   authors: AuthorItem[],
+  room: RoomsItem
 }
 
 export interface AttendeeItem {

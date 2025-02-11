@@ -17,17 +17,6 @@ import {LineaInvestigacionPipe} from '../pipes/linea-investigacion.pipe';
 import {TipoExposicionPipe} from '../pipes/tipo-exposicion.pipe';
 import {BuscarCertificadosComponent} from '../congresos/buscar-certificados/buscar-certificados.component';
 
-interface Conference {
-  id: number;
-  title: string;
-  speaker: string;
-  date: string;
-  time: string;
-  description: string;
-  location: string;
-  capacity: number;
-}
-
 interface CountdownTime {
   days: number;
   hours: number;
@@ -98,6 +87,7 @@ export class LandingComponent implements OnInit {
         this.actualizarDiasEvento();
         this.congressService.getExposures(data.congressId, 1, this.pageSize).subscribe({
           next: (data) => {
+            console.log(data);
             this.ponencias = data;
           }
         })
