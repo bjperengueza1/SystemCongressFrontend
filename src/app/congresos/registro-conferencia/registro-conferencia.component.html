@@ -189,15 +189,21 @@
         </div>
         <div class="col-md-6 mb-3">
           <label for="author{{i}}Country" class="form-label">País:</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="author.Country"
+          
+          <ng-select
+            id="author{{i}}Country"
             name="author{{i}}Country"
+            [items]="countries"
+            bindLabel="value"
+            bindValue="value"
+            [(ngModel)]="author.Country"
+            placeholder="Selecciona un País"
+            [notFoundText]="'No se encontraron Países'"
             required
-            minlength="3"
-            maxlength="20"
-            placeholder="País de origen">
+            class="form-control">
+          </ng-select>
+
+
           @if(expositionForm.controls['author'+i+'Country'].invalid && expositionForm.controls['author'+i+'Country']["touched"]){
             <div class="text-danger">
               @if(expositionForm.controls['author'+i+'Country'].errors?.['required']) {

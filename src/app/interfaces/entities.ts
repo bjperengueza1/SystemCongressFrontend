@@ -74,7 +74,7 @@ export interface AuthorInsertItem {
   InstitutionalMail:string,
   PersonalMail: string,
   PhoneNumber: string,
-  Country: string,
+  Country: string | null,
   City: string,
   AcademicDegree: number | null
 }

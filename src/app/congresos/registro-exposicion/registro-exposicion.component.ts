@@ -106,9 +106,32 @@ export class RegistroExposicionComponent implements OnInit {
         InstitutionalMail: '',
         PersonalMail: '',
         PhoneNumber: '',
-        Country: '',
+        Country: null,
         City: '',
         AcademicDegree: null
       }], CongressGuid: congressGuid, ResearchLine: null, Type: 1, pdfFile: null, Name:""};
   }
+
+  countries = [
+    { value: 'Argentina' },
+    { value: 'Bolivia' },
+    { value: 'Brasil' },
+    { value: 'Chile' },
+    { value: 'Colombia' },
+    { value: 'Costa Rica' },
+    { value: 'Cuba' },
+    { value: 'República Dominicana' },
+    { value: 'Ecuador' },
+    { value: 'El Salvador' },
+    { value: 'Guatemala' },
+    { value: 'Honduras' },
+    { value: 'México' },
+    { value: 'Nicaragua' },
+    { value: 'Panamá' },
+    { value: 'Paraguay' },
+    { value: 'Perú' },
+    { value: 'Puerto Rico' },
+    { value: 'Uruguay' },
+    { value: 'Venezuela' }
+  ];
 }
