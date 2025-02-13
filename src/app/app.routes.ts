@@ -12,6 +12,7 @@ import {AsistenciasComponent} from './admin/asistencias/asistencias.component';
 import {AsistentesComponent} from './admin/asistentes/asistentes.component';
 import {BuscarCertificadosComponent} from './congresos/buscar-certificados/buscar-certificados.component';
 import {RegistroConferenciaComponent} from './congresos/registro-conferencia/registro-conferencia.component';
+import {CongressFormComponent} from './congress-form/congress-form.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -28,6 +29,7 @@ export const routes: Routes = [
     ]
   },
   { path: 'landing', component: LandingComponent },
+  { path: 'cf', component: CongressFormComponent },
   //registro exposicion por congreso
   { path: 'registro-ponencia/:id', component: RegistroExposicionComponent},
   { path: 'registro-conferencia/:id', component: RegistroConferenciaComponent},

@@ -6,7 +6,6 @@ import {CongressService} from '../../services/congress.service';
 import {ApiResponse} from '../../interfaces/api-response';
 import {CongressItem, RoomsItem} from '../../interfaces/entities';
 import {Clipboard} from '@angular/cdk/clipboard';
-import Swal from 'sweetalert2';
 import {AlertService} from '../../services/alert.service';
 
 @Component({
@@ -36,6 +35,17 @@ export class CongresosComponent implements OnInit {
   selectedCongreso: CongressItem = this.initializeCongreso();
 
   private domain = '';
+
+  fileValidFlayer: boolean = false;
+  fileValidConference: boolean = false;
+  fileValidPonencia: boolean = false;
+  fileValidAttendance: boolean = false;
+
+  fileFlayer: File | null = null;
+  fileConference: File | null = null;
+  filePonencia: File | null = null;
+  fileAttendance: File | null = null
+
 
   constructor(
     private modalService: NgbModal,
@@ -103,13 +113,31 @@ export class CongresosComponent implements OnInit {
 
   open(content: any) {
     this.selectedCongreso = this.initializeCongreso(); // Reiniciar para nuevo congreso
-    this.modalService.open(content);
+    this.modalService.open(content,{
+      centered: true,
+      size: "lg"
+    });
   }
 
   // Abrir modal para editar un congreso
   edit(content: any, congressItem: CongressItem) {
     this.selectedCongreso = { ...congressItem }; // Clonar el objeto seleccionado
-    this.modalService.open(content);
+    this.modalService.open(content,
+      {
+        centered: true,
+        size: "lg"
+      }
+    );
+  }
+
+  openModalFile(content: any, congressItem: CongressItem) {
+    this.selectedCongreso = { ...congressItem };
+    this.modalService.open(content,
+      {
+        centered: true,
+        size: "lg"
+      }
+    );
   }
 
   save(congressForm: NgForm) {
@@ -202,5 +230,106 @@ export class CongresosComponent implements OnInit {
         this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente')
       }
     })
+  }
+
+  onFileChangeF(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.fileFlayer = file;
+      this.fileValidFlayer = true;
+    } else {
+      this.fileValidFlayer = false;
+    }
+  }
+
+  onFileChangeC(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.fileConference = file;
+      this.fileValidConference = true;
+    } else {
+      this.fileValidConference = false;
+    }
+  }
+
+  onFileChangeP(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.filePonencia = file;
+      this.fileValidPonencia = true;
+    } else {
+      this.fileValidPonencia = false;
+    }
+  }
+
+  onFileChangeA(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.fileAttendance = file;
+      this.fileValidAttendance = true;
+    } else {
+      this.fileValidAttendance = false;
+    }
+  }
+
+  saveFile(type: number) {
+    switch (type) {
+      case 1:
+        if (!this.fileFlayer) {
+          return;
+        }
+        this.congressService.uploadFlayer(this.selectedCongreso.congressId, this.fileFlayer).subscribe({
+          next: () => {
+            this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
+            this.modalService.dismissAll();
+          },
+          error: (err) => {
+            this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
+          },
+        });
+        break;
+      case 2:
+        if (!this.fileConference) {
+          return;
+        }
+        this.congressService.uploadConference(this.selectedCongreso.congressId, this.fileConference).subscribe({
+          next: () => {
+            this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
+            this.modalService.dismissAll();
+          },
+          error: (err) => {
+            this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
+          },
+        });
+        break;
+      case 3:
+        if (!this.filePonencia) {
+          return;
+        }
+        this.congressService.uploadPonencia(this.selectedCongreso.congressId, this.filePonencia).subscribe({
+          next: () => {
+            this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
+            this.modalService.dismissAll();
+          },
+          error: (err) => {
+            this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
+          },
+        });
+        break;
+      case 4:
+        if (!this.fileAttendance) {
+          return;
+        }
+        this.congressService.uploadAttendance(this.selectedCongreso.congressId, this.fileAttendance).subscribe({
+          next: () => {
+            this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
+            this.modalService.dismissAll();
+          },
+          error: (err) => {
+            this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
+          },
+        });
+        break;
+      }
   }
 }

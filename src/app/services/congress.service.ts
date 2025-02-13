@@ -18,6 +18,30 @@ export class CongressService {
     return this.http.get<ApiResponse<CongressItem>>(`${this.apiUrl}`, { params });
   }
 
+  uploadFlayer(id: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/${id}/upload-flayer`, formData);
+  }
+
+  uploadConference(id: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/${id}/upload-template-certificate-conference`, formData);
+  }
+
+  uploadPonencia(id: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/${id}/upload-template-certificate-exposure`, formData);
+  }
+
+  uploadAttendance(id: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/${id}/upload-template-certificate-attendance`, formData);
+  }
+
   // Obtener un congreso por ID
   getCongress(id: number): Observable<CongressItem> {
     return this.http.get<CongressItem>(`${this.apiUrl}/${id}`);

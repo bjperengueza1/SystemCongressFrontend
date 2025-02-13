@@ -69,14 +69,14 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <button class="btn btn-sm btn-info dropdown-item" (click)="openListRoomsPage(contentListRooms,congress)">
-                  Gestionar Salas
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="activateCongress(congress.congressId)">
+                  Activar
                 </button>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <button class="btn btn-sm btn-secondary dropdown-item" (click)="copyUrlRegisterPonencia(congress.guid)">
-                  Copiar url de registro ponencia
+                <button class="btn btn-sm btn-info dropdown-item" (click)="openListRoomsPage(contentListRooms,congress)">
+                  Gestionar Salas
                 </button>
                 <hr class="dropdown-divider">
               </li>
@@ -87,8 +87,26 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <button class="btn btn-sm btn-secondary dropdown-item" (click)="activateCongress(congress.congressId)">
-                  Activar
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalFile(modalSubirFlayer, congress)">
+                  Subir Flayer
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalFile(modalSubirConferencia, congress)">
+                  Subir Plantilla de Certificado de Conferencia
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalFile(modalSubirPonencia, congress)">
+                  Subir Plantilla de Certificado de Ponencia
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalFile(modalSubirAsistencia, congress)">
+                  Subir Plantilla de Certificado de Asistencia
                 </button>
               </li>
             </ul>
@@ -131,7 +149,7 @@
     <div class="modal-body">
       <form #congressForm="ngForm" (ngSubmit)="save(congressForm)">
         <div class="form-group mb-2">
-          <label for="nombre">Nombre</label>
+          <label for="nombre" class="form-label">Nombre</label>
           <input
             type="text"
             id="nombre"
@@ -147,7 +165,7 @@
           </div>
         </div>
         <div class="form-group mb-2">
-          <label for="fechaInicio">Fecha Inicio</label>
+          <label for="fechaInicio" class="form-label">Fecha Inicio</label>
           <input
             type="date"
             id="fechaInicio"
@@ -161,7 +179,7 @@
           </div>
         </div>
         <div class="form-group mb-2">
-          <label for="fechaFin">Fecha Fin</label>
+          <label for="fechaFin" class="form-label">Fecha Fin</label>
           <input
             type="date"
             id="fechaFin"
@@ -175,7 +193,7 @@
           </div>
         </div>
         <div class="form-group mb-3">
-          <label for="ubicacion">Ciudad</label>
+          <label for="ubicacion" class="form-label">Ciudad</label>
           <input
             type="text"
             id="ubicacion"
@@ -189,7 +207,7 @@
           </div>
         </div>
         <div class="form-group mb-3">
-          <label for="minHours">Horas Mínimas</label>
+          <label for="minHours" class="form-label">Horas Mínimas</label>
           <input
             type="number"
             id="minHours"
@@ -212,6 +230,102 @@
     </div>
   </ng-template>
 
+  <!-- Modal -->
+  <ng-template #modalSubirFlayer let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedCongreso.congressId ? 'Editar Flayer' : 'Agregar Flayer' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #flayerForm="ngForm" (ngSubmit)="saveFile(1)">
+        <div class="form-group mb-3">
+          <input type="file" class="form-control" id="flayer" accept="image/*" required (change)="onFileChangeF($event)"
+          [(ngModel)]="fileFlayer" name="flayer">
+          @if(!fileValidFlayer){
+            <div class="text-danger">
+              <small >El archivo es requerido.</small>
+            </div>
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="!fileValidFlayer">Guardar</button>
+          <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #modalSubirConferencia let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedCongreso.congressId ? 'Editar Plantilla Certificado Conferencia' : 'Agregar Plantilla Certificado Conferencia' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #conferenceForm="ngForm" (ngSubmit)="saveFile(2)">
+        <div class="form-group mb-3">
+          <input type="file" class="form-control" id="templateConference" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required (change)="onFileChangeC($event)"
+          [(ngModel)]="fileFlayer" name="templateConference">
+          @if(!fileValidConference){
+            <div class="text-danger">
+              <small >El archivo es requerido.</small>
+            </div>
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="!fileValidConference">Guardar</button>
+          <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #modalSubirPonencia let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedCongreso.congressId ? 'Editar Plantilla Certificado Ponencia' : 'Agregar Plantilla Certificado Ponencia' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #ponenciaForm="ngForm" (ngSubmit)="saveFile(3)">
+        <div class="form-group mb-3">
+          <input type="file" class="form-control" id="templatePonencia" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required (change)="onFileChangeP($event)"
+          [(ngModel)]="filePonencia" name="templatePonencia">
+          @if(!fileValidPonencia){
+            <div class="text-danger">
+              <small >El archivo es requerido.</small>
+            </div>
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="!fileValidPonencia">Guardar</button>
+          <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #modalSubirAsistencia let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedCongreso.congressId ? 'Editar Plantilla Certificado Asistencia' : 'Agregar Plantilla Certificado Asistencia' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #attendanceForm="ngForm" (ngSubmit)="saveFile(4)">
+        <div class="form-group mb-3">
+          <input type="file" class="form-control" id="templateAttendance" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required (change)="onFileChangeF($event)"
+          [(ngModel)]="fileFlayer" name="templateAttendance">
+          @if(!fileValidAttendance){
+            <div class="text-danger">
+              <small >El archivo es requerido.</small>
+            </div>
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="!fileValidAttendance">Guardar</button>
+          <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
 
   <!-- Modal for list Rooms -->
   <ng-template #contentListRooms let-modal>

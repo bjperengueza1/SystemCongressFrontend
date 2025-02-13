@@ -9,6 +9,21 @@ export interface CongressItem {
   status: number;
 }
 
+export interface CongressInsertItem {
+  congressId: number;
+  name: string;
+  startDate: string; // O usa Date si prefieres convertirla manualmente
+  endDate: string;
+  location: string;
+  minHours: number;
+  guid: string;
+  status: number;
+  fileFlayer: File | null;
+  fileConferencia: File | null;
+  filePonencia: File | null;
+  fileAttendeee: File | null;
+}
+
 export interface RoomsItem {
   roomId: number;
   congressId: number;
