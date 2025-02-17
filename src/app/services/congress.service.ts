@@ -8,7 +8,7 @@ import {CongressItem, ExposureItem, ListCongressCertificate, RoomsItem} from '..
   providedIn: 'root',
 })
 export class CongressService {
-  private apiUrl = 'http://34.173.148.212:8080/api/Congress'; // Endpoint de la API
+  private apiUrl = 'http://34.173.148.212:5196/api/Congress'; // Endpoint de la API
 
   constructor(private http: HttpClient) {}
 
