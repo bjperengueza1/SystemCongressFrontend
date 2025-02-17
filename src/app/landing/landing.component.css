@@ -266,3 +266,15 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+
+.flayer-portada {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.flayer-portada img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

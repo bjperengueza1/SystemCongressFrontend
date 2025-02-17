@@ -116,6 +116,14 @@ export class CongressService {
     return this.http.get<CongressItem>(`${this.apiUrl}/active`);
   }
 
+  getFlayerActiveCongress() : Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/active/flayer`, {
+      responseType: 'blob',
+    });
+  }
+
+
+
   getExposures(id: number, page: number, size: number): Observable<ApiResponse<ExposureItem>> {
     const params = {pageNumber: page.toString(), pageSize: size.toString() };
     return this.http.get<ApiResponse<ExposureItem>>(`${this.apiUrl}/${id}/exposures`, { params });

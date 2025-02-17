@@ -72,6 +72,8 @@ export class LandingComponent implements OnInit {
 
   urlRegistroPonencia: string = '';
 
+  imageUrl: string = '';
+
 
   constructor(
     private congressService: CongressService,
@@ -80,6 +82,12 @@ export class LandingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.congressService.getFlayerActiveCongress().subscribe({
+      next: (data: Blob) => {
+        this.imageUrl = URL.createObjectURL(data);
+      }
+    })
+
     this.congressService.getActiveCongress().subscribe({
       next: data => {
         this.congress = data;

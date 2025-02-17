@@ -60,6 +60,13 @@
   </div>
 </section>
 
+<!-- Foto Flayer Portada Content -->
+<div class="container">
+  <div class="flayer-portada">
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Flayer Portada" />
+  </div>
+</div>
+
 <div class="container">
   <!-- About Section -->
   <section id="about" class="section">
@@ -191,7 +198,7 @@
         <li>IoT y Edge Computing</li>
       </ul>
       <p style="color: #4b5563; margin: 1.5rem 0;">
-        <strong>Fecha límite:</strong> 30 de junio, 2024
+        <!-- <strong>Fecha límite:</strong> 30 de junio, 2024 -->
       </p>
     </div>
     <a href="{{urlRegistroPonencia}}"
@@ -212,7 +219,7 @@
         <ul class="certificates-list">
           <li>Asistentes a las conferencias</li>
           <li>Ponentes</li>
-          <li>Participantes de talleres</li>
+          <li>Conferencistas</li>
         </ul>
         <p style="color: #4b5563; margin: 1rem 0;">
           Los certificados se emitirán digitalmente y contarán con un código QR para verificar su autenticidad.
