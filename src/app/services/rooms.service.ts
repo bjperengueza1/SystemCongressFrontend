@@ -8,7 +8,7 @@ import {CongressItem, RoomsItem, RoomWitchCongressItem} from '../interfaces/enti
   providedIn: 'root'
 })
 export class RoomsService {
-  private apiUrl = 'http://34.173.148.212:5196/api/Rooms'; // Endpoint de la API
+  private apiUrl = 'http://34.173.148.212:8080/api/Rooms'; // Endpoint de la API
 
   constructor(private http: HttpClient) { }
 
