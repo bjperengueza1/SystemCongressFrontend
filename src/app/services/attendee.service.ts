@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class AttendeeService {
 
-  private apiUrl = 'http://localhost:5196/api/Attendees'; // Endpoint de la API
+  private apiUrl = 'http://34.173.148.212:5196/api/Attendees'; // Endpoint de la API
 
   constructor(private http: HttpClient) { }
 
