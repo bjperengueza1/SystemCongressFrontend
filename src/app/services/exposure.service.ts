@@ -3,14 +3,18 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ApproveExposureModel, ExposureInsertItem, ExposureItem, RejectExposureModel} from '../interfaces/entities';
 import {ApiResponse} from '../interfaces/api-response';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExposureService {
-  private apiUrl = 'http://localhost:5196/api/Exposures'; // Endpoint de la API
 
-  constructor(private http: HttpClient) { }
+  private apiUrl: string = "";
+
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+  }
 
 
   getExposures(page: number, size: number, search: string): Observable<ApiResponse<ExposureItem>> {

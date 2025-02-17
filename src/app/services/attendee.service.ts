@@ -3,15 +3,18 @@ import {HttpClient} from '@angular/common/http';
 import {AttendeeItem} from '../interfaces/entities';
 import {ApiResponse} from '../interfaces/api-response';
 import {Observable} from 'rxjs';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AttendeeService {
 
-  private apiUrl = 'http://localhost:5196/api/Attendees'; // Endpoint de la API
+  private apiUrl: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+  }
 
   getAttendees(page: number, size: number, search: string): Observable<ApiResponse<AttendeeItem>> {
     const params = { pageNumber: page.toString(), pageSize: size.toString(), search };

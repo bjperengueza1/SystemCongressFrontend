@@ -3,14 +3,17 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable, of} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
 import {CongressItem, RoomsItem, RoomWitchCongressItem} from '../interfaces/entities';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
-  private apiUrl = 'http://localhost:5196/api/Rooms'; // Endpoint de la API
+  private apiUrl: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+  }
 
   //Obtener la lista de Rooms
   getRooms(page:number, size:number, search: string): Observable<ApiResponse<RoomWitchCongressItem>> {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, Observable, ReplaySubject, throwError} from 'rxjs';
+import { ConfigService } from './config.service';
 
 export interface LoginResponse {
   userId: number;
@@ -19,11 +20,14 @@ export interface LoginCredentials {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5196/api/Account';
+
+  private apiUrl: string = "";
+
   private currentUserSource = new ReplaySubject<LoginResponse | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
     this.checkLocalStorage();
   }
 
