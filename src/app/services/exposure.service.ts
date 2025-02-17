@@ -8,7 +8,7 @@ import {ApiResponse} from '../interfaces/api-response';
   providedIn: 'root'
 })
 export class ExposureService {
-  private apiUrl = 'http://34.173.148.212:5196/api/Exposures'; // Endpoint de la API
+  private apiUrl = 'http://localhost:5196/api/Exposures'; // Endpoint de la API
 
   constructor(private http: HttpClient) { }
 

@@ -19,7 +19,7 @@ export interface LoginCredentials {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://34.173.148.212:5196/api/Account';
+  private apiUrl = 'http://localhost:5196/api/Account';
   private currentUserSource = new ReplaySubject<LoginResponse | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 

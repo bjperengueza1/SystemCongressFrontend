@@ -311,7 +311,7 @@
     <div class="modal-body">
       <form #attendanceForm="ngForm" (ngSubmit)="saveFile(4)">
         <div class="form-group mb-3">
-          <input type="file" class="form-control" id="templateAttendance" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required (change)="onFileChangeF($event)"
+          <input type="file" class="form-control" id="templateAttendance" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required (change)="onFileChangeA($event)"
           [(ngModel)]="fileFlayer" name="templateAttendance">
           @if(!fileValidAttendance){
             <div class="text-danger">

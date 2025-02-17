@@ -9,7 +9,7 @@ import {AttendanceInsertItem, AttendanceItem} from '../interfaces/entities';
 })
 export class AttendancesService {
 
-  private apiUrl = 'http://34.173.148.212:5196/api/Attendances'; // Endpoint de la API
+  private apiUrl = 'http://localhost:5196/api/Attendances'; // Endpoint de la API
 
   constructor(private http: HttpClient) { }
 

@@ -24,7 +24,7 @@
           <!-- Formulario de registro -->
           <form (ngSubmit)="registerAttendance()" #attendanceForm="ngForm">
             <div class="mb-3">
-              <label for="idNumber" class="form-label">No. Documento de dentidad</label>
+              <label for="idNumber" class="form-label">No. Documento de Identidad</label>
               <input type="text" class="form-control" id="idNumber" placeholder="Ingresa tu documento de identidad"
                      required [(ngModel)]="attendance.attendee.idNumber" name="idNumber">
             </div>

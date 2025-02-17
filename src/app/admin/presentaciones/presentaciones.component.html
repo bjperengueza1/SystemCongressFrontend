@@ -68,7 +68,7 @@
 
               <ul class="dropdown-menu">
                 <li>
-                  <button class="btn btn-sm btn-secondary dropdown-item" (click)="showAuthors(exposure.authors, content)">Authores</button>
+                  <button class="btn btn-sm btn-secondary dropdown-item" (click)="showAuthors(exposure.authors, content)">Autores</button>
                   <hr class="dropdown-divider">
                 </li>
                 <li>
@@ -146,7 +146,7 @@
           <tbody>
           @for (author of authors; track author.authorId) {
             <tr>
-              <td>{{author.position}}</td>
+              <td>{{author.position | posicionAutor }} td>
               <td>{{author.name}}</td>
               <td>{{author.idNumber}}</td>
               <td>{{author.institutionalMail}}</td>
@@ -230,7 +230,7 @@
 
   <ng-template #contentRejectExposure let-modalRejectExposure class="modal-dialog modal-lg">
     <div class="modal-header">
-      <h4 class="modal-title">Aprobar exposición</h4>
+      <h4 class="modal-title">Rechazar exposición</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modalRejectExposure.dismiss('Cross click')"></button>
     </div>
 

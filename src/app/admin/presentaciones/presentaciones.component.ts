@@ -19,6 +19,7 @@ import {NgSelectComponent} from '@ng-select/ng-select';
 import {CongressService} from '../../services/congress.service';
 import {AlertService} from '../../services/alert.service';
 import {TipoExposicionPipe} from '../../pipes/tipo-exposicion.pipe';
+import { PosicionAutorPipe } from "../../pipes/posicion-autor.pipe";
 
 
 @Component({
@@ -31,8 +32,9 @@ import {TipoExposicionPipe} from '../../pipes/tipo-exposicion.pipe';
     NgbPagination,
     FormatearFechaPipe,
     NgSelectComponent,
-    TipoExposicionPipe
-  ],
+    TipoExposicionPipe,
+    PosicionAutorPipe
+],
   templateUrl: './presentaciones.component.html',
   styleUrl: './presentaciones.component.css'
 })
