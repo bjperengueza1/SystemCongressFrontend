@@ -27,7 +27,7 @@ export class AuthService {
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+    this.apiUrl = configService.getApiUrl()+"api/Account"; 
     this.checkLocalStorage();
   }
 

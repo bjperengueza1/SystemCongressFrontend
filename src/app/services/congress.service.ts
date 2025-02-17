@@ -12,7 +12,7 @@ export class CongressService {
   private apiUrl: string = "";
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+    this.apiUrl = configService.getApiUrl()+"api/Congress"; 
   }
 
   // Obtener la lista de congresos y mapear propiedades

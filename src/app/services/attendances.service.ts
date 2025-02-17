@@ -13,7 +13,7 @@ export class AttendancesService {
   private apiUrl: string = "";
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+    this.apiUrl = configService.getApiUrl()+"api/Attendances"; 
   }
 
   getAttendances(page: number, size: number, search: string): Observable<ApiResponse<AttendanceItem>> {

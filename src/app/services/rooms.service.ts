@@ -12,7 +12,7 @@ export class RoomsService {
   private apiUrl: string = "";
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+    this.apiUrl = configService.getApiUrl()+"api/Rooms"; 
   }
 
   //Obtener la lista de Rooms
