@@ -125,12 +125,14 @@ export class CongressService {
     });
   }
 
-
-
   getExposures(id: number, page: number, size: number): Observable<ApiResponse<ExposureItem>> {
     const params = {pageNumber: page.toString(), pageSize: size.toString() };
     return this.http.get<ApiResponse<ExposureItem>>(`${this.apiUrl}/${id}/exposures`, { params });
 
+  }
+
+  sendInvitationConference(id: number, emails: string[]): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/send-invitacion-conference`, emails);
   }
 
 }

@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment.development';
 export class ConfigService {
 
   getApiUrl(): string {
-    console.log(environment.production);
     return environment.apiUrl;
   }
 

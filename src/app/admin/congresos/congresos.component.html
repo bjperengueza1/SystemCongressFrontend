@@ -87,6 +87,12 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalSendInvitationConference(modalInvitationConference,congress)">
+                  Enviar invitación con url de registro conferencia
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
                 <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalFile(modalSubirFlayer, congress)">
                   Subir Flayer
                 </button>
@@ -377,5 +383,56 @@
     </div>
 
   </ng-template>
+
+    <!-- Modal for Send Multiples Emails -->
+    <ng-template #modalInvitationConference let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{ selectedCongreso.congressId ? 'Editar Plantilla Certificado Ponencia' : 'Agregar Plantilla Certificado Ponencia' }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+  
+        <div class="email-container">
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              [(ngModel)]="emailInput" 
+              (keyup.enter)="addEmail()" 
+              placeholder="Escribe un correo y presiona Enter"
+              class="email-input"
+            />
+            <button class="add-button" (click)="addEmail()">Agregar</button>
+          </div>
+
+          <!-- Mostrar mensaje de error si el correo no es válido -->
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+        
+          <div class="emails-list">
+            <ul class="ul-emails">
+              <li *ngFor="let email of emails; let i = index" class="email-item">
+                <span class="email-text">{{ email }}</span>
+                <button class="remove-button" (click)="removeEmail(i)">×</button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Botón Enviar -->
+        <button 
+          class="send-button" 
+          (click)="sendEmails()" 
+          [disabled]="emails.length === 0"
+        >
+          Enviar
+        </button>
+
+          
+
+        </div>
+              
+      </div>
+  
+    </ng-template>
 
 </div>

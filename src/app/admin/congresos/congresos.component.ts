@@ -332,4 +332,59 @@ export class CongresosComponent implements OnInit {
         break;
       }
   }
+
+
+  emails: string[] = []; // Lista de correos
+  emailInput: string = ''; // Valor del input
+  errorMessage: string = ''; // Mensaje de error
+
+  // Función para agregar un correo
+  addEmail() {
+    if (this.emailInput && this.validateEmail(this.emailInput)) {
+      this.emails.push(this.emailInput);
+      this.emailInput = ''; // Limpiar el campo de entrada
+      this.errorMessage = ''; // Limpiar el mensaje de error si el correo es válido
+    } else {
+      this.errorMessage = 'Por favor, ingresa un correo electrónico válido.';
+    }
+  }
+
+  // Validar el formato del correo
+  validateEmail(email: string): boolean {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email);
+  }
+
+  // Función para eliminar un correo de la lista
+  removeEmail(index: number) {
+    this.emails.splice(index, 1);
+  }
+
+  openModalSendInvitationConference(content: any, congressItem: CongressItem) {
+    this.selectedCongreso = { ...congressItem };
+    this.emails = [];
+    this.modalService.open(content,{
+      size: "lg"
+    });
+  }
+
+  // Función para simular el envío de correos
+  sendEmails() {
+    if (this.emails.length > 0) {
+
+      this.congressService.sendInvitationConference(this.selectedCongreso.congressId, this.emails).subscribe({
+        next: () => {
+          this.emails = [];
+          this.alertService.showSuccess('Exitoso', 'Correos enviados exitosamente.');
+          this.modalService.dismissAll();
+        },
+        error: (err) => {
+          this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
+        },
+      });
+    } else {
+      this.errorMessage = 'Por favor, agrega al menos un correo electrónico.';
+    }
+  }
+
 }

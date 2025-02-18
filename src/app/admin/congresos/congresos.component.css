@@ -1,0 +1,123 @@
+/* Contenedor general */
+.email-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .email-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .email-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .add-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Lista de correos con dos columnas */
+  .emails-list {
+    margin-top: 20px;
+  }
+  
+  .ul-emails {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Esto crea dos columnas */
+    gap: 15px;
+  }
+  
+  .email-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .email-item:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .email-text {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .remove-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #d9534f;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .remove-button:hover {
+    color: #c9302c;
+  }
+  
+  /* Mensaje de error */
+.error-message {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Estilos para el botón Enviar */
+.send-button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.send-button:hover {
+  background-color: #218838;
+}
+
+.send-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

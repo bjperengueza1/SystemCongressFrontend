@@ -189,5 +189,5 @@ export class LandingComponent implements OnInit {
     })
   }
 
-  protected readonly event = event;
+  //protected readonly event = event;
 }
