@@ -80,18 +80,22 @@
                 </button>
                 <hr class="dropdown-divider">
               </li>
-              <li>
-                <button class="btn btn-sm btn-secondary dropdown-item" (click)="copyUrlRegisterConferencia(congress.guid)">
-                  Copiar url de registro conferencia
-                </button>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalSendInvitationConference(modalInvitationConference,congress)">
-                  Enviar invitación con url de registro conferencia
-                </button>
-                <hr class="dropdown-divider">
-              </li>
+
+              @if (congress.status){
+                <li>
+                  <button class="btn btn-sm btn-secondary dropdown-item" (click)="copyUrlRegisterConferencia(congress.guid)">
+                    Copiar url de registro conferencia
+                  </button>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalSendInvitationConference(modalInvitationConference,congress)">
+                    Enviar invitación con url de registro conferencia
+                  </button>
+                  <hr class="dropdown-divider">
+                </li>
+              }
+
               <li>
                 <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalFile(modalSubirFlayer, congress)">
                   Subir Flayer
@@ -391,13 +395,13 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
       </div>
       <div class="modal-body">
-  
+
         <div class="email-container">
           <div class="input-wrapper">
-            <input 
-              type="text" 
-              [(ngModel)]="emailInput" 
-              (keyup.enter)="addEmail()" 
+            <input
+              type="text"
+              [(ngModel)]="emailInput"
+              (keyup.enter)="addEmail()"
               placeholder="Escribe un correo y presiona Enter"
               class="email-input"
             />
@@ -408,7 +412,7 @@
           <div *ngIf="errorMessage" class="error-message">
             {{ errorMessage }}
           </div>
-        
+
           <div class="emails-list">
             <ul class="ul-emails">
               <li *ngFor="let email of emails; let i = index" class="email-item">
@@ -419,20 +423,20 @@
           </div>
 
           <!-- Botón Enviar -->
-        <button 
-          class="send-button" 
-          (click)="sendEmails()" 
+        <button
+          class="send-button"
+          (click)="sendEmails()"
           [disabled]="emails.length === 0"
         >
           Enviar
         </button>
 
-          
+
 
         </div>
-              
+
       </div>
-  
+
     </ng-template>
 
 </div>
