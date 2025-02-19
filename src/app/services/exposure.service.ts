@@ -13,7 +13,7 @@ export class ExposureService {
   private apiUrl: string = "";
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.apiUrl = configService.getApiUrl()+"api/Exposures"; 
+    this.apiUrl = configService.getApiUrl()+"api/Exposures";
   }
 
 
@@ -27,7 +27,7 @@ export class ExposureService {
   }
   downloadReport(page: number, size: number, search: string, congressId: number) {
     const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId };
-    return this.http.get(`${this.apiUrl}/report`, {
+    return this.http.get(`${this.apiUrl}/reportsxls`, {
       params,
       responseType: 'blob',
       observe: 'response' // Para acceder a headers y body
