@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {AuthService, LoginResponse} from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -68,6 +69,11 @@ export class LoginComponent implements OnInit {
       error: (error) => {
         this.errorMessage = error.message || 'Error al iniciar sesión';
         this.isLoading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al iniciar sesión'
+        });
       },
       complete: () => {
         this.isLoading = false;

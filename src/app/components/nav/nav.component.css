@@ -3,3 +3,18 @@
   padding: 5px 10px;
   font-size: 14px;
 }
+.navbar {
+  padding: 1rem 1rem; /* Espaciado adicional para la barra de navegación */
+}
+
+.navbar-brand img {
+  max-height: 300px; /* Asegura que la imagen no sea demasiado alta */
+}
+
+
+@media (max-width: 768px) {
+  .navbar-nav {
+      flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+      align-items: center; /* Alinea los elementos al centro */
+  }
+}
