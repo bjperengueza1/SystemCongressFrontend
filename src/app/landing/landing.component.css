@@ -6,28 +6,29 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 5px;
 }
 
 .nav-menu {
-  background-color: #1f2937;
+  background-color: #dcdcdc;
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  font-size: 20px;
 }
 
 .nav-container {
-  display: flex;
+  display: flex;  
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-logo {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
 }
@@ -38,14 +39,14 @@ body {
 }
 
 .nav-link {
-  color: white;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: #60a5fa;
+  color: #043096;
 }
 
 .btn {
@@ -87,13 +88,15 @@ body {
 
 .conference-card {
   background: #f3f4f6;
-  border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  border-radius: 48px;
+  box-shadow:  2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .section {
   margin: 4rem 0;
+  
 }
 
 .hero-section {
@@ -120,6 +123,7 @@ body {
   background: #f8fafc;
   padding: 3rem 0;
   text-align: center;
+
 }
 
 .certificates-form {
@@ -133,26 +137,46 @@ body {
 
 .event-highlights {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 3rem;
-  margin-top: 2rem;
+  gap: 20px; /* Espacio entre elementos */
+  margin-top: 20px;
 }
 
 .highlight-item {
+  background: white; /* Fondo blanco */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 20px;
+  width: 150px; /* Ancho fijo, ajustable según necesidades */
+  text-align: center;
+  box-shadow: 10px 14px 12px rgba(0, 0, 0, 0.15); /* Sombra para efecto de elevación */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  position: relative; /* Para posicionar la imagen arriba */
+}
+
+.highlight-item img {
+  width: 50px; /* Ajusta el tamaño de la imagen */
+  height: 50px;
+  position: absolute;
+  top:15px; /* Hace que la imagen sobresalga un poco de la caja */
+  background: white;
+  padding: 5px;
 }
 
 .highlight-item strong {
-  font-size: 2rem;
-  color: #2563eb;
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-top: 40px; /* Ajusta el espacio debajo de la imagen */
 }
 
 .highlight-item span {
+  font-size: 1rem;
   color: #4b5563;
-  margin-top: 0.5rem;
 }
+
 
 .event-details {
   margin-top: 3rem;
@@ -176,26 +200,40 @@ body {
 }
 
 .topics-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
 }
 
 .topics-list li {
-  background: #f3f4f6;
-  padding: 1rem;
-  border-radius: 6px;
-  text-align: center;
-  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height:   70px; /* Ajusta la altura según sea necesario */
+  border-radius: 10px; /* Hace que el elemento sea circular */
+  color: rgb(33, 33, 33); /* Color del texto */
+  font-size: 17px;
+  background-color: #ffffff; /* Color de fondo por defecto */
+ /* background-image: url('/logor.png');  Ruta de la imagen */
+
+  background-size: cover; /* Ajusta la imagen al tamaño del círculo */
+  background-position: center; /* Centra la imagen */
+  /*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);  Sombra para mejorar el contraste del texto */
 }
 
 .certificates-list {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(33, 33, 33); /* Color del texto */
+
 }
 
 .certificates-list li {
@@ -236,35 +274,37 @@ body {
 
 /* Countdown Styles */
 .countdown-container {
+  background: white; /* Fondo blanco */
+  border-radius: 50px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   display: flex;
+  flex-wrap: wrap; /* Hace que sea responsivo */
   justify-content: center;
-  gap: 2rem;
-  margin: 2rem 0;
+  gap: 20px; /* Espacio entre elementos */
+  max-width: 600px; /* Ajusta el ancho máximo */
+  margin: 0 auto; /* Centrar en pantalla */
 }
 
 .countdown-item {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
+  text-align: center;
+  flex: 1 1 120px; /* Hace que los elementos sean flexibles y responsivos */
   min-width: 100px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background: #f8f9fa; /* Color de fondo ligero */
+  border-radius: 8px;
 }
 
 .countdown-value {
-  display: block;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #2563eb;
-  line-height: 1;
+  color: #000000; /* Color oscuro para contraste */
 }
 
 .countdown-label {
-  display: block;
+  font-size: 1rem;
   color: #4b5563;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  display: block;
 }
 
 
@@ -274,7 +314,104 @@ body {
 }
 
 .flayer-portada img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Reduce el tamaño de la imagen al 80% del contenedor */
+    max-width: 500px; /* Ajusta el tamaño máximo para que no sea muy grande */
+    height: auto; /* Mantiene la proporción */
+    display: block;
+    margin: 0 auto; 
+}
+
+.logo {
+  position: fixed;
+  bottom: 10px; /* o top: 10px; para la esquina superior */
+  right: 10px; /* o left: 10px; para la esquina izquierda */
+  width: 100px; /* Ajusta el tamaño según lo necesites */
+  height: auto;
+}
+
+.hero-section {
+  position: relative;
+  background: url('/fondo1.png') no-repeat center center/cover;
+  height: 100vh; /* Ajusta según necesites */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white; /* Ajusta el color del texto según el contraste necesario */
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Capa oscura */
+  backdrop-filter: blur(5px); /* Efecto de desenfoque */
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2; /* Asegura que el contenido esté sobre la capa oscura */
+}
+
+/*FOOTER*/
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Tres columnas de igual tamaño */
+  gap: 1rem; /* Espacio entre columnas */
+  background: #dcdcdc; /* Color de fondo */
+  color: rgb(62, 62, 62); /* Color del texto */
+  padding: 2rem 1rem; /* Espaciado interno */
+  margin-top: 4rem; /* Margen superior */
+  text-align: center; /* Centramos el texto */
+}
+
+.footer img {
+  max-width:80%; /* Asegura que la imagen no exceda el ancho del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.social-links {
+  display: flex; /* Usamos flexbox para alinear las imágenes */
+  justify-content: center; /* Centrar las imágenes */
+  gap: 0.5rem; /* Ajusta este valor para controlar el espacio entre imágenes */
+}
+
+.social-icon {
+  width: auto; /* Ajusta el tamaño de las imágenes */
+  height: auto; /* Mantén la proporción de las imágenes */
+}
+
+.social-link:hover {
+  text-decoration: underline; /* Subrayar al pasar el ratón */
+}
+
+
+
+
+
+
+
+
+
+/*RESPONSIVE*/
+/* Media Queries para Responsividad */
+@media (max-width: 900px) {
+  .topics-list {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .topics-list {
+      grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+  }
+  
+  .topics-list li {
+      height: 120px; /* Ajusta la altura para pantallas pequeñas */
+  }
 }

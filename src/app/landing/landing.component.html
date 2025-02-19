@@ -1,7 +1,7 @@
 <!-- Navigation Menu -->
 <nav class="nav-menu">
   <div class="container nav-container">
-    <a href="#" class="nav-logo">CILAI</a>
+    <a href="#" class="nav-logo"><img src="/logor.png" style="width: 30%; height: 50%; "/></a>
     <div class="nav-links">
       <a href="#about" class="nav-link">Acerca de</a>
       <a href="#conferences" class="nav-link">Conferencias</a>
@@ -14,57 +14,65 @@
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="container">
-    <h1 style="font-size: 3rem; color: #1f2937; margin-bottom: 1rem;">
+    <h1 style="font-size: 3rem; color: #ffffff; margin-bottom: 1rem;">
       {{congress.name}}
     </h1>
-    <p style="font-size: 1.25rem; color: #4b5563; margin-bottom: 2rem; max-width: 800px; margin: 0 auto;">
-      Únete a nosotros en la mayor conferencia de innovación tecnológica de Latinoamérica.
+    <p style="font-size: 2rem; color: #ffffff; margin-bottom: 2rem; max-width: 800px; margin: 0 auto;">
+     <strong> Únete a nosotros en el mayor congreso de innovación educativa de Latinoamérica.
       Del {{ congress.startDate | obtenerDia}} de {{ congress.startDate | obtenerMesNombre}} al {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}, {{ congress.startDate | obtenerAnio}} - {{ congress.location }}
-    </p>
-
+    </strong></p><BR><BR>
+<p><strong>SÓLO QUEDAN</strong></p>
     <!-- Countdown Timer -->
-    <div class="countdown-container">
-      <div class="countdown-item">
-        <span class="countdown-value">{{ countdown.days }}</span>
-        <span class="countdown-label">Días</span>
-      </div>
-      <div class="countdown-item">
-        <span class="countdown-value">{{ countdown.hours }}</span>
-        <span class="countdown-label">Horas</span>
-      </div>
-      <div class="countdown-item">
-        <span class="countdown-value">{{ countdown.minutes }}</span>
-        <span class="countdown-label">Minutos</span>
-      </div>
-      <div class="countdown-item">
-        <span class="countdown-value">{{ countdown.seconds }}</span>
-        <span class="countdown-label">Segundos</span>
-      </div>
-    </div>
-
-    <div class="event-highlights">
-      <div class="highlight-item">
-        <strong>+{{ponencias?.totalItems}}</strong>
-        <span>Presentaciones</span>
-      </div>
-      <div class="highlight-item">
-        <strong>+1000</strong>
-        <span>Asistentes</span>
-      </div>
-      <div class="highlight-item">
-        <strong>{{counterDays}}</strong>
-        <span>Días</span>
+      <div class="countdown-container">
+        <div class="countdown-item">
+          <span class="countdown-value">{{ countdown.days }}</span>
+          <span class="countdown-label">Días</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value">{{ countdown.hours }}</span>
+          <span class="countdown-label">Horas</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value">{{ countdown.minutes }}</span>
+          <span class="countdown-label">Minutos</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value">{{ countdown.seconds }}</span>
+          <span class="countdown-label">Segundos</span>
+        </div>
       </div>
 
-    </div>
+   
   </div>
-</section>
+</section> <br>
 
 <!-- Foto Flayer Portada Content -->
 <div class="container">
   <div class="flayer-portada">
     <img *ngIf="imageUrl" [src]="imageUrl" alt="Flayer Portada" />
   </div>
+</div><br><br>
+
+<h3 style="text-align: center;">
+  CONGRESO EN CIFRAS
+</h3>
+<div class="event-highlights">
+  <div class="highlight-item">
+    <img src="/doc-ico.png" />
+    <strong>+{{ponencias?.totalItems}}</strong>
+    <span>Presentaciones</span>
+  </div>
+  <!--
+  <div class="highlight-item">
+    <strong>+1000</strong>
+    <span>Asistentes</span>
+  </div>-->
+  <div class="highlight-item">
+    <img src="/timer-ico.png" />
+    <strong>{{counterDays}}</strong>
+    <span>Días</span>
+  </div>
+
 </div>
 
 <div class="container">
@@ -74,47 +82,22 @@
     <div class="about-section">
       <div class="about-card">
         <h3 style="color: #2563eb;">Networking</h3>
-        <p>Conecta con expertos y profesionales de la industria tecnológica de toda Latinoamérica. Oportunidades únicas para establecer contactos y colaboraciones.</p>
+        <p><strong> Conecta con expertos y profesionales de la industria tecnológica de toda Latinoamérica. Oportunidades únicas para establecer contactos y colaboraciones.</strong></p>
+        <p style="text-align: justify;">Desde tecnología e innovación hasta educación, arte, sostenibilidad y emprendimiento, este evento reúne a investigadores, académicos y profesionales de diversas industrias. Descubre nuevas tendencias, participa en conferencias magistrales y crea oportunidades únicas para establecer contactos y colaboraciones estratégicas. No pierdas la oportunidad de ser parte de esta experiencia que impulsa el avance del conocimiento y la transformación en múltiples sectores. </p>
       </div>
       <div class="about-card">
         <h3 style="color: #2563eb;">Conocimiento</h3>
-        <p>Accede a contenido exclusivo, las últimas tendencias en tecnología y casos de éxito presentados por líderes de la industria.</p>
+        <p> <strong> Accede a contenido exclusivo, las últimas tendencias en tecnología y casos de éxito presentados por líderes de la industria.</strong></p>
+        <p style="text-align: justify;">Desde avances tecnológicos e innovación educativa hasta sostenibilidad, arte y emprendimiento, este congreso reúne a expertos de diversas áreas para compartir investigaciones, experiencias y casos de éxito. Conoce de primera mano las estrategias y proyectos que están transformando la industria, presentados por líderes y referentes en cada campo. ¡Inspírate, aprende y sé parte del futuro.</p>
       </div>
       <div class="about-card">
         <h3 style="color: #2563eb;">Oportunidades</h3>
-        <p>Descubre nuevas oportunidades de colaboración, desarrollo profesional y conexiones con empresas líderes del sector tecnológico.</p>
+        <p><strong> Nuevas oportunidades de colaboración, desarrollo profesional y conexiones con empresas líderes del sector tecnológico.</strong></p>
+        <p style="text-align: justify;">Este congreso reúne a expertos en tecnología, arte, sostenibilidad, educación y emprendimiento, creando un espacio ideal para el intercambio de ideas y la generación de alianzas estratégicas. Conéctate con instituciones académicas, startups y grandes empresas que buscan talento e innovación. ¡Expande tu red y lleva tu carrera al siguiente nivel.</p>
       </div>
     </div>
 
-    <div class="event-details" style="display: none">
-      <h3 style="color: #1f2937; margin: 2rem 0 1rem;">Información del Evento</h3>
-      <div class="details-grid">
-        <div class="detail-item">
-          <strong>Sede:</strong>
-          <p>Centro de Convenciones Tecnológico<br/>Av. Reforma 123, CDMX</p>
-        </div>
-        <div class="detail-item">
-          <strong>Fechas Importantes:</strong>
-          <p>
-            Inicio de Registro: 1 de Mayo<br/>
-            Límite envío ponencias: 30 de Junio<br/>
-            Notificación aceptación: 15 de Julio
-          </p>
-        </div>
-        <div class="detail-item">
-          <strong>Modalidades:</strong>
-          <p>Presencial y Virtual<br/>Transmisión en vivo de todas las sesiones</p>
-        </div>
-        <div class="detail-item">
-          <strong>Incluye:</strong>
-          <p>
-            Material digital<br/>
-            Certificado de participación<br/>
-            Coffee breaks y almuerzo
-          </p>
-        </div>
-      </div>
-    </div>
+    
   </section>
 
   <!-- Conferences Section -->
@@ -125,26 +108,26 @@
       <div *ngFor="let conference of ponencias.items" class="conference-card">
         <h3 style="color: #1f2937; margin-bottom: 0.5rem;">{{ conference.name }}</h3>
         <div class="conference-details">
-          <div class="conference-info">
+          <div class="conference-info" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, auto); gap: 1rem;">
             <p style="color: #4b5563; margin-bottom: 0.5rem;">
-              <strong>Ponente:</strong> {{ conference.authors[0].name }} - {{ conference.authors[0].academicDegree | obtenerGradoAcademicoNombre }}
+                <strong>Ponente:</strong> {{ conference.authors[0].name }} - {{ conference.authors[0].academicDegree | obtenerGradoAcademicoNombre }}
             </p>
             <p style="color: #4b5563; margin-bottom: 0.5rem;">
-              <strong>Fecha:</strong> {{ conference.dateStart | formatearFecha }} | <strong>Hora:</strong> {{ conference.dateStart | obtenerHoraFormateada }}
+                <strong>Fecha:</strong> {{ conference.dateStart | formatearFecha }} | <strong>Hora:</strong> {{ conference.dateStart | obtenerHoraFormateada }}
             </p>
             <p style="color: #4b5563; margin-bottom: 0.5rem;">
-              <strong>Linea de Investigación:</strong> {{ conference.researchLine | lineaInvestigacion }}
+                <strong>Linea de Investigación:</strong> {{ conference.researchLine | lineaInvestigacion }}
             </p>
             <p style="color: #4b5563; margin-bottom: 0.5rem;">
-              <strong>Tipo:</strong> {{ conference.type | tipoExposicion }}
+                <strong>Tipo:</strong> {{ conference.type | tipoExposicion }}
             </p>
             <p style="color: #4b5563; margin-bottom: 0.5rem;">
-              <strong>Sala:</strong> {{ conference.room.name }}
+                <strong>Sala:</strong> {{ conference.room.name }}
             </p>
-            <p style="color: #4b5563; margin-bottom: 0.5rem;">
-              <strong>Capacidad:</strong> {{ conference.room.capacity }}
+            <p style="color: #4b5563; margin-bottom: -1rem;">
+                <strong>Capacidad:</strong> {{ conference.room.capacity }}
             </p>
-          </div>
+        </div>
         </div>
 
         <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
@@ -186,16 +169,19 @@
   <section id="submit" class="section" style="text-align: center;">
     <h2 style="color: #1f2937; margin-bottom: 1rem;">¿Quieres ser ponente?</h2>
     <div class="submit-info">
-      <p style="color: #4b5563; margin-bottom: 1.5rem;">
+      <p style="color: #4b5563; margin-bottom: 1.5rem; font-size: 19px;">
         Comparte tu conocimiento y experiencia con la comunidad. Buscamos presentaciones sobre:
       </p>
       <ul class="topics-list">
-        <li>Inteligencia Artificial y Machine Learning</li>
-        <li>Desarrollo Web y Móvil</li>
-        <li>DevOps y Cloud Computing</li>
-        <li>Ciberseguridad</li>
-        <li>Blockchain y Criptomonedas</li>
-        <li>IoT y Edge Computing</li>
+        <li>Tecnológias de la Información y Comunicación</li>
+        <li>Educación Superior y Modalidades de Estudio</li>
+        <li>Administración, Marketing y Emprendimiento</li>
+        <li>Calidad e Innovación Educativa</li>
+        <li>Artes y Humanidades </li>
+        <li>Actividad Física y Deportiva </li>
+        <li>Servicios de Protección Seguridad y Transporte </li>
+        <li>Ingeniería, Industria y Construcción </li>
+        <li>Ciencias Jurídicas, Políticas y Sociales</li>
       </ul>
       <p style="color: #4b5563; margin: 1.5rem 0;">
         <!-- <strong>Fecha límite:</strong> 30 de junio, 2024 -->
@@ -214,23 +200,21 @@
       <h2 style="color: #1f2937; margin-bottom: 1rem;">Certificados de Participación</h2>
       <div class="certificates-info">
         <p style="color: #4b5563; margin-bottom: 1rem;">
-          Los certificados estarán disponibles para:
+          Los certificados estarán disponibles luego de culminar el congreso para:
         </p>
         <ul class="certificates-list">
-          <li>Asistentes a las conferencias</li>
+          <li>Asistentes a las conferencias o ponencias</li>
           <li>Ponentes</li>
           <li>Conferencistas</li>
         </ul>
-        <p style="color: #4b5563; margin: 1rem 0;">
+        <!--<p style="color: #4b5563; margin: 1rem 0;">
           Los certificados se emitirán digitalmente y contarán con un código QR para verificar su autenticidad.
-        </p>
+        </p> -->
       </div>
 
       <div class="certificates-form">
         <h3 style="color: #1f2937; margin-bottom: 1rem;">Descarga tu Certificado</h3>
-        <p style="color: #4b5563; margin-bottom: 1rem;">
-          Los certificados estarán disponibles 48 horas después de cada sesión.
-        </p>
+       
         <form (ngSubmit)="onCertificateSubmit()" #certificateForm="ngForm">
           <div class="form-group">
             <input
@@ -264,14 +248,26 @@
 
 
 
-<footer style="background: #1f2937; color: white; padding: 2rem 0; margin-top: 4rem;">
-  <div class="container" style="text-align: center;">
-    <p>© 2024 Congreso Internacional de Innovación y Tecnología</p>
-    <p>Contacto: gyugjuygh.com</p>
-    <div class="social-links">
-      <a href="#" class="social-link">Twitter</a>
-      <a href="#" class="social-link">LinkedIn</a>
-      <a href="#" class="social-link">Instagram</a>
-    </div>
+
+
+<footer class="footer">
+  <div>
+      <img src="logor.png" alt="Logo" /> 
+      <p><strong>© 2025 Congreso Internacional Los Andes Innova</strong></p>
+  </div>
+  <div>
+      <p><strong>Contacto:</strong></p>
+      <p>Provincia de Santo Domingo de los Tsáchilas</p>
+      <p>Parroquia Abraham Calazacón, Av. Tsáchila, Urbanización Vega, calle Río Yamino y Río Shiripuno, instalaciones del Colegio Latino.</p>
+      <p>Teléfono: {{ telefono }}</p>
+        <p>Correo: <a href="mailto:{{ email }}">{{ email }}</a></p>
+  </div>
+  <div>
+      <p><strong> Redes Sociales:</strong></p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/istlosandes/about?locale=es_LA" target="_blank" class="social-icon" alt="Facebook"><img src="/fb-ico.png" style="width: 30%; height: 100%; "/></a>
+        <a href="https://www.instagram.com/istlosandes/" target="_blank" class="social-icon" alt="Instagram"><img src="/ig-ico.png" style="width: 30%; height: 100%; "/></a>
+        <a href="https://x.com/i/flow/login?redirect_after_login=%2Fistlosandes" target="_blank" class="social-icon" alt="X"><img src="/tw-ico.png" style="width: 30%; height: 100%; "/></a>
+      </div>
   </div>
 </footer>

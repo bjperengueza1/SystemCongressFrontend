@@ -21,15 +21,16 @@
                    <ul class="list-group list-group-flush">
 
                      @if (congreso.certificateAttendance) {
-                       <h5>Certificado asistencia</h5>
-                       <button class="btn btn-info" (click)="descargarCertificadoAsistencia(congreso.congressId)">Descargar</button>
+                       <h5>Certificado asistencia</h5> 
+                       <li class="list-group-item">
+                       <button class="btn btn-info" (click)="descargarCertificadoAsistencia(congreso.congressId)">Descargar</button></li><br>
                      }
                      @if (congreso.exposure.length > 0){
                        <h5>Certificados exposiciones</h5>
                        <li *ngFor="let exposicion of congreso.exposure" class="list-group-item">
 
                          @if(exposicion.type == 1){
-                           <strong>Ponencia: {{ exposicion.name }}:</strong>
+                           <strong>Ponencia: {{ exposicion.name }}</strong><br><br>
                            <button class="btn btn-info" (click)="descargarCertificadoExposicion(exposicion.exposureId)">Descargar</button>
                          }
                          @if(exposicion.type == 2){

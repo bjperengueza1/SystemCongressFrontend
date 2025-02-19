@@ -45,11 +45,16 @@ interface CountdownTime {
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
+
+
+
 export class LandingComponent implements OnInit {
 
   @ViewChild(BuscarCertificadosComponent) child!: BuscarCertificadosComponent;
 
   ponencias: ApiResponse<ExposureItem> | null = null;
+  email = 'secretaria@istla.edu.ec'; // Define tu correo aquí
+  telefono = '+593 98 384 407'; // Define tu teléfono aquí
 
   emailInputs: { [key: number]: string } = {};
   submittedConferences: { [key: number]: boolean } = {};
@@ -188,6 +193,8 @@ export class LandingComponent implements OnInit {
       }
     })
   }
+
+  
 
   //protected readonly event = event;
 }
