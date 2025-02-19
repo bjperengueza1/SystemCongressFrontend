@@ -33,6 +33,14 @@
           (input)="onSearchChange()"
         />
       </div>
+
+      <!-- boton para descargar reporte con icono excel-->
+      <div class="form-group">
+        <button class="float-end text-end" (click)="downloadReport()">
+          <img width="30px" src="excel.ico" />
+        </button>
+      </div>
+
       <!-- Selector para tamaño de página -->
       <div class="form-group">
         <label for="pageSize" class="me-2">Elementos por página:</label>

@@ -58,7 +58,7 @@ export class PresentacionesComponent implements OnInit {
 
   roomsItems: RoomsItem[] = [];
 
-  congressIdFilter: number | undefined = undefined;
+  congressIdFilter: number | null = null;
   congresses: CongressItem[] = [];
 
   constructor(
@@ -105,7 +105,6 @@ export class PresentacionesComponent implements OnInit {
   }
 
   loadExposures2() {
-    console.log(this.congressIdFilter);
     this.exposureService.getExposures2(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter)).subscribe({
       next: (response) => {
         this.response = {
@@ -233,5 +232,29 @@ export class PresentacionesComponent implements OnInit {
 
   initializeApproveExposure():ApproveExposureModel  {
     return {roomId: null, exposureId: 0,congressId: 0,dateEnd: '', dateStart: '', observation: ''}
+  }
+
+  downloadReport() {
+    this.exposureService.downloadReport(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter)).subscribe({
+      next: (response: any) => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let fileName = 'Reporte.xlsx'; // Valor por defecto
+
+        // Extraer el nombre del archivo del header Content-Disposition
+        if (contentDisposition) {
+          const matches = contentDisposition.match(/filename="(.+)"/);
+          if (matches && matches[1]) {
+            fileName = matches[1];
+          }
+        }
+
+        // Crear un blob y usar file-saver para descargar
+        const blob = new Blob([response.body], { type: response.headers.get('Content-Type') });
+        saveAs(blob, fileName);
+      },
+      error: (err) => {
+        console.error('Error downloading the file:', err);
+      }
+    });
   }
 }

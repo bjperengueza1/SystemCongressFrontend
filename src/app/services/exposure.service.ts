@@ -25,6 +25,14 @@ export class ExposureService {
     const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId };
     return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
   }
+  downloadReport(page: number, size: number, search: string, congressId: number) {
+    const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId };
+    return this.http.get(`${this.apiUrl}/report`, {
+      params,
+      responseType: 'blob',
+      observe: 'response' // Para acceder a headers y body
+    });
+  }
 
   getExposure(id: string): Observable<ExposureItem> {
     return this.http.get<ExposureItem>(`${this.apiUrl}/guid/${id}`);
