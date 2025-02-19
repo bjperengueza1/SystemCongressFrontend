@@ -1,14 +1,19 @@
 @if (loggedIn){
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div class="container-fluid">
       
-      <!-- Primera columna: Imagen alineada a la izquierda -->
+      <!-- Logo alineado a la izquierda -->
       <a class="navbar-brand" href="admin/congresos">
-        <img src="/logoAD.png" style="width: 40%; height: auto;" alt="Logo" />
+        <img src="/logoAD.png" alt="Logo" style="max-width: 100px; height: auto;">
       </a>
-      
-      <!-- Segunda columna: Lista de opciones centrada -->
-      <div class="collapse navbar-collapse mx-auto" id="navbarNavAltMarkup">
+  
+      <!-- Botón de colapso para dispositivos pequeños -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Menú centrado -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink]="['congresos']">Congresos</a>
           <a class="nav-link" routerLinkActive="active" [routerLink]="['salas']">Salas</a>
@@ -18,12 +23,13 @@
         </div>
       </div>
   
-      <!-- Tercera columna: Botón de cerrar sesión -->
-      <div>
+      <!-- Botón de cerrar sesión alineado a la derecha -->
+      <div class="d-flex">
         <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
       </div>
   
     </div>
   </nav>
+  
 }
 
