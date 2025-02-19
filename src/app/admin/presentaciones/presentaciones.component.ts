@@ -7,6 +7,7 @@ import {
   academicDegrees,
   ApproveExposureModel,
   AuthorItem,
+  CongressItem,
   ExposureItem, RejectExposureModel,
   researchLines, RoomsItem,
   statusExposure
@@ -57,6 +58,9 @@ export class PresentacionesComponent implements OnInit {
 
   roomsItems: RoomsItem[] = [];
 
+  congressIdFilter: number | undefined = undefined;
+  congresses: CongressItem[] = [];
+
   constructor(
     private modalService: NgbModal,
     private exposureService: ExposureService,
@@ -68,11 +72,41 @@ export class PresentacionesComponent implements OnInit {
 
   ngOnInit() {
     this.loadExposures(this.currentPage, this.pageSize, this.searchTerm);
+    this.loadFilterCongress({target: {value: ''}});
     this.domain = this.document.location.origin;
   }
 
   loadExposures(page: number, pageSize: number, searchTerm: string) {
     this.exposureService.getExposures(page, pageSize, searchTerm).subscribe({
+      next: (response) => {
+        this.response = {
+          ...response,
+          items: response.items.map((item: ExposureItem) => ({
+            ...item,
+            statusLabelExposure: this.getStatusLabel(item.statusExposure),
+            researchLineLabel: this.getResearchLine(item.researchLine),
+            authors: item.authors.map((author: AuthorItem)=> ({
+              ...author,
+              academicDegreeLabel: this.getAcademicDegree(author.academicDegree)
+            })),
+          }))
+        }
+      }
+    })
+  }
+
+  loadFilterCongress(event: any) {
+    let searchTerm = event.target.value;
+    this.congressService.getCongresses(1, 15, searchTerm).subscribe({
+      next: (response) => {
+        this.congresses = response.items;
+      }
+    })
+  }
+
+  loadExposures2() {
+    console.log(this.congressIdFilter);
+    this.exposureService.getExposures2(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter)).subscribe({
       next: (response) => {
         this.response = {
           ...response,

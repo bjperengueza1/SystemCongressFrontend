@@ -21,6 +21,10 @@ export class ExposureService {
     const params = { pageNumber: page.toString(), pageSize: size.toString(), search };
     return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
   }
+  getExposures2(page: number, size: number, search: string, congressId: number): Observable<ApiResponse<ExposureItem>> {
+    const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId };
+    return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
+  }
 
   getExposure(id: string): Observable<ExposureItem> {
     return this.http.get<ExposureItem>(`${this.apiUrl}/guid/${id}`);
