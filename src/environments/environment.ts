@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://34.173.148.212:5196/'
+    apiUrl: 'http://cilai.istla-sigala.edu.ec:5196/'
   };
