@@ -134,7 +134,6 @@ export class LandingComponent implements OnInit {
   }
 
   onSubmit(conferenceId: number) {
-    console.log('Registro para conferencia:', conferenceId, 'Email:', this.emailInputs[conferenceId]);
     this.exposureService.registerPrevious(conferenceId,this.emailInputs[conferenceId]).subscribe({
       next: data => {
         this.submittedConferences[conferenceId] = true;
@@ -160,7 +159,20 @@ export class LandingComponent implements OnInit {
   }
 
   private initializeCongress(): CongressItem {
-    return {minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: '', status: 0}
+    return {
+      congressId: 0,
+      name: '',
+      startDate: '',
+      endDate: '',
+      location: '',
+      minHours: 0,
+      guid: '',
+      status: 0,
+      fileFlayer: '',
+      fileCertificateConference: '',
+      fileCertificateAttendance: '',
+      fileCertificateExposure: ''
+    }
   }
 
   private actualizarDiasEvento() {

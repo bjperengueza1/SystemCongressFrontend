@@ -24,6 +24,9 @@ body {
   display: flex;  
   justify-content: space-between;
   align-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 5px;
 }
 
 .nav-logo {

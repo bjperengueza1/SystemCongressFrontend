@@ -21,12 +21,12 @@ export class ExposureService {
     const params = { pageNumber: page.toString(), pageSize: size.toString(), search };
     return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
   }
-  getExposures2(page: number, size: number, search: string, congressId: number): Observable<ApiResponse<ExposureItem>> {
-    const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId };
+  getExposures2(page: number, size: number, search: string, congressId: number,researchLine: number): Observable<ApiResponse<ExposureItem>> {
+    const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId, ResearchLine: researchLine };
     return this.http.get<ApiResponse<ExposureItem>>(this.apiUrl, { params });
   }
-  downloadReport(page: number, size: number, search: string, congressId: number) {
-    const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId };
+  downloadReport(page: number, size: number, search: string, congressId: number, researchLine: number): Observable<any> {
+    const params = { pageNumber: page.toString(), pageSize: size.toString(), search, congressId: congressId, ResearchLine: researchLine };
     return this.http.get(`${this.apiUrl}/reportsxls`, {
       params,
       responseType: 'blob',

@@ -60,6 +60,8 @@ export class PresentacionesComponent implements OnInit {
 
   congressIdFilter: number | null = null;
   congresses: CongressItem[] = [];
+  researchLinesFilter = researchLines;
+  researchLineFilter: number | null = null;
 
   constructor(
     private modalService: NgbModal,
@@ -105,7 +107,7 @@ export class PresentacionesComponent implements OnInit {
   }
 
   loadExposures2() {
-    this.exposureService.getExposures2(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter)).subscribe({
+    this.exposureService.getExposures2(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter), Number(this.researchLineFilter)).subscribe({
       next: (response) => {
         this.response = {
           ...response,
@@ -235,7 +237,7 @@ export class PresentacionesComponent implements OnInit {
   }
 
   downloadReport() {
-    this.exposureService.downloadReport(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter)).subscribe({
+    this.exposureService.downloadReport(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter),Number(this.researchLineFilter)).subscribe({
       next: (response: any) => {
         const contentDisposition = response.headers.get('Content-Disposition');
         let fileName = 'Reporte.xlsx'; // Valor por defecto

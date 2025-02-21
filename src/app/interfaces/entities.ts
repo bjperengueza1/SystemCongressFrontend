@@ -7,6 +7,10 @@ export interface CongressItem {
   minHours: number;
   guid: string;
   status: number;
+  fileFlayer: string;
+  fileCertificateConference: string;
+  fileCertificateAttendance: string;
+  fileCertificateExposure: string;
 }
 
 export interface CongressInsertItem {

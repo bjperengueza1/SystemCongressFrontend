@@ -97,7 +97,11 @@ export class SalasComponent implements OnInit{
       location: '',
       minHours: 0,
       guid: '',
-      status: 0
+      status: 0,
+      fileFlayer: '',
+      fileCertificateConference: '',
+      fileCertificateAttendance: '',
+      fileCertificateExposure: ''
     }];
       this.modalService.open(content);
 

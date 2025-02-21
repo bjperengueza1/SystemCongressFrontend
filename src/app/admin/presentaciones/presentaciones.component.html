@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="form-group w-50">
       <!-- Congreso-->
-       <label for="congress" class="form-label
+      <label for="congress" class="form-label
         ">Congreso:</label>
       <ng-select
         [items]="congresses"
@@ -12,6 +12,23 @@
         bindValue="congressId"
         placeholder="Selecciona un congreso"
         [(ngModel)]="congressIdFilter"
+        (keyup)="loadFilterCongress($event)"
+        (change)="loadExposures2()"
+        [notFoundText]="'No se encontraron congresos'"
+        class="form-control"
+      >
+      </ng-select>
+    </div>
+    <div class="form-group w-50">
+      <!-- Congreso-->
+      <label for="researchLines" class="form-label
+        ">Línea de Investigación:</label>
+      <ng-select
+        [items]="researchLinesFilter"
+        bindLabel="label"
+        bindValue="value"
+        placeholder="Selecciona una línea de investigación"
+        [(ngModel)]="researchLineFilter"
         (keyup)="loadFilterCongress($event)"
         (change)="loadExposures2()"
         [notFoundText]="'No se encontraron congresos'"

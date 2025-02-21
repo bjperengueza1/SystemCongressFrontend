@@ -32,6 +32,10 @@
         <th>Nombre</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
+        <th>Flater</th>
+        <th>Asistencia</th>
+        <th>Ponencia</th>
+        <th>Conferencia</th>
         <th>Ciudad</th>
         <th class="text-center">Horas Mínimas</th>
         <th class="text-center">Activo</th>
@@ -43,6 +47,34 @@
         <td>{{ congress.name }}</td>
         <td>{{ congress.startDate }}</td>
         <td>{{ congress.endDate }}</td>
+        <td class="text-center">
+          @if (congress.fileFlayer != ""){
+            SI
+          } @else {
+            No disponible
+          }
+        </td>
+        <td class="text-center">
+          @if (congress.fileCertificateAttendance != ""){
+            SI
+          } @else {
+            No disponible
+          }
+        </td>
+        <td class="text-center">
+          @if (congress.fileCertificateExposure != ""){
+            SI
+          } @else {
+            No disponible
+          }
+        </td>
+        <td class="text-center">
+          @if (congress.fileCertificateConference != ""){
+            SI
+          } @else {
+            No disponible
+          }
+        </td>
         <td>{{ congress.location }}</td>
         <td class="text-center">{{ congress.minHours }}</td>
         <td class="text-center">

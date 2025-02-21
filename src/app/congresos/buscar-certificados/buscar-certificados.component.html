@@ -14,7 +14,7 @@
              @if(congreso.certificateAttendance || congreso.exposure.length > 0){
                <div class="card mb-3 shadow">
                  <div class="card-header bg-secondary text-white">
-                   <h5 class="mb-0">Congreso: {{ congreso.name }}</h5>
+                   <h5 class="mb-0">Congreso: {{ congreso.name }} - {{congreso.startDate | formatearFecha}}</h5>
                  </div>
                  <div class="card-body">
                    <!-- Lista de Certificados -->

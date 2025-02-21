@@ -108,7 +108,20 @@ export class CongresosComponent implements OnInit {
   // Inicializar un congreso vacío
   private initializeCongreso(): CongressItem {
     //return { id: 0, nombre: '', fechaInicio: '', fechaFin: '', ubicacion: '' };
-    return {minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: '', status: 0}
+    return {
+      congressId: 0,
+      name: '',
+      startDate: '',
+      endDate: '',
+      location: '',
+      minHours: 0,
+      guid: '',
+      status: 0,
+      fileFlayer: '',
+      fileCertificateConference: '',
+      fileCertificateAttendance: '',
+      fileCertificateExposure: ''
+    }
   }
 
   open(content: any) {
@@ -282,6 +295,7 @@ export class CongresosComponent implements OnInit {
           next: () => {
             this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
             this.modalService.dismissAll();
+            this.loadCongresses(this.currentPage,this.pageSize, this.searchTerm);
           },
           error: (err) => {
             this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
@@ -296,6 +310,7 @@ export class CongresosComponent implements OnInit {
           next: () => {
             this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
             this.modalService.dismissAll();
+            this.loadCongresses(this.currentPage,this.pageSize, this.searchTerm);
           },
           error: (err) => {
             this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
@@ -310,6 +325,7 @@ export class CongresosComponent implements OnInit {
           next: () => {
             this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
             this.modalService.dismissAll();
+            this.loadCongresses(this.currentPage,this.pageSize, this.searchTerm);
           },
           error: (err) => {
             this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
@@ -324,6 +340,7 @@ export class CongresosComponent implements OnInit {
           next: () => {
             this.alertService.showSuccess('Exitoso', 'Archivo subido exitosamente.');
             this.modalService.dismissAll();
+            this.loadCongresses(this.currentPage,this.pageSize, this.searchTerm);
           },
           error: (err) => {
             this.alertService.showError('Error inesperado', 'Ocurrió un error inesperado. Por favor, inténtalo nuevamente');
