@@ -106,9 +106,6 @@ export class RegistroAsistenciaComponent implements OnInit {
     });
   }
 
-
-
-
   getResearchLine(value: number): string {
     const status = researchLines.find(s => s.value === value);
     return status ? status.label : 'Desconocido'; // Manejo de valores no definidos
@@ -117,6 +114,20 @@ export class RegistroAsistenciaComponent implements OnInit {
   getAcademicDegree(value: number): string {
     const status = academicDegrees.find(s => s.value === value);
     return status ? status.label : 'Desconocido'; // Manejo de valores no definidos
+  }
+
+  validarLetras(event: KeyboardEvent) {
+    const char = event.key;
+    if (!/^[a-zA-Z\s]+$/.test(char)) {
+      event.preventDefault();
+    }
+  } 
+  
+  validarNumeros(event: KeyboardEvent) {
+    const char = event.key;
+    if (!/^[0-9]$/.test(char)) {
+      event.preventDefault();
+    }
   }
 
 }

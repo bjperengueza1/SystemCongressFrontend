@@ -26,12 +26,12 @@
             <div class="mb-3">
               <label for="idNumber" class="form-label">No. Documento de Identidad</label>
               <input type="text" class="form-control" id="idNumber" placeholder="Ingresa tu documento de identidad"
-                     required [(ngModel)]="attendance.attendee.idNumber" pattern="[0-9]*" name="idNumber">
+                     required [(ngModel)]="attendance.attendee.idNumber" (keypress)="validarNumeros($event)" name="idNumber">
             </div>
             <div class="mb-3">
               <label for="name" class="form-label">Nombre Completo</label>
               <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre completo"
-                     required [(ngModel)]="attendance.attendee.name" pattern="[a-zA-Z]*" name="name">
+                     required [(ngModel)]="attendance.attendee.name" (keypress)="validarLetras($event)" name="name">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Correo Electrónico</label>
@@ -46,7 +46,7 @@
             <div class="mb-3">
               <label for="phone" class="form-label">Número Telefónico</label>
               <input type="text" class="form-control" id="phone" placeholder="Ingresa tu número telefónico"
-                     required [(ngModel)]="attendance.attendee.phone" pattern="[0-9]*" name="phone">
+                     required [(ngModel)]="attendance.attendee.phone" (keypress)="validarNumeros($event)" name="phone">
             </div>
 
             <!--
