@@ -89,6 +89,7 @@
           minlength="10"
           maxlength="100"
           required
+          pattern="[a-zA-Z]*"
           placeholder="Nombre del autor">
       </div>
       @if(expositionForm.controls['author'+i+'Name'].invalid && expositionForm.controls['author'+i+'Name']["touched"]){
@@ -112,6 +113,7 @@
           minlength="10"
           maxlength="13"
           required
+          pattern="[0-9]*"
           placeholder="Cédula del autor">
       </div>
       @if(expositionForm.controls['author'+i+'IDNumber'].invalid && expositionForm.controls['author'+i+'IDNumber']["touched"]){
@@ -175,6 +177,7 @@
             required
             minlength="10"
             maxlength="13"
+            pattern="[0-9]*"
             placeholder="Teléfono del autor">
           @if(expositionForm.controls['author'+i+'PhoneNumber'].invalid && expositionForm.controls['author'+i+'PhoneNumber']["touched"]){
             <div class="text-danger">
