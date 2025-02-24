@@ -20,6 +20,7 @@
         required
         minlength=3
         maxlength="100"
+        pattern="^(?!\s*$)(?!\d+$)[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s.,:;]+$"
         placeholder="Ingrese el nombre de la exposición">
     </div>
     @if(expositionForm.controls['name'].invalid && expositionForm.controls['name']["touched"]){
@@ -136,6 +137,7 @@
             [(ngModel)]="author.InstitutionalMail"
             name="author{{i}}InstitutionalMail"
             required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder="Correo institucional">
           @if(expositionForm.controls['author'+i+'InstitutionalMail'].invalid && expositionForm.controls['author'+i+'InstitutionalMail']["touched"]){
             <div class="text-danger">
@@ -154,6 +156,7 @@
             [(ngModel)]="author.PersonalMail"
             name="author{{i}}PersonalMail"
             required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder="Correo personal">
           @if(expositionForm.controls['author'+i+'PersonalMail'].invalid && expositionForm.controls['author'+i+'PersonalMail']["touched"]){
             <div class="text-danger">

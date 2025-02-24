@@ -136,6 +136,7 @@
             [(ngModel)]="author.InstitutionalMail"
             name="author{{i}}InstitutionalMail"
             required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder="Correo institucional">
           @if(expositionForm.controls['author'+i+'InstitutionalMail'].invalid && expositionForm.controls['author'+i+'InstitutionalMail']["touched"]){
             <div class="text-danger">
@@ -154,6 +155,7 @@
             [(ngModel)]="author.PersonalMail"
             name="author{{i}}PersonalMail"
             required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder="Correo personal">
           @if(expositionForm.controls['author'+i+'PersonalMail'].invalid && expositionForm.controls['author'+i+'PersonalMail']["touched"]){
             <div class="text-danger">
@@ -192,7 +194,7 @@
         </div>
         <div class="col-md-6 mb-3">
           <label for="author{{i}}Country" class="form-label">País:</label>
-          
+
           <ng-select
             id="author{{i}}Country"
             name="author{{i}}Country"

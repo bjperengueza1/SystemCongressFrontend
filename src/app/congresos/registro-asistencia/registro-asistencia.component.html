@@ -36,7 +36,7 @@
             <div class="mb-3">
               <label for="email" class="form-label">Correo Electrónico</label>
               <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico"
-                     required [(ngModel)]="attendance.attendee.email" name="email">
+                     required [(ngModel)]="attendance.attendee.email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
             </div>
             <div class="mb-3">
               <label for="institution" class="form-label">Institución</label>
