@@ -13,6 +13,7 @@ import {AsistentesComponent} from './admin/asistentes/asistentes.component';
 import {BuscarCertificadosComponent} from './congresos/buscar-certificados/buscar-certificados.component';
 import {RegistroConferenciaComponent} from './congresos/registro-conferencia/registro-conferencia.component';
 import {CongressFormComponent} from './congress-form/congress-form.component';
+import { UsuariosComponent } from './admin/usuarios/usuarios.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'presentaciones', component: PresentacionesComponent, canActivate: [authGuard] },
       { path: 'asistentes', component: AsistentesComponent, canActivate: [authGuard] },
       { path: 'asistencias', component: AsistenciasComponent, canActivate: [authGuard] },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [authGuard] },
     ]
   },
   { path: 'landing', component: LandingComponent },

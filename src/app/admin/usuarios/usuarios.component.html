@@ -1,0 +1,169 @@
+<div>
+  <!-- Botón para agregar un nuevo congreso -->
+  <button class="btn btn-primary mb-3" (click)="openModalCreate(modalCrear)">Agregar Usuario</button>
+
+  <div *ngIf="response">
+    <!-- Selector para tamaño de página -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="form-group w-50">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar congresos..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange()"
+        />
+      </div>
+      <!-- Selector para tamaño de página -->
+      <div class="form-group">
+        <label for="pageSize" class="me-2">Elementos por página:</label>
+        <select id="pageSize" class="form-select d-inline-block w-auto"
+                [(ngModel)]="pageSize"
+                (change)="onPageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tabla para mostrar la lista de congresos -->
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of response.items">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td class="border border-gray-300 px-4 py-2 relative">
+          <div class="inline-block text-left">
+            <button
+              type="button"
+              data-bs-toggle="dropdown"
+              class="btn btn-primary dropdown-toggle show"
+            >
+              Opciones
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button class="btn btn-sm btn-warning me-2 dropdown-item" (click)="openModalEdit(modalEditar,user)">
+                  Editar
+                </button>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="btn btn-sm btn-secondary dropdown-item" (click)="openModalChangePassword(modalContrasenia,user.userId)">
+                  Cambiar contraseña
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <!-- Mostrar mensaje si no hay congresos -->
+      <tr *ngIf="response.items.length === 0">
+        <td colspan="6" class="text-center">No hay congresos disponibles.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginación usando ng-bootstrap -->
+    <nav class="mt-4" *ngIf="response.totalPages > 1">
+      <ngb-pagination
+        [collectionSize]="response.totalItems"
+        [(page)]="currentPage"
+        [pageSize]="pageSize"
+        (pageChange)="loadCongresses($event, pageSize, searchTerm)">
+      </ngb-pagination>
+    </nav>
+  </div>
+
+  <!-- Spinner de carga -->
+  <div *ngIf="!response" class="text-center mt-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p>Cargando usuarios...</p>
+  </div>
+
+  <!-- Modal para cambiar contraseña -->
+   <ng-template #modalContrasenia let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Cambiar contraseña</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="password">Nueva contraseña</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="modelChangePassword.newPassword" minlength="8" />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar contraseña</label>
+        <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="modelChangePassword.confirmPassword" minlength="8" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="changePassword()">Guardar</button>
+    </div>
+
+   </ng-template>
+
+  <!-- Modal para editar usuario -->
+  <ng-template #modalEditar let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Editar usuario</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="modelEditUser.name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="modelEditUser.email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="editUser()">Guardar</button>
+    </div>
+  </ng-template>
+
+  <!-- Modal para crear usuario -->
+  <ng-template #modalCrear let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Agregar usuario</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="modelEditUser.name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="modelEditUser.email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+      </div>
+      <div class="form-group
+      ">
+        <label for="password">Contraseña</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="modelChangePassword.newPassword" minlength="8"/>
+
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar contraseña</label>
+        <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="modelChangePassword.confirmPassword" minlength="8"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="createUser()">Guardar</button>
+    </div>
+  </ng-template>
+
+</div>

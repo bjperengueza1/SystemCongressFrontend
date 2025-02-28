@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, Observable, ReplaySubject, throwError} from 'rxjs';
 import { ConfigService } from './config.service';
+import { UserItem } from '../interfaces/entities';
+import { ApiResponse } from '../interfaces/api-response';
 
 export interface LoginResponse {
   userId: number;
@@ -108,6 +110,22 @@ export class AuthService {
     }
 
     return throwError(() => new Error(errorMessage));
+  }
+
+  getUsers(page: number, size: number, search: string): Observable<ApiResponse<UserItem>> {
+    return this.http.get<ApiResponse<UserItem>>(this.apiUrl);
+  }
+
+  changePasswordByAdmin(id: number, newPassword: string, confirmPassword: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/change-password-by-admin/${id}`, { newPassword, confirmPassword });
+  }
+
+  editUser(id: number, name: string, email: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, { name, email });
+  }
+
+  createUser(name: string, email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, { name, email, password, role: 0 });
   }
 
 }

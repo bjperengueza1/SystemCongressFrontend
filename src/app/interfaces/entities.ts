@@ -179,3 +179,10 @@ export type RejectExposureModel = {
   exposureId: number,
   observation: string,
 }
+
+export type UserItem = {
+  userId: number,
+  name: string,
+  email: string,
+  role: number
+}
