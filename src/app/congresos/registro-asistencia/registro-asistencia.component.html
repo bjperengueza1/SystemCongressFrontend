@@ -1,4 +1,3 @@
-<script src="../../interfaces/entities.ts"></script>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -26,35 +25,74 @@
             <div class="mb-3">
               <label for="idNumber" class="form-label">No. Documento de Identidad</label>
               <input type="text" class="form-control" id="idNumber" placeholder="Ingresa tu documento de identidad"
-                     required [(ngModel)]="attendance.attendee.idNumber" (keypress)="validarNumeros($event)" name="idNumber">
+                     required [(ngModel)]="attendance.attendee.idNumber" minlength="10" maxlength="13" pattern="^\d{10,13}$" name="idNumber">
+              <div class="text-danger">
+                <small [hidden]="!(attendanceForm.controls['idNumber'].errors?.['minlength'] || attendanceForm.controls['idNumber'].errors?.['maxlength'])">
+                  El documento de identidad debe tener entre 10 y 13 dígitos.
+                </small>
+                <small [hidden]="!attendanceForm.controls['idNumber'].errors?.['pattern']">
+                  Solo se permiten números.
+                </small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="name" class="form-label">Nombre Completo</label>
               <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre completo"
-                     required [(ngModel)]="attendance.attendee.name" (keypress)="validarLetras($event)" name="name">
+                     required [(ngModel)]="attendance.attendee.name" minlength="3" maxlength="75" pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$" name="name" #name="ngModel">
+              <div class="text-danger">
+                <small [hidden]="!name.touched || !name.errors?.['required']">
+                  El nombre es requerido.
+                </small>
+                <small [hidden]="!name.touched || !(name.errors?.['minlength'] || name.errors?.['maxlength'])">
+                  El nombre debe tener entre 3 y 75 caracteres.
+                </small>
+                <small [hidden]="!name.touched || !name.errors?.['pattern']">
+                  Solo se permiten letras y espacios.
+                </small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Correo Electrónico</label>
               <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico"
-                     required [(ngModel)]="attendance.attendee.email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                     required [(ngModel)]="attendance.attendee.email" name="email" #email="ngModel" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+              <div class="text-danger">
+                <small [hidden]="email?.valid || !email?.touched || !email?.errors?.['required']">
+                  El correo electrónico es requerido.
+                </small>
+                <small [hidden]="email?.valid || !email?.touched || !email?.errors?.['pattern']">
+                  Debes ingresar un correo electrónico válido.
+                </small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="institution" class="form-label">Institución</label>
               <input type="text" class="form-control" id="institution" placeholder="Ingresa la institución a la que perteneces"
-                     required [(ngModel)]="attendance.attendee.institution" name="institution">
+                     required [(ngModel)]="attendance.attendee.institution" name="institution" minlength="3" maxlength="75" pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$" #institution="ngModel">
+              <div class="text-danger">
+                <small [hidden]="!institution.touched || !institution.errors?.['required']">
+                  El nombre es requerido.
+                </small>
+                <small [hidden]="!institution.touched || !(institution.errors?.['minlength'] || institution.errors?.['maxlength'])">
+                  El nombre debe tener entre 3 y 75 caracteres.
+                </small>
+                <small [hidden]="!institution.touched || !institution.errors?.['pattern']">
+                  Solo se permiten letras y espacios.
+                </small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label">Número Telefónico</label>
               <input type="text" class="form-control" id="phone" placeholder="Ingresa tu número telefónico"
-                     required [(ngModel)]="attendance.attendee.phone" (keypress)="validarNumeros($event)" name="phone">
+                     required [(ngModel)]="attendance.attendee.phone" name="phone" minlength="10" maxlength="13" pattern="^\d{10,13}$">
+              <div class="text-danger">
+                <small [hidden]="!(attendanceForm.controls['phone'].errors?.['minlength'] || attendanceForm.controls['phone'].errors?.['maxlength'])">
+                  El número telefónico debe tener entre 10 y 13 dígitos.
+                </small>
+                <small [hidden]="!attendanceForm.controls['phone'].errors?.['pattern']">
+                  Solo se permiten números.
+                </small>
+              </div>
             </div>
-
-            <!--
-            <div class="mb-3">
-              <label for="comentarios" class="form-label">Comentarios (Opcional)</label>
-              <textarea class="form-control" id="comentarios" rows="3" placeholder="Escribe algún comentario"
-                        [(ngModel)]="attendanceData.comentarios" name="comentarios"></textarea>
-            </div> -->
             <div class="d-grid">
               <button type="submit" class="btn btn-primary" [disabled]="!attendanceForm.form.valid">Registrar Asistencia</button>
             </div>

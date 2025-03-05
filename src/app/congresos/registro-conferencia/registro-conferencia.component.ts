@@ -36,7 +36,7 @@ export class RegistroConferenciaComponent implements OnInit {
               private alertService: AlertService,
               private router: Router,
               private route: ActivatedRoute,
-              ) {
+  ) {
   }
 
   ngOnInit() {
@@ -133,19 +133,4 @@ export class RegistroConferenciaComponent implements OnInit {
     { value: 'Uruguay' },
     { value: 'Venezuela' }
   ];
-
-  validarLetras(event: KeyboardEvent) {
-    const char = event.key;
-    if (!/^[a-zA-Z\s]+$/.test(char)) {
-      event.preventDefault();
-    }
-  } 
-  
-  validarNumeros(event: KeyboardEvent) {
-    const char = event.key;
-    if (!/^[0-9]$/.test(char)) {
-      event.preventDefault();
-    }
-  }
-  
 }

@@ -1,274 +1,367 @@
 <!-- Navigation Menu -->
 <nav class="nav-menu">
-  <div class="nav-container">
-    <a href="#" class="nav-logo"><img src="/logor.png" style="width: 30%; height: 50%; "/></a>
-    <div class="nav-links">
+  <div class="container nav-container">
+    <a href="#" class="nav-logo"><img src="/logor.png" alt="Logo" /></a>
+    <div class="nav-links" [class.active]="isMenuOpen">
       <a href="#about" class="nav-link">Acerca de</a>
       <a href="#conferences" class="nav-link">Conferencias</a>
       <a href="#submit" class="nav-link">Postular Ponencia</a>
       <a href="#certificates" class="nav-link">Certificados</a>
-      <a class="nav-link" href="https://revistacodigocientifico.itslosandes.net/index.php/">Revista</a>
+      <a href="https://revistacodigocientifico.itslosandes.net/index.php/1/issue/archive" target="_blank" class="nav-link">Revista</a>
+    </div>
+    <div class="nav-toggle" (click)="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
     </div>
   </div>
 </nav>
-
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="hero-section" >
   <div class="container">
     <h1 style="font-size: 3rem; color: #ffffff; margin-bottom: 1rem;">
-      {{congress.name}}
+      {{congress.name}}  {{ congress.startDate | obtenerAnio}}
     </h1>
     <p style="font-size: 2rem; color: #ffffff; margin-bottom: 2rem; max-width: 800px; margin: 0 auto;">
-     <strong> Únete a nosotros en el mayor congreso de innovación educativa de Latinoamérica.
-      Del {{ congress.startDate | obtenerDia}} de {{ congress.startDate | obtenerMesNombre}} al {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}, {{ congress.startDate | obtenerAnio}} - {{ congress.location }}
-    </strong></p><BR><BR>
-<p><strong>SÓLO QUEDAN</strong></p>
+      <strong> Únete a nosotros en el mayor congreso de innovación educativa de Latinoamérica. <br>
+        Del {{ congress.startDate | obtenerDia}} de {{ congress.startDate | obtenerMesNombre}} al {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}, - {{ congress.location }}
+      </strong></p><BR><BR>
+    <p><strong>FALTAN</strong></p>
     <!-- Countdown Timer -->
-      <div class="countdown-container">
-        <div class="countdown-item">
-          <span class="countdown-value">{{ countdown.days }}</span>
-          <span class="countdown-label">Días</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-value">{{ countdown.hours }}</span>
-          <span class="countdown-label">Horas</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-value">{{ countdown.minutes }}</span>
-          <span class="countdown-label">Minutos</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-value">{{ countdown.seconds }}</span>
-          <span class="countdown-label">Segundos</span>
-        </div>
+    <div class="countdown-container">
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.days }}</span>
+        <span class="countdown-label">Días</span>
       </div>
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.hours }}</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.minutes }}</span>
+        <span class="countdown-label">Minutos</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value">{{ countdown.seconds }}</span>
+        <span class="countdown-label">Segundos</span>
+      </div>
+    </div>
 
-   
+
   </div>
 </section> <br>
 
 <!-- Foto Flayer Portada Content -->
 <div class="container">
-  <div class="flayer-portada">
-    <img *ngIf="imageUrl" [src]="imageUrl" alt="Flayer Portada" />
-  </div>
-</div><br><br>
-
-<h3 style="text-align: center;">
-  CONGRESO EN CIFRAS
-</h3>
-<div class="event-highlights">
-  <div class="highlight-item">
-    <img src="/doc-ico.png" />
-    <strong>+{{ponencias?.totalItems}}</strong>
-    <span>Presentaciones</span>
-  </div>
-  <!--
-  <div class="highlight-item">
-    <strong>+1000</strong>
-    <span>Asistentes</span>
-  </div>-->
-  <div class="highlight-item">
-    <img src="/timer-ico.png" />
-    <strong>{{counterDays}}</strong>
-    <span>Días</span>
-  </div>
-
-</div>
-
-<div class="container">
-  <!-- About Section -->
-  <section id="about" class="section">
-    <h2 style="text-align: center; color: #1f2937; margin-bottom: 2rem;">¿Por qué participar?</h2>
-    <div class="about-section">
-      <div class="about-card">
-        <h3 style="color: #2563eb;">Networking</h3>
-        <p><strong> Conecta con expertos y profesionales de la industria tecnológica de toda Latinoamérica. Oportunidades únicas para establecer contactos y colaboraciones.</strong></p>
-        <p style="text-align: justify;">Desde tecnología e innovación hasta educación, arte, sostenibilidad y emprendimiento, este evento reúne a investigadores, académicos y profesionales de diversas industrias. Descubre nuevas tendencias, participa en conferencias magistrales y crea oportunidades únicas para establecer contactos y colaboraciones estratégicas. No pierdas la oportunidad de ser parte de esta experiencia que impulsa el avance del conocimiento y la transformación en múltiples sectores. </p>
-      </div>
-      <div class="about-card">
-        <h3 style="color: #2563eb;">Conocimiento</h3>
-        <p> <strong> Accede a contenido exclusivo, las últimas tendencias en tecnología y casos de éxito presentados por líderes de la industria.</strong></p>
-        <p style="text-align: justify;">Desde avances tecnológicos e innovación educativa hasta sostenibilidad, arte y emprendimiento, este congreso reúne a expertos de diversas áreas para compartir investigaciones, experiencias y casos de éxito. Conoce de primera mano las estrategias y proyectos que están transformando la industria, presentados por líderes y referentes en cada campo. ¡Inspírate, aprende y sé parte del futuro.</p>
-      </div>
-      <div class="about-card">
-        <h3 style="color: #2563eb;">Oportunidades</h3>
-        <p><strong> Nuevas oportunidades de colaboración, desarrollo profesional y conexiones con empresas líderes del sector tecnológico.</strong></p>
-        <p style="text-align: justify;">Este congreso reúne a expertos en tecnología, arte, sostenibilidad, educación y emprendimiento, creando un espacio ideal para el intercambio de ideas y la generación de alianzas estratégicas. Conéctate con instituciones académicas, startups y grandes empresas que buscan talento e innovación. ¡Expande tu red y lleva tu carrera al siguiente nivel.</p>
-      </div>
+  <div class="container1">
+    <!-- Sección izquierda con la imagen de portada -->
+    <div class="flayer-portada">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Flayer Portada" />
     </div>
 
-    
-  </section>
+    <!-- Sección derecha con las 4 tarjetas -->
+    <div class="right-section">
+      <h2 class="section-title">FECHAS IMPORTANTES</h2> <!-- Título agregado -->
 
-  <!-- Conferences Section -->
-  <section id="conferences" class="section">
-    <h2 style="text-align: center; color: #1f2937; margin-bottom: 2rem;">Conferencias Disponibles</h2>
+      <div class="grid">
 
-    <div *ngIf="ponencias">
-      <div *ngFor="let conference of ponencias.items" class="conference-card">
-        <h3 style="color: #1f2937; margin-bottom: 0.5rem;">{{ conference.name }}</h3>
-        <div class="conference-details">
-          <div class="conference-info" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, auto); gap: 1rem;">
-            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+        <!-- Tarjeta 1 -->
+        <div class="card">
+          <div class="card-content">
+            <img src="1.png" alt="Recepción de Ponencias" class="icon" />
+            <div class="card-text">
+              <h4>Recepción de Ponencias</h4>
+
+            </div>
+            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="card">
+          <div class="card-content">
+            <img src="2.png" alt="Notificación de Ponencias" class="icon" />
+            <div class="card-text">
+              <h4>Notificación de Aceptación de Ponencias</h4>
+
+            </div>
+            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="card">
+          <div class="card-content">
+            <img src="3.png" alt="Registro de Participantes" class="icon" />
+            <div class="card-text">
+              <h4>Registro de participantes</h4>
+            </div>
+            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4 -->
+        <div class="card">
+          <div class="card-content">
+            <img src="4.png" alt="Desarrollo del Congreso" class="icon" />
+            <div class="card-text">
+              <h4>Desarrollo del Congreso CILAI</h4>
+            </div>
+            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <br><br>
+
+  <h3 style="text-align: center;  margin-bottom: 2rem;">
+    CONGRESO EN CIFRAS
+  </h3>
+  <div class="event-highlights">
+    <div class="highlight-item">
+      <img src="/doc-ico.png" />
+      <strong>+{{ponencias?.totalItems}}</strong>
+      <span>Presentaciones</span>
+    </div>
+    <!--
+    <div class="highlight-item">
+      <strong>+1000</strong>
+      <span>Asistentes</span>
+    </div>-->
+    <div class="highlight-item">
+      <img src="/timer-ico.png" />
+      <strong>{{counterDays}}</strong>
+      <span>Días</span>
+    </div>
+
+  </div>
+
+  <div class="container">
+
+
+
+    <!-- Conferences Section -->
+    <section id="conferences" class="section" style=" margin-bottom: 2rem;">
+      <h2 style="text-align: center; color: #1f2937; margin-bottom: 2em;">Conferencias Disponibles</h2>
+
+      <div *ngIf="!ponencias || ponencias.items.length === 0" style="text-align: center; color: #6b7280; font-size: 1.2em;">
+        No existen conferencias disponibles actualmente.
+      </div>
+      <div *ngIf="ponencias">
+        <div *ngFor="let conference of ponencias.items" class="conference-card">
+          <h3 style="color: #1f2937; margin-bottom: 0.5rem;">{{ conference.name }}</h3>
+          <div class="conference-details">
+            <div class="conference-info" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, auto); gap: 1rem;">
+              <p style="color: #4b5563; margin-bottom: 0.5rem;">
                 <strong>Ponente:</strong> {{ conference.authors[0].name }} - {{ conference.authors[0].academicDegree | obtenerGradoAcademicoNombre }}
-            </p>
-            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              </p>
+              <p style="color: #4b5563; margin-bottom: 0.5rem;">
                 <strong>Fecha:</strong> {{ conference.dateStart | formatearFecha }} | <strong>Hora:</strong> {{ conference.dateStart | obtenerHoraFormateada }}
-            </p>
-            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              </p>
+              <p style="color: #4b5563; margin-bottom: 0.5rem;">
                 <strong>Linea de Investigación:</strong> {{ conference.researchLine | lineaInvestigacion }}
-            </p>
-            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              </p>
+              <p style="color: #4b5563; margin-bottom: 0.5rem;">
                 <strong>Tipo:</strong> {{ conference.type | tipoExposicion }}
-            </p>
-            <p style="color: #4b5563; margin-bottom: 0.5rem;">
+              </p>
+              <p style="color: #4b5563; margin-bottom: 0.5rem;">
                 <strong>Sala:</strong> {{ conference.room.name }}
-            </p>
-            <p style="color: #4b5563; margin-bottom: -1rem;">
+              </p>
+              <p style="color: #4b5563; margin-bottom: -1rem;">
                 <strong>Capacidad:</strong> {{ conference.room.capacity }}
-            </p>
-        </div>
-        </div>
-
-        <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
-          <div class="form-group" style="max-width: 300px;">
-            <input
-              type="email"
-              [id]="'email-' + conference.exposureId"
-              name="email"
-              [(ngModel)]="emailInputs[conference.exposureId]"
-              required
-              class="form-control"
-              placeholder="Ingresa tu correo para registrarte"
-            >
+              </p>
+            </div>
           </div>
-          <button type="submit"
-                  class="btn"
-                  [disabled]="!emailInputs[conference.exposureId]">
-            Registrarme
-          </button>
-          <div *ngIf="submittedConferences[conference.exposureId]" class="success-message">
-            ¡Registro exitoso! Te enviaremos los detalles por correo.
-          </div>
-        </form>
 
+          <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
+            <div class="form-group" style="max-width: 300px;">
+              <input
+                type="email"
+                [id]="'email-' + conference.exposureId"
+                name="email"
+                [(ngModel)]="emailInputs[conference.exposureId]"
+                required
+                class="form-control"
+                placeholder="Ingresa tu correo para registrarte"
+              >
+            </div>
+            <button type="submit"
+                    class="btn"
+                    [disabled]="!emailInputs[conference.exposureId]">
+              Registrarme
+            </button>
+            <div *ngIf="submittedConferences[conference.exposureId]" class="success-message">
+              ¡Registro exitoso! Te enviaremos los detalles por correo.
+            </div>
+          </form>
+
+        </div>
+        <!-- Paginación usando ng-bootstrap -->
+        <nav class="mt-4" *ngIf="ponencias.totalPages > 1">
+          <ngb-pagination
+            [collectionSize]="ponencias.totalItems"
+            [(page)]="currentPage"
+            [pageSize]="pageSize"
+            (pageChange)="loadExposures($event, pageSize)">
+          </ngb-pagination>
+        </nav>
       </div>
-      <!-- Paginación usando ng-bootstrap -->
-      <nav class="mt-4" *ngIf="ponencias.totalPages > 1">
-        <ngb-pagination
-          [collectionSize]="ponencias.totalItems"
-          [(page)]="currentPage"
-          [pageSize]="pageSize"
-          (pageChange)="loadExposures($event, pageSize)">
-        </ngb-pagination>
-      </nav>
-    </div>
-  </section>
+    </section>
 
-  <!-- Submit Presentation Section -->
-  <section id="submit" class="section" style="text-align: center;">
-    <h2 style="color: #1f2937; margin-bottom: 1rem;">¿Quieres ser ponente?</h2>
-    <div class="submit-info">
-      <p style="color: #4b5563; margin-bottom: 1.5rem; font-size: 19px;">
-        Comparte tu conocimiento y experiencia con la comunidad. Buscamos presentaciones sobre:
-      </p>
-      <ul class="topics-list">
-        <li>Tecnológias de la Información y Comunicación</li>
-        <li>Educación Superior y Modalidades de Estudio</li>
-        <li>Administración, Marketing y Emprendimiento</li>
-        <li>Calidad e Innovación Educativa</li>
-        <li>Artes y Humanidades </li>
-        <li>Actividad Física y Deportiva </li>
-        <li>Servicios de Protección Seguridad y Transporte </li>
-        <li>Ingeniería, Industria y Construcción </li>
-        <li>Ciencias Jurídicas, Políticas y Sociales</li>
-      </ul>
-      <p style="color: #4b5563; margin: 1.5rem 0;">
-        <!-- <strong>Fecha límite:</strong> 30 de junio, 2024 -->
-      </p>
-    </div>
-    <a href="{{urlRegistroPonencia}}"
-       target="_blank"
-       class="btn">
-      Enviar Propuesta de Ponencia
-    </a>
-  </section>
-
-  <!-- Certificates Section -->
-  <section id="certificates" class="certificates-section">
-    <div class="container">
-      <h2 style="color: #1f2937; margin-bottom: 1rem;">Certificados de Participación</h2>
-      <div class="certificates-info">
-        <p style="color: #4b5563; margin-bottom: 1rem;">
-          Los certificados estarán disponibles luego de culminar el congreso para:
+    <!-- Submit Presentation Section -->
+    <section id="submit" class="section" style="text-align: center; margin-bottom: 2rem;">
+      <h2 style="color: #1f2937; margin-bottom: 2rem;">¿Quieres ser ponente?</h2>
+      <div class="submit-info">
+        <p style="color: #4b5563; margin-bottom: 1.5rem; font-size: 19px;">
+          Comparte tu conocimiento y experiencia con la comunidad. Buscamos presentaciones sobre:
         </p>
-        <ul class="certificates-list">
-          <li>Asistentes a las conferencias o ponencias</li>
-          <li>Ponentes</li>
-          <li>Conferencistas</li>
+        <ul class="topics-list">
+          <li>Tecnológias de la Información y Comunicación</li>
+          <li>Educación Superior y Modalidades de Estudio</li>
+          <li>Administración, Marketing y Emprendimiento</li>
+          <li>Calidad e Innovación Educativa</li>
+          <li>Artes y Humanidades </li>
+          <li>Actividad Física y Deportiva </li>
+          <li>Servicios de Protección Seguridad y Transporte </li>
+          <li>Ingeniería, Industria y Construcción </li>
+          <li>Ciencias Jurídicas, Políticas y Sociales</li>
         </ul>
-        <!--<p style="color: #4b5563; margin: 1rem 0;">
-          Los certificados se emitirán digitalmente y contarán con un código QR para verificar su autenticidad.
-        </p> -->
+        <p style="color: #4b5563; margin: 1.5rem 0;">
+          <!-- <strong>Fecha límite:</strong> 30 de junio, 2024 -->
+        </p>
       </div>
+      <a href="{{urlRegistroPonencia}}"
+         target="_blank"
+         class="btn" style=" margin-bottom: 1rem;">
+        Enviar Propuesta de Ponencia
+      </a> <br>
+      <p>Descarga la plantilla <a href="https://drive.google.com/drive/folders/1HvCi34c8utRt-yqmo6k7yye6sWoO-BCI?usp=sharing"
+                                  target="_blank"
+                                  class="">
+        AQUI   </a> </p>
+    </section>
 
-      <div class="certificates-form">
-        <h3 style="color: #1f2937; margin-bottom: 1rem;">Descarga tu Certificado</h3>
-       
-        <form (ngSubmit)="onCertificateSubmit()" #certificateForm="ngForm">
-          <div class="form-group">
-            <input
-              type="text"
-              id="dni"
-              name="dni"
-              [(ngModel)]="dniInput"
-              required
-              pattern="[0-9]{13}"
-              class="form-control"
-              placeholder="Ingresa tu DNI (Máximo 13 dígitos)"
-            >
-          </div>
-          <button type="submit"
-                  class="btn"
-                  [disabled]="!dniInput || dniInput.length < 10">
-            Buscar Certificados
-          </button>
-          <div *ngIf="certificateError" class="error-message">
-            {{ certificateError }}
-          </div>
-          <div *ngIf="certificateSuccess" class="success-message">
-            {{ certificateSuccess }}
-          </div>
-        </form>
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2 style="text-align: center; color: #1f2937; margin-bottom: 1rem;">Organizan</h2>
+      <div class="about-section">
+        <div class="about-card">
+          <img src="logor.png" alt="Networking" class="about-img">
+        </div>
+        <div class="about-card">
+          <img src="itla-logo.png" alt="Conocimiento" class="about-img">
+        </div>
+        <div class="about-card">
+          <img src="revista-logo.png" alt="Oportunidades" class="about-img">
+
+        </div>
       </div>
-      <app-buscar-certificados [cedula]="dniInput"></app-buscar-certificados>
-    </div>
-  </section>
+    </section>
+
+
+
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates-section" style=" margin-bottom: 0rem;">
+      <div class="container">
+        <h2 style="color: #1f2937; margin-bottom: 2rem;">Certificados de Participación</h2>
+        <div class="certificates-info">
+          <p style="color: #4b5563; margin-bottom: 1rem;">
+            Los certificados estarán disponibles luego de culminar el congreso para:
+          </p>
+          <ul class="certificates-list">
+            <li>Asistentes a las conferencias y/o ponencias</li>
+            <li>Ponentes</li>
+            <li>Conferencistas</li>
+          </ul>
+          <!--<p style="color: #4b5563; margin: 1rem 0;">
+            Los certificados se emitirán digitalmente y contarán con un código QR para verificar su autenticidad.
+          </p> -->
+        </div>
+
+        <div class="certificates-form">
+          <h3 style="color: #1f2937; margin-bottom: 1rem;">Descarga tu Certificado</h3>
+
+          <form (ngSubmit)="onCertificateSubmit()" #certificateForm="ngForm">
+            <div class="form-group">
+              <input
+                type="text"
+                id="dni"
+                name="dni"
+                [(ngModel)]="dniInput"
+                required
+                pattern="[0-9]{10,13}"
+                class="form-control"
+                placeholder="Ingresa tu N° de Cédula"
+              >
+            </div>
+            <div *ngIf="dniInput.length > 13 && dniInput.length > 0" class="error-message">
+              El N° de Cédula debe tener entre 10 y 13 dígitos.
+            </div>
+            <button type="submit"
+                    class="btn"
+                    [disabled]="!dniInput || dniInput.length < 10 || dniInput.length > 13 ">
+              Buscar Certificados
+            </button>
+            <div *ngIf="certificateError" class="error-message">
+              {{ certificateError }}
+            </div>
+            <div *ngIf="certificateSuccess" class="success-message">
+              {{ certificateSuccess }}
+            </div>
+          </form>
+        </div>
+        <app-buscar-certificados [cedula]="dniInput"></app-buscar-certificados>
+      </div>
+    </section>
+  </div>
 </div>
 
 
 
 
 
-<footer class="footer">
-  <div>
-      <img src="logor.png" alt="Logo" /> 
-      <p><strong>© 2025 Congreso Internacional Los Andes Innova</strong></p>
-  </div>
-  <div>
-      <p><strong>Contacto:</strong></p>
-      <p>Provincia de Santo Domingo de los Tsáchilas</p>
+
+<button class="scroll-to-top" (click)="scrollToTop()" *ngIf="showButton">
+  ↑
+</button>
+
+<!-- Botón flotante de WhatsApp -->
+<a href="https://api.whatsapp.com/send?phone=+5930983844070&text=¡Hola!%20Quisiera%20más%20información."
+   class="whatsapp-button"
+   target="_blank">
+  <div class="whatsapp-tooltip">¿Cómo puedo ayudarte?</div>
+  <img src="wp-ico.png" alt="WhatsApp" class="whatsapp-icon">
+</a>
+
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <a href="https://cilai.istla-sigala.edu.ec/admin/login" target="_blank">
+        <img src="logor.png" alt="Logo" class="footer-logo">
+      </a>
+    </div>
+    <div class="footer-right">
+      <strong>Contáctanos</strong>
+      <p>Provincia de Santo Domingo de los Tsáchilas, Ecuador.</p>
       <p>Parroquia Abraham Calazacón, Av. Tsáchila, Urbanización Vega, calle Río Yamino y Río Shiripuno, instalaciones del Colegio Latino.</p>
-      <p>Teléfono: {{ telefono }}</p>
-        <p>Correo: <a href="mailto:{{ email }}">{{ email }}</a></p>
+      <p>{{telefono}}</p>
+      <p>{{email}} </p>
+    </div>
   </div>
-  <div>
-      <p><strong> Redes Sociales:</strong></p>
-      <div class="social-links">
-        <a href="https://www.facebook.com/istlosandes/about?locale=es_LA" target="_blank" class="social-icon" alt="Facebook"><img src="/fb-ico.png" style="width: 30%; height: 100%; "/></a>
-        <a href="https://www.instagram.com/istlosandes/" target="_blank" class="social-icon" alt="Instagram"><img src="/ig-ico.png" style="width: 30%; height: 100%; "/></a>
-        <a href="https://x.com/i/flow/login?redirect_after_login=%2Fistlosandes" target="_blank" class="social-icon" alt="X"><img src="/tw-ico.png" style="width: 30%; height: 100%; "/></a>
-      </div>
+  <div class="footer-icons">
+    <a href="https://www.facebook.com/istlosandes/about?locale=es_LA" target="_blank"><img src="faceb-ico.png" alt="Icono 1"></a>
+    <a href="https://www.instagram.com/istlosandes/" target="_blank"><img src="insta-ico.png" alt="Icono 2"></a>
+    <a href="https://x.com/istlosandes?lang=es" target="_blank"><img src="tw-ico.png" alt="Icono 3"></a>
+    <a href="https://youtube.com/@institutosuperiortecnologi9557?si=EgwGUIZkI5EWnRSX" target="_blank"><img src="yt-ico.png" alt="Icono 4"></a>
   </div>
+  <p class="footer-rights">Copyright © 2025 Congreso Internacional Los Andes Innova.</p>
 </footer>
+

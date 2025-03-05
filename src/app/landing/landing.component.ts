@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, HostListener} from '@angular/core';
 import {NavComponent} from "../components/nav/nav.component";
 import {FormsModule} from '@angular/forms';
 import {DOCUMENT, NgForOf, NgIf} from '@angular/common';
@@ -44,11 +44,33 @@ interface CountdownTime {
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
+
+
 })
 
 
 
 export class LandingComponent implements OnInit {
+
+  //navegador responsive
+  isMenuOpen = false; // Estado del menú
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen; // Alterna el estado
+  }
+
+
+  showButton = false;
+
+  //Boton para subir la pantalla al inicio
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.showButton = window.scrollY > 300; // Muestra el botón después de hacer scroll
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   @ViewChild(BuscarCertificadosComponent) child!: BuscarCertificadosComponent;
 
@@ -67,13 +89,19 @@ export class LandingComponent implements OnInit {
     minutes: 0,
     seconds: 0
   };
+  message = 'Countdown started';
+
+  increaseDays() {
+    this.countdown.days += 1;
+  }
+  name = '';
 
   congress : CongressItem = this.initializeCongress();
 
   counterDays: number = 0;
 
   currentPage: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 3;
 
   urlRegistroPonencia: string = '';
 
@@ -134,6 +162,7 @@ export class LandingComponent implements OnInit {
   }
 
   onSubmit(conferenceId: number) {
+    console.log('Registro para conferencia:', conferenceId, 'Email:', this.emailInputs[conferenceId]);
     this.exposureService.registerPrevious(conferenceId,this.emailInputs[conferenceId]).subscribe({
       next: data => {
         this.submittedConferences[conferenceId] = true;
@@ -160,19 +189,11 @@ export class LandingComponent implements OnInit {
 
   private initializeCongress(): CongressItem {
     return {
-      congressId: 0,
-      name: '',
-      startDate: '',
-      endDate: '',
-      location: '',
-      minHours: 0,
-      guid: '',
-      status: 0,
-      fileFlayer: '',
-      fileCertificateConference: '',
-      fileCertificateAttendance: '',
-      fileCertificateExposure: ''
-    }
+      fileCertificateAttendance: "",
+      fileCertificateConference: "",
+      fileCertificateExposure: "",
+      fileFlayer: "",
+      minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: '', status: 0}
   }
 
   private actualizarDiasEvento() {
@@ -206,7 +227,7 @@ export class LandingComponent implements OnInit {
     })
   }
 
-  
+
 
   //protected readonly event = event;
 }

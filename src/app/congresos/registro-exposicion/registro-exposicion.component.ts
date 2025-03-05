@@ -37,14 +37,14 @@ export class RegistroExposicionComponent implements OnInit {
               private alertService: AlertService,
               private router: Router,
               private route: ActivatedRoute,
-              ) { }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.congressService.getCongressByGuid(params['id']).subscribe({
         next: data => {
-           this.congressItem = data;
-           this.exposureInsertItem = this.initializeExposureInsertItem(params['id']);
+          this.congressItem = data;
+          this.exposureInsertItem = this.initializeExposureInsertItem(params['id']);
         },
         error: () => {
           this.alertService.showError("Error","No se encontró el congreso")
@@ -134,19 +134,4 @@ export class RegistroExposicionComponent implements OnInit {
     { value: 'Uruguay' },
     { value: 'Venezuela' }
   ];
-
-  validarLetras(event: KeyboardEvent) {
-    const char = event.key;
-    if (!/^[a-zA-Z\s]+$/.test(char)) {
-      event.preventDefault();
-    }
-  }  
-
-  validarNumeros(event: KeyboardEvent) {
-    const char = event.key;
-    if (!/^[0-9]$/.test(char)) {
-      event.preventDefault();
-    }
-  }
-  
 }

@@ -3,6 +3,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
+  position: relative;
 }
 
 .container {
@@ -11,45 +12,71 @@ body {
   padding: 0 5px;
 }
 
+/*NAVEGADOR*/
 .nav-menu {
-  background-color: #dcdcdc;
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  font-size: 20px;
+  background: linear-gradient(135deg, #F0F0F0, #1A1A1A);  padding: 1rem; /* Espaciado interno */
 }
 
 .nav-container {
-  display: flex;  
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 5px;
+  display: flex; /* Utiliza flexbox */
+  align-items: center; /* Alinea elementos verticalmente */
+  justify-content: space-between; /* Espacio entre logo y enlaces */
 }
 
-.nav-logo {
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
+.nav-logo img {
+  width: 30%; /* Ajusta el tamaño del logo */
+  height: auto; /* Mantiene la proporción del logo */
 }
 
 .nav-links {
-  display: flex;
-  gap: 2rem;
+  display: flex; /* Disposición en fila */
+  gap: 1.5rem; /* Espacio entre enlaces */
+  font-size: 19px;
 }
 
 .nav-link {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
+  color: #ffffff; /* Color del texto */
+  text-decoration: none; /* Sin subrayado */
+  transition: color 0.3s; /* Transición suave para el color */
 }
 
 .nav-link:hover {
-  color: #043096;
+  color: #fbbf24; /* Color al pasar el mouse */
+}
+
+.nav-toggle {
+  display: none; /* Oculto por defecto */
+  flex-direction: column; /* Disposición vertical */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
+}
+
+.bar {
+  height: 3px; /* Grosor de las barras del menú hamburguesa */
+  width: 25px; /* Ancho de las barras */
+  background-color: #ffffff; /* Color de las barras */
+  margin: 4px 0; /* Espaciado entre las barras */
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Oculta los enlaces en pantallas pequeñas */
+    flex-direction: column; /* Cambia a disposición vertical */
+    position: absolute; /* Posiciona el menú */
+    top: 60px; /* Espaciado desde la parte superior */
+    left: 0; /* Alinea a la izquierda */
+    background-color: #1f2937; /* Color de fondo del menú */
+    width: 100%; /* Ancho completo */
+    padding: 1rem 0; /* Espaciado interno */
+    z-index: 100; /* Asegura que esté encima */
+  }
+
+  .nav-links.active {
+    display: flex; /* Muestra el menú cuando está activo */
+  }
+
+  .nav-toggle {
+    display: flex; /* Muestra el menú hamburguesa */
+  }
 }
 
 .btn {
@@ -90,16 +117,39 @@ body {
 }
 
 .conference-card {
-  background: #f3f4f6;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 48px;
-  box-shadow:  2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Fondo blanco para la tarjeta */
+  border: 1px solid #9c9c9c; /* Borde gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 1.5rem; /* Espaciado interno */
+  margin: 1rem; /* Margen entre tarjetas */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.2s; /* Efecto de transformación al pasar el mouse */
+}
+
+.conference-card:hover {
+  transform: scale(1.05); /* Aumenta ligeramente la tarjeta al pasar el mouse */
+}
+
+.conference-details {
+  margin-top: 1rem; /* Espaciado superior */
+}
+
+.conference-info {
+  display: grid; /* Utiliza grid para el diseño */
+  grid-template-columns: 1fr; /* Una columna por defecto */
+  gap: 0.5rem; /* Espacio entre elementos */
+}
+
+@media (min-width: 600px) {
+  .conference-info {
+    grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas más grandes */
+    grid-template-rows: repeat(3, auto); /* Filas automáticas */
+  }
 }
 
 .section {
   margin: 4rem 0;
-  
+
 }
 
 .hero-section {
@@ -108,19 +158,42 @@ body {
   text-align: center;
 }
 
+/*ESTILOS PARA LAS IMAGENES DE LOS ORGANIZADORES*/
 .about-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
-  margin: 4rem 0;
+  text-align: center;
 }
 
 .about-card {
-  background: #f3f4f6;
-  padding: 2rem;
-  border-radius: 8px;
-  text-align: center;
+  flex: 1 1 300px;
+  max-width: 350px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.about-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+
+
 
 .certificates-section {
   background: #f8fafc;
@@ -221,7 +294,7 @@ body {
   color: rgb(33, 33, 33); /* Color del texto */
   font-size: 17px;
   background-color: #ffffff; /* Color de fondo por defecto */
- /* background-image: url('/logor.png');  Ruta de la imagen */
+  /* background-image: url('/logor.png');  Ruta de la imagen */
 
   background-size: cover; /* Ajusta la imagen al tamaño del círculo */
   background-position: center; /* Centra la imagen */
@@ -247,33 +320,11 @@ body {
   color: #4b5563;
 }
 
-.social-links {
-  margin-top: 1rem;
-}
 
-.social-link {
-  color: white;
-  text-decoration: none;
-  margin: 0 1rem;
-  transition: color 0.3s;
-}
+/*BOTONES REDES SOCIALES*/
 
-.social-link:hover {
-  color: #60a5fa;
-}
 
-.conference-details {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin: 1rem 0;
-}
 
-.conference-info {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 6px;
-}
 
 /* Countdown Styles */
 .countdown-container {
@@ -294,7 +345,7 @@ body {
   flex: 1 1 120px; /* Hace que los elementos sean flexibles y responsivos */
   min-width: 100px;
   padding: 10px;
-  background: #f8f9fa; /* Color de fondo ligero */
+  background: white; /* Color de fondo ligero */
   border-radius: 8px;
 }
 
@@ -318,10 +369,10 @@ body {
 
 .flayer-portada img {
   width: 100%; /* Reduce el tamaño de la imagen al 80% del contenedor */
-    max-width: 500px; /* Ajusta el tamaño máximo para que no sea muy grande */
-    height: auto; /* Mantiene la proporción */
-    display: block;
-    margin: 0 auto; 
+  max-width: 550px; /* Ajusta el tamaño máximo para que no sea muy grande */
+  height: auto; /* Mantiene la proporción */
+  display: block;
+  margin: 0 auto;
 }
 
 .logo {
@@ -360,41 +411,171 @@ body {
   z-index: 2; /* Asegura que el contenido esté sobre la capa oscura */
 }
 
+/* Diseño responsive para tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  .hero-section {
+    height: auto; /* Permite que la sección crezca según el contenido */
+    padding: 50px 20px; /* Añade padding para mejorar la legibilidad */
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem; /* Reduce el tamaño del título */
+  }
+
+  .hero-section p {
+    font-size: 1.8rem; /* Ajusta el tamaño del texto descriptivo */
+    max-width: 90%; /* Evita que el texto sea demasiado ancho */
+  }
+
+  .countdown-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que los elementos se acomoden si no caben */
+    gap: 10px;
+  }
+
+  .countdown-item {
+    flex: 1 1 45%; /* Permite que haya 2 elementos por fila */
+    text-align: center;
+  }
+}
+
+/* Diseño responsive para móviles */
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto; /* Ajuste dinámico */
+    padding: 40px 15px;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem; /* Reduce más el título en móviles */
+  }
+
+  .hero-section p {
+    font-size: 1.5rem; /* Ajusta el tamaño del párrafo */
+  }
+
+  .countdown-container {
+    flex-direction: column; /* Los elementos se apilan verticalmente */
+    align-items: center;
+  }
+
+  .countdown-item {
+    width: 100%; /* Ocupa el 100% en móviles */
+  }
+
+  .countdown-value {
+    font-size: 2rem; /* Aumenta el tamaño del número */
+  }
+
+  .countdown-label {
+    font-size: 1.2rem; /* Ajusta el tamaño del texto */
+  }
+}
+
+
+
+
+
 /*FOOTER*/
-
-.footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Tres columnas de igual tamaño */
-  gap: 1rem; /* Espacio entre columnas */
-  background: #dcdcdc; /* Color de fondo */
-  color: rgb(62, 62, 62); /* Color del texto */
-  padding: 2rem 1rem; /* Espaciado interno */
-  margin-top: 4rem; /* Margen superior */
-  text-align: center; /* Centramos el texto */
+footer {
+  background: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 
-.footer img {
-  max-width:80%; /* Asegura que la imagen no exceda el ancho del contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
+/* Contenedor principal del footer */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
 }
 
-.social-links {
-  display: flex; /* Usamos flexbox para alinear las imágenes */
-  justify-content: center; /* Centrar las imágenes */
-  gap: 0.5rem; /* Ajusta este valor para controlar el espacio entre imágenes */
+/* Logo alineado a la izquierda */
+.footer-left img {
+  width: 300px;
+  max-width: 100%;
 }
 
-.social-icon {
-  width: auto; /* Ajusta el tamaño de las imágenes */
-  height: auto; /* Mantén la proporción de las imágenes */
+/* Información alineada a la derecha */
+.footer-right {
+  text-align: right;
+  max-width: 30%;
 }
 
-.social-link:hover {
-  text-decoration: underline; /* Subrayar al pasar el ratón */
+/* Íconos centrados */
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.footer-icons img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.footer-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Texto de derechos reservados */
+.footer-rights {
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-right {
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .footer-left img {
+    width: 100px;
+  }
 }
 
 
 
+
+
+/*CSS PARA EL BOTON DE SUBIR PANTALLA*/
+.scroll-to-top {
+  position: fixed;
+  bottom: 88px;
+  right: 20px;
+  background-color: white; /* Color de fondo del botón */
+  color: black; /* Color del ícono o texto */
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.scroll-to-top:hover {
+  background-color: rgb(231, 231, 231); /* Color de fondo al pasar el cursor */
+  color:black; /* Color del ícono o texto al pasar el cursor */
+}
 
 
 
@@ -405,16 +586,168 @@ body {
 /* Media Queries para Responsividad */
 @media (max-width: 900px) {
   .topics-list {
-      grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
   }
 }
 
 @media (max-width: 600px) {
   .topics-list {
-      grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
   }
-  
+
   .topics-list li {
-      height: 120px; /* Ajusta la altura para pantallas pequeñas */
+    height: 120px; /* Ajusta la altura para pantallas pequeñas */
   }
+}
+
+.container1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 120px;
+  padding: 20px;
+}
+
+/* Sección izquierda con la imagen de portada */
+.left-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.portada-img {
+  max-width: 40px; /* Ajusta el tamaño de la imagen */
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Sección derecha con las tarjetas */
+.right-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column; /* Cambiar de 'row' a 'column' */
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid #ccc;
+
+}
+
+.card-content {
+  padding: 15px;
+}
+.card:hover {
+  box-shadow:10px 14px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.icon {
+  width: 180px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  background: #2D6987;
+  color: white;
+  padding: 10px;
+}
+
+h4{
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2937; /* Color similar al del fondo de las tarjetas */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Diseño responsivo */
+@media (max-width: 1024px) {
+  .container1 {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left-section {
+    order: 1;
+  }
+
+  .right-section {
+    order: 2;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portada-img {
+    max-width: 250px;
+  }
+}
+
+
+
+/* Botón flotante de WhatsApp */
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+/* Icono de WhatsApp */
+.whatsapp-icon {
+  width: 35px;
+  height: 35px;
+}
+
+/* Tooltip (mensaje emergente en hover) */
+.whatsapp-tooltip {
+  position: absolute;
+  bottom: 10px; /* Aparece arriba del botón */
+  right:70px;
+  background-color: #004d00;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(110px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Mostrar el mensaje al pasar el mouse */
+.whatsapp-button:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
 }

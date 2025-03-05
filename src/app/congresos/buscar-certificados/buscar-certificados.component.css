@@ -1,0 +1,109 @@
+/* Estilos generales para el contenedor */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilos para las tarjetas de certificados */
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el encabezado de la tarjeta */
+.card-header {
+  background: #fcfcfc;
+  color: white;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: none;
+}
+
+/* Estilos para el cuerpo de la tarjeta */
+.card-body {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+}
+
+/* Estilos para la lista de certificados */
+.list-group {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.list-group-item {
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group-item strong {
+  color: #1f2937;
+}
+
+/* Estilos para centrar el botón */
+.list-group-item.centered-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Estilos para los botones de descarga */
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+/* Estilos para los títulos de certificados */
+h5 {
+  color: #1f2937;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para el mensaje de alerta */
+.alert {
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  color: #856404;
+}
+
+/* Estilos para el mensaje de "hola" */
+p {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}

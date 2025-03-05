@@ -1,13 +1,21 @@
 <div class="container mt-5 p-4 rounded shadow-lg bg-light">
   <!-- Información del congreso -->
-  <div class="mb-4 p-4 rounded text-white" style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
-    <h1 class="text-center fw-bold" style="font-size: 2.5rem;">{{ congressItem.name }}</h1>
-    <p class="text-center mb-1" style="font-size: 1.2rem;">Fecha: {{ congressItem.startDate | formatearFecha }} - {{ congressItem.endDate | formatearFecha}}</p>
-    <p class="text-center" style="font-size: 1.2rem;">Ubicación: {{ congressItem.location }}</p>
+  <div class="mb-4 p-4 rounded text-white d-flex align-items-center" style="background: linear-gradient(90deg,  #F0F0F0, #1A1A1A);">
+    <!-- Parte izquierda: Imagen -->
+    <div class="me-4" style="flex: 0 0 30%; max-width: 200px;">
+      <img src="logor.png" alt="Imagen del congreso" class="img-fluid rounded" style="width: 100%; height: auto;">
+    </div>
+
+    <!-- Parte derecha: Contenido -->
+    <div style="flex: 1; text-align: right;">
+      <h1 class="fw-bold" style="font-size: 2.5rem; ">{{ congressItem.name }}</h1>
+      <p class="mb-1" style="font-size: 1.2rem;">Fecha: {{ congressItem.startDate | formatearFecha }} - {{ congressItem.endDate | formatearFecha }}</p>
+      <p style="font-size: 1.2rem;">Ubicación: {{ congressItem.location }}</p>
+    </div>
   </div>
 
-  <h2 class="text-center mb-4">Formulario de Inscripción de Exposición</h2>
-  <form #expositionForm="ngForm" (ngSubmit)="onSubmit()">
+  <h2 class="text-center mb-4">Formulario de Inscripción para Exposición</h2>
+  <form #expositionForm="ngForm" (ngSubmit)="onSubmit()" noValidate>
     <!-- Campo para el nombre de la exposición -->
     <div class="mb-3">
       <label for="name" class="form-label">Nombre de la Exposición:</label>
@@ -18,21 +26,27 @@
         [(ngModel)]="exposureInsertItem.Name"
         name="name"
         required
-        minlength=3
-        maxlength="100"
+        minlength="3"
+        maxlength="200"
         pattern="^(?!\s*$)(?!\d+$)[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s.,:;]+$"
         placeholder="Ingrese el nombre de la exposición">
     </div>
-    @if(expositionForm.controls['name'].invalid && expositionForm.controls['name']["touched"]){
+
+    @if (expositionForm.controls["name"].invalid && expositionForm.controls["name"].touched) {
       <div class="text-danger">
-        @if(expositionForm.controls['name'].errors?.['required']) {
-          <small >El nombre es requerido.</small>
+        @if (expositionForm.controls["name"].errors?.["required"]) {
+          <small>El nombre es requerido.</small>
         }
-        @if(expositionForm.controls['name'].errors?.['minlength'] || expositionForm.controls['name'].errors?.['maxlength']) {
-          <small >El nombre debe tener al menos 3 caracteres y máximo 100.</small>
+        @if (expositionForm.controls["name"].errors?.["pattern"]) {
+          <small>No se permite caracteres especiale o solo números.</small>
         }
+        @if (expositionForm.controls["name"].errors?.["minlength"] || expositionForm.controls["name"].errors?.["maxlength"]) {
+          <small>El nombre debe tener entre 3 y 200 caracteres.</small>
+        }
+
       </div>
     }
+
 
     <!-- Campo para la línea de investigación -->
     <div class="mb-3">
@@ -72,7 +86,7 @@
     </div>
     @if(!fileValid){
       <div class="text-danger">
-          <small >El archivo es requerido.</small>
+        <small >El archivo es requerido.</small>
       </div>
     }
 
@@ -81,17 +95,17 @@
     <div *ngFor="let author of exposureInsertItem.Authors; let i = index" class="border rounded p-3 mb-3">
       <h5>Autor {{ i + 1 }}</h5>
       <div class="mb-3">
-        <label for="author{{i}}Name" class="form-label">Nombre:</label>
+        <label for="author{{i}}Name" class="form-label">Nombre completo:</label>
         <input
           type="text"
           class="form-control"
           [(ngModel)]="author.Name"
           name="author{{i}}Name"
           minlength="10"
-          maxlength="100"
+          maxlength="200"
           required
-          (keypress)="validarLetras($event)"
-          placeholder="Nombre del autor">
+          pattern="^(?!\s*$)[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$"
+          placeholder="Nombre completo del autor">
       </div>
       @if(expositionForm.controls['author'+i+'Name'].invalid && expositionForm.controls['author'+i+'Name']["touched"]){
         <div class="text-danger">
@@ -100,6 +114,9 @@
           }
           @if(expositionForm.controls['author'+i+'Name'].errors?.['minlength'] || expositionForm.controls['author'+i+'Name'].errors?.['maxlength']) {
             <small >El nombre debe tener al menos 10 caracteres y máximo 100.</small>
+          }
+          @if(expositionForm.controls['author'+i+'Name'].errors?.['pattern']) {
+            <small >Solo se permite ingresar letras.</small>
           }
         </div>
       }
@@ -114,16 +131,19 @@
           minlength="10"
           maxlength="13"
           required
-          (keypress)="validarNumeros($event)"
+          pattern="^\d{10,13}$"
           placeholder="Cédula del autor">
       </div>
       @if(expositionForm.controls['author'+i+'IDNumber'].invalid && expositionForm.controls['author'+i+'IDNumber']["touched"]){
         <div class="text-danger">
           @if(expositionForm.controls['author'+i+'IDNumber'].errors?.['required']) {
-            <small >El documento de identidad es requerido.</small>
+            <small>El documento de identidad es requerido.</small>
           }
           @if(expositionForm.controls['author'+i+'IDNumber'].errors?.['minlength'] || expositionForm.controls['author'+i+'IDNumber'].errors?.['maxlength']) {
-            <small >El documento de identidad debe tener al menos 10 caracteres y máximo 13.</small>
+            <small>El documento de identidad debe tener entre 10 y 13 dígitos.</small>
+          }
+          @if(expositionForm.controls['author'+i+'IDNumber'].errors?.['pattern']) {
+            <small>Solo se permiten números.</small>
           }
         </div>
       }
@@ -139,10 +159,14 @@
             required
             pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             placeholder="Correo institucional">
+
           @if(expositionForm.controls['author'+i+'InstitutionalMail'].invalid && expositionForm.controls['author'+i+'InstitutionalMail']["touched"]){
             <div class="text-danger">
               @if(expositionForm.controls['author'+i+'InstitutionalMail'].errors?.['required']) {
                 <small>El correo institucional es requerido.</small>
+              }
+              @if(expositionForm.controls['author'+i+'InstitutionalMail'].errors?.['pattern']) {
+                <small>Ingrese un correo válido .</small>
               }
             </div>
           }
@@ -163,6 +187,9 @@
               @if(expositionForm.controls['author'+i+'PersonalMail'].errors?.['required']) {
                 <small>El correo personal es requerido.</small>
               }
+              @if(expositionForm.controls['author'+i+'PersonalMail'].errors?.['pattern']) {
+                <small>Ingrese un correo válido.</small>
+              }
             </div>
           }
         </div>
@@ -180,15 +207,19 @@
             required
             minlength="10"
             maxlength="13"
-            (keypress)="validarNumeros($event)"
+            pattern="^\d{10,13}$"
             placeholder="Teléfono del autor">
+
           @if(expositionForm.controls['author'+i+'PhoneNumber'].invalid && expositionForm.controls['author'+i+'PhoneNumber']["touched"]){
             <div class="text-danger">
               @if(expositionForm.controls['author'+i+'PhoneNumber'].errors?.['required']) {
-                <small >El numero telefónico es requerido.</small>
+                <small>El número telefónico es requerido.</small>
               }
               @if(expositionForm.controls['author'+i+'PhoneNumber'].errors?.['minlength'] || expositionForm.controls['author'+i+'PhoneNumber'].errors?.['maxlength']) {
-                <small >El numero telefónico debe tener al menos 10 caracteres y máximo 13.</small>
+                <small>El número telefónico debe tener entre 10 y 13 dígitos.</small>
+              }
+              @if(expositionForm.controls['author'+i+'PhoneNumber'].errors?.['pattern']) {
+                <small>Solo se permiten números.</small>
               }
             </div>
           }
@@ -231,14 +262,19 @@
             required
             minlength="3"
             maxlength="20"
-            placeholder="Ciudad de residencia">
+            pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$"
+            placeholder="Ingrese la ciudad">
+
           @if(expositionForm.controls['author'+i+'City'].invalid && expositionForm.controls['author'+i+'City']["touched"]){
             <div class="text-danger">
               @if(expositionForm.controls['author'+i+'City'].errors?.['required']) {
-                <small >La ciudad es requerida.</small>
+                <small>La ciudad es requerida.</small>
               }
               @if(expositionForm.controls['author'+i+'City'].errors?.['minlength'] || expositionForm.controls['author'+i+'City'].errors?.['maxlength']) {
-                <small >La ciudad debe tener al menos 3 caracteres y máximo 20.</small>
+                <small>La ciudad debe tener entre 3 y 20 caracteres.</small>
+              }
+              @if(expositionForm.controls['author'+i+'City'].errors?.['pattern']) {
+                <small>Solo se permiten letras y espacios.</small>
               }
             </div>
           }
@@ -272,6 +308,16 @@
     <button type="button" class="btn btn-outline-secondary mb-3" (click)="addAuthor()">Agregar Autor</button>
 
     <!-- Botón para enviar el formulario -->
-    <button type="submit" class="btn btn-primary w-100">Enviar</button>
+    <button type="submit" class="btn btn-primary w-100" [disabled]="expositionForm.invalid">
+      Enviar
+    </button>
   </form>
 </div>
+
+
+<!-- Footer -->
+<footer class="footer mt-5 p-4 text-center rounded shadow-lg" style=" color: white;">
+  <div class="container">
+    <p class="mb-0">Copyright © 2025 Congreso Internacional Los Andes Innova  .</p>
+  </div>
+</footer>

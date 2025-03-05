@@ -1,0 +1,146 @@
+/* Estilos generales para el contenedor del formulario */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Estilo para el título del congreso */
+.congress-header {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.congress-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.congress-header p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo para el título del formulario */
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Estilos para los campos del formulario */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #1711cb;
+  box-shadow: 0 0 0 0.2rem rgba(23, 17, 203, 0.25);
+}
+
+/* Estilos para las tarjetas de autores */
+.author-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #f9f9f9;
+}
+
+.author-card h5 {
+  font-size: 1.25rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para los botones */
+.btn {
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary {
+  border-color: #3311cb;
+  color: #3311cb;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #3311cb;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #3311cb;
+  border-color: #3311cb;
+}
+
+.btn-primary:hover {
+  background-color: #2575fc;
+  border-color: #2575fc;
+}
+
+.btn-primary:disabled {
+  background-color: #b3b3b3;
+  border-color: #b3b3b3;
+  cursor: not-allowed;
+}
+
+/* Estilos para los mensajes de error */
+.text-danger small {
+  font-size: 0.875rem;
+  color: #dc3545;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Estilos para los selectores personalizados (ng-select) */
+.ng-select.custom {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+}
+
+.ng-select.custom .ng-select-container {
+  border-radius: 8px;
+}
+
+.ng-select.custom .ng-dropdown-panel {
+  border-radius: 8px;
+}
+
+/* Estilos para el botón de agregar autor */
+.add-author-btn {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos para el botón de enviar */
+.submit-btn {
+  margin-top: 1.5rem;
+}
+
+/* Estilos para el footer */
+.footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  background: #1f2937;
+  color: white;
+}
+
+.footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #e0e0e0;
+  text-decoration: none;
+}

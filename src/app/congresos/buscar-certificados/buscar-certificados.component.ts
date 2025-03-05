@@ -4,7 +4,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {CongressService} from '../../services/congress.service';
 import {ListCongressCertificate} from '../../interfaces/entities';
 import {saveAs} from 'file-saver';
-import { FormatearFechaPipe } from "../../pipes/formatear-fecha.pipe";
+import {FormatearFechaPipe} from '../../pipes/formatear-fecha.pipe';
 interface Certificado {
   tipo: string; // Ejemplo: 'Expositor', 'Participante', 'Oyente'
   descripcion: string; // Información adicional del certificado
@@ -22,7 +22,7 @@ interface Congreso {
     NgIf,
     NgForOf,
     FormatearFechaPipe
-],
+  ],
   templateUrl: './buscar-certificados.component.html',
   styleUrl: './buscar-certificados.component.css'
 })

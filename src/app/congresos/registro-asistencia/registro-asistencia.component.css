@@ -1,0 +1,95 @@
+/* Estilos generales para el contenedor del formulario */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Estilo para la tarjeta (card) */
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* Estilos para los campos del formulario */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.25);
+}
+
+/* Estilos para las etiquetas (labels) */
+.form-label {
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para los mensajes de error */
+.text-danger small {
+  font-size: 0.875rem;
+  color: #dc3545;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Estilos para la lista de información de la exposición */
+.list-group {
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.list-group-item {
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.list-group-item strong {
+  color: #1f2937;
+}
+
+/* Estilos para el botón de enviar */
+.btn-primary {
+  background-color: #6a11cb;
+  border-color: #6a11cb;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2575fc;
+  border-color: #2575fc;
+}
+
+.btn-primary:disabled {
+  background-color: #b3b3b3;
+  border-color: #b3b3b3;
+  cursor: not-allowed;
+}
+
+/* Estilos para el grid del botón */
+.d-grid {
+  margin-top: 1.5rem;
+}

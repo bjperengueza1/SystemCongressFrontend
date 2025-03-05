@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForOf} from '@angular/common';
+import {NgSelectComponent} from '@ng-select/ng-select';
 import {ExposureService} from '../../services/exposure.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from'sweetalert2';
@@ -22,7 +23,8 @@ import {AttendancesService} from '../../services/attendances.service';
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgSelectComponent,
   ],
   templateUrl: './registro-asistencia.component.html',
   styleUrl: './registro-asistencia.component.css'
@@ -34,6 +36,7 @@ export class RegistroAsistenciaComponent implements OnInit {
   attendance: AttendanceInsertItem = this.initializeAttendance();
 
   private exposureGuid: string = '';
+  idNumber: any;
 
   constructor(
     private exposureService: ExposureService,
@@ -78,7 +81,7 @@ export class RegistroAsistenciaComponent implements OnInit {
       next: (response) => {
         // Manejo de respuesta exitosa (2xx)
         swal.fire({
-          title: "Exelente!",
+          title: "Excelente!",
           text: "Asistencia registrada exitosamente!",
           icon: "success",
 
@@ -106,6 +109,9 @@ export class RegistroAsistenciaComponent implements OnInit {
     });
   }
 
+
+
+
   getResearchLine(value: number): string {
     const status = researchLines.find(s => s.value === value);
     return status ? status.label : 'Desconocido'; // Manejo de valores no definidos
@@ -114,20 +120,6 @@ export class RegistroAsistenciaComponent implements OnInit {
   getAcademicDegree(value: number): string {
     const status = academicDegrees.find(s => s.value === value);
     return status ? status.label : 'Desconocido'; // Manejo de valores no definidos
-  }
-
-  validarLetras(event: KeyboardEvent) {
-    const char = event.key;
-    if (!/^[a-zA-Z\s]+$/.test(char)) {
-      event.preventDefault();
-    }
-  } 
-  
-  validarNumeros(event: KeyboardEvent) {
-    const char = event.key;
-    if (!/^[0-9]$/.test(char)) {
-      event.preventDefault();
-    }
   }
 
 }
