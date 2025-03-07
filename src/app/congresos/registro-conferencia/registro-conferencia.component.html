@@ -86,9 +86,21 @@
       </div>
     }
 
+
+
     <!-- Sección de autores -->
     <h4 class="mb-3">Autores (Máximo 3 Autores)</h4>
     <div *ngFor="let author of exposureInsertItem.Authors; let i = index" class="border rounded p-3 mb-3">
+      <button
+      type="button"
+      class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
+      (click)="removeAuthor(i)"
+      aria-label="Eliminar autor"
+    >
+      <i class="bi bi-x"></i> <!-- Ícono de "equis" de Bootstrap -->
+    </button>
+  
+  
       <h5>Autor {{ i + 1 }}</h5>
       <div class="mb-3">
         <label for="author{{i}}Name" class="form-label">Nombre:</label>

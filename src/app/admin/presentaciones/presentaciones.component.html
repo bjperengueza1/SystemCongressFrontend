@@ -2,7 +2,7 @@
 
   <!--Filtros -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="form-group w-50">
+    <div class="form-group w-10">
       <!-- Congreso-->
       <label for="congress" class="form-label
         ">Congreso:</label>
@@ -19,6 +19,7 @@
       >
       </ng-select>
     </div>
+ 
     <div class="form-group w-50">
       <!-- Congreso-->
       <label for="researchLines" class="form-label
@@ -177,7 +178,6 @@
         <table class="table table-bordered table-striped mt-3">
           <thead class="table-dark">
           <tr>
-            <th>Posición</th>
             <th>Nombre</th>
             <th>Cédula</th>
             <th>Correo institucional</th>
@@ -191,7 +191,6 @@
           <tbody>
           @for (author of authors; track author.authorId) {
             <tr>
-              <td>{{author.position | posicionAutor }} </td>
               <td>{{author.name}}</td>
               <td>{{author.idNumber}}</td>
               <td>{{author.institutionalMail}}</td>
@@ -243,8 +242,12 @@
               name="fecha_inicio"
               class="form-control"
               [(ngModel)]="approveExposureModel.dateStart"
-              required>
+              min="2024-05-05T07:00"
+              max="2024-05-09T23:59"
+              required
+            />
           </div>
+          
           <div class="mb-3">
             <label for="fecha_fin" class="form-label">Fecha fin:</label>
             <input
@@ -253,8 +256,14 @@
               name="fecha_fin"
               class="form-control"
               [(ngModel)]="approveExposureModel.dateEnd"
-              required>
+              min="2024-05-05T07:00"
+              max="2024-05-09T23:59"
+              required
+            />
           </div>
+          <div class="text-danger" id="error_fecha_fin" style="display:none;">
+            La fecha de fin debe estar entre el 05 de mayo y el 09 de mayo de 2024.
+        </div>
 
           <div class="mb-3">
             <label for="observacion" class="form-label">Observación:</label>

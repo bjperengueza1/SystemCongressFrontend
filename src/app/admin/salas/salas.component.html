@@ -85,7 +85,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form>
+      <form #salasForm="ngForm">
         <div class="form-group mb-2">
           <label for="congress">Congreso</label>
           <!-- Aqui quisiera poder biscar en el select y que consuma una api-->
@@ -112,7 +112,18 @@
             [(ngModel)]="selectedRoomWitchCongres.name"
             name="name"
             required
+            pattern="^(?=.*[a-zA-ZáéíóúÁÉÍÓÚñÑ])([a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s,\.]+)$"
+            title="El campo debe contener letras, números y puntos, pero no solo números."
+            #name="ngModel"
           />
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+            <div *ngIf="name.errors?.['pattern']">
+              El campo debe contener letras y/o números, pero no solo números.
+            </div>
+            <div *ngIf="name.errors?.['required']">
+              Este campo es obligatorio.
+            </div>
+          </div>
         </div>
         <div class="form-group mb-2">
           <label for="capacity">Capacidad</label>
@@ -123,7 +134,20 @@
             [(ngModel)]="selectedRoomWitchCongres.capacity"
             name="capacity"
             required
+            min="1"
+            #capacity="ngModel"
           />
+          <div *ngIf="capacity.invalid && (capacity.dirty || capacity.touched)" class="text-danger">
+            <!-- Mensaje para campo requerido -->
+            <div *ngIf="capacity.errors?.['required']">
+              Este campo es obligatorio.
+            </div>
+            <!-- Mensaje para valor mínimo -->
+            <div *ngIf="capacity.errors?.['min']">
+              La capacidad debe ser mayor a 1.
+            </div>
+          </div>
+        
         </div>
         <div class="form-group mb-2">
           <label for="location">Ubicación</label>
@@ -134,12 +158,25 @@
             [(ngModel)]="selectedRoomWitchCongres.location"
             name="location"
             required
+            pattern="^(?=.*[a-zA-ZáéíóúÁÉÍÓÚñÑ])([a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s,\.]+)$"
+            title="El campo debe contener letras, números y puntos, pero no solo números."
+            #location="ngModel"
           />
+          <div *ngIf="location.invalid && (location.dirty || location.touched)" class="text-danger">
+            <div *ngIf="location.errors?.['pattern']">
+              El campo debe contener letras y/o números, pero no solo números.
+            </div>
+            <div *ngIf="location.errors?.['required']">
+              Este campo es obligatorio.
+            </div>
+          </div>
+        
         </div>
+        
       </form>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-success" (click)="save()">Guardar</button>
+      <button class="btn btn-success" (click)="save()" [disabled]="salasForm.invalid">Guardar</button>
       <button class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
     </div>
   </ng-template>

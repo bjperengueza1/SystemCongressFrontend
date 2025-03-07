@@ -97,6 +97,15 @@ export class RegistroConferenciaComponent implements OnInit {
     }
   }
 
+  removeAuthor(index: number) {
+    if (this.exposureInsertItem.Authors.length > 1) { // Asegura que al menos quede un autor
+      this.exposureInsertItem.Authors.splice(index, 1); // Elimina el autor en la posición `index`
+    } else {
+      // Muestra un mensaje de error si intentas eliminar el último autor
+      this.alertService.showError("Error", "Debe haber al menos un autor.");
+    }
+  }
+
   private initializeExposureInsertItem(congressGuid: string): ExposureInsertItem {
     return {Authors: [{
         Position: 1,

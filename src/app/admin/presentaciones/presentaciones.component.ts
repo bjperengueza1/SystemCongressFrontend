@@ -41,6 +41,11 @@ import { PosicionAutorPipe } from "../../pipes/posicion-autor.pipe";
 })
 export class PresentacionesComponent implements OnInit {
 
+
+
+
+  
+  
   private domain = '';
 
   searchTerm: string = '';
@@ -170,7 +175,7 @@ export class PresentacionesComponent implements OnInit {
       next: (response) => {
         this.loadExposures(1, this.pageSize, this.searchTerm);
         this.modalService.dismissAll();
-        this.alertService.showSuccess("Exitoso","Aprovado exitosamente");
+        this.alertService.showSuccess("Exitoso","Aprobado exitosamente");
       }
     });
   }
@@ -259,4 +264,15 @@ export class PresentacionesComponent implements OnInit {
       }
     });
   }
+
+
+
+
+
+
+  formatDate(isoDate: string): string {
+    return isoDate.split('T')[0];
+  }
+
+
 }

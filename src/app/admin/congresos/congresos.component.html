@@ -200,12 +200,17 @@
             name="nombre"
             required
             minlength="3"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
           />
+          
+          <!-- Mensajes de error -->
           <div *ngIf="congressForm.controls['nombre']?.invalid && congressForm.controls['nombre']?.touched" class="text-danger">
             <small *ngIf="congressForm.controls['nombre']?.errors?.['required']">El nombre es requerido.</small>
             <small *ngIf="congressForm.controls['nombre']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</small>
+            <small *ngIf="congressForm.controls['nombre']?.errors?.['pattern']">Solo se permiten letras y espacios.</small>
           </div>
         </div>
+        
         <div class="form-group mb-2">
           <label for="fechaInicio" class="form-label">Fecha Inicio</label>
           <input
@@ -243,9 +248,13 @@
             [(ngModel)]="selectedCongreso.location"
             name="ubicacion"
             required
+            pattern="^[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚáéíóúÑñ ]*$"
+
           />
           <div *ngIf="congressForm.controls['ubicacion']?.invalid && congressForm.controls['ubicacion']?.touched" class="text-danger">
-            <small>La ciudad es requerida.</small>
+            <small *ngIf="congressForm.controls['ubicacion']?.errors?.['required']">La ciudad es requerida.</small>
+            <small *ngIf="congressForm.controls['ubicacion']?.errors?.['pattern']">Debe iniciar con mayúscula y solo se permiten letras y espacios.</small>
+
           </div>
         </div>
         <div class="form-group mb-3">
