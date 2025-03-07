@@ -8,6 +8,7 @@ import {
   ApproveExposureModel,
   AuthorItem,
   CongressItem,
+  EditExposurePendingModel,
   ExposureItem, RejectExposureModel,
   researchLines, RoomsItem,
   statusExposure
@@ -21,6 +22,7 @@ import {CongressService} from '../../services/congress.service';
 import {AlertService} from '../../services/alert.service';
 import {TipoExposicionPipe} from '../../pipes/tipo-exposicion.pipe';
 import { PosicionAutorPipe } from "../../pipes/posicion-autor.pipe";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -40,11 +42,6 @@ import { PosicionAutorPipe } from "../../pipes/posicion-autor.pipe";
   styleUrl: './presentaciones.component.css'
 })
 export class PresentacionesComponent implements OnInit {
-
-
-
-
-  
   
   private domain = '';
 
@@ -60,6 +57,8 @@ export class PresentacionesComponent implements OnInit {
   approveExposureModel:ApproveExposureModel = this.initializeApproveExposure();
 
   rejectExposureModel:RejectExposureModel = {exposureId : 0, observation : ""};
+
+  editExposurePendingModel: EditExposurePendingModel = {exposureId: 0, name: '', researchLine: 0, observation: ''};
 
   roomsItems: RoomsItem[] = [];
 
@@ -191,6 +190,51 @@ export class PresentacionesComponent implements OnInit {
       }
     })
   }
+
+  openOnReviewExposure(exposure: ExposureItem) {
+    this.rejectExposureModel = {exposureId: exposure.exposureId ,observation : ""};
+    Swal.fire({
+      title: '¿Está seguro de enviar a revisión?',
+      text: "¡No podrá revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Enviar a revisión'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.exposureService.onReviewExposure(exposure.exposureId).subscribe({
+          next: (response) => {
+            this.loadExposures(1, this.pageSize, this.searchTerm);
+            this.alertService.showSuccess("Exitoso","Enviado a revisión exitosamente");
+          }
+        })
+      }
+    }
+    )
+  }
+
+  openEditExposure(content:any, exposure: ExposureItem) {
+    this.editExposurePendingModel = {exposureId: exposure.exposureId, name: exposure.name, researchLine: exposure.researchLine, observation: exposure.observation};
+    this.modalService.open(content);
+  }
+
+  editExposure(form: NgForm) {
+    if(!form.valid) {
+      return;
+    }
+    this.exposureService.editExposure(this.editExposurePendingModel.exposureId, this.editExposurePendingModel).subscribe({
+      next: (response) => {
+        this.loadExposures(1, this.pageSize, this.searchTerm);
+        this.modalService.dismissAll();
+        this.alertService.showSuccess("Exitoso","Editado exitosamente");
+      },
+      error: (err) => {
+        this.alertService.showError("Error",err.error);
+      }
+    })
+  }
+
   openRejectExposure(content:any,exposure: ExposureItem) {
     this.rejectExposureModel = {exposureId: exposure.exposureId ,observation : ""};
     this.modalService.open(content);

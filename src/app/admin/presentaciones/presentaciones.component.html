@@ -126,7 +126,23 @@
                   }
                 </li>
                 <li>
-                  @if (exposure.statusExposure == 1 || exposure.statusExposure == 0) {
+                  @if (exposure.statusExposure == 0) {
+                    <button class="btn btn-sm btn-info dropdown-item" (click)="openOnReviewExposure(exposure)">
+                      Enviar a revisión
+                    </button>
+                    <hr class="dropdown-divider">
+                  }
+                </li>
+                <li>
+                  @if (exposure.statusExposure == 3 || exposure.statusExposure == 0) {
+                    <button class="btn btn-sm btn-info dropdown-item" (click)="openEditExposure(contentEditExposurePending,exposure)">
+                      Editar
+                    </button>
+                    <hr class="dropdown-divider">
+                  }
+                </li>
+                <li>
+                  @if (exposure.statusExposure == 3 || exposure.statusExposure == 1 || exposure.statusExposure == 0) {
                     <button class="btn btn-sm btn-info dropdown-item" (click)="openRejectExposure(contentRejectExposure,exposure)">
                       Rechazar
                     </button>
@@ -275,7 +291,7 @@
               [(ngModel)]="approveExposureModel.observation"
               required>
           </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
+          <button type="submit" class="btn btn-primary"  [disabled]="approveForm.invalid">Enviar</button>
         </form>
       </div>
     </div>
@@ -306,6 +322,60 @@
         </form>
       </div>
     </div>
+  </ng-template>
 
+  <ng-template #contentEditExposurePending let-modalEditExposure class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h4 class="modal-title">Editar exposición</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalEditExposure.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="container mt-5">
+        <form #editForm="ngForm" (ngSubmit)="editExposure(editForm)" class="p-4 border
+        rounded shadow">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              class="form-control"
+              [(ngModel)]="editExposurePendingModel.name"
+              required>
+          </div>
+
+          <div class="mb-3">
+            <label for="linea_investigacion" class="form-label">Línea de investigación:</label>
+            <ng-select
+              id="linea_investigacion"
+              name="linea_investigacion"
+              [items]="researchLinesFilter"
+              bindLabel="label"
+              bindValue="value"
+              [(ngModel)]="editExposurePendingModel.researchLine"
+              placeholder="Selecciona una línea de investigación"
+              [notFoundText]="'No se encontraron líneas de investigación'"
+              required
+              class="form-control"
+            >
+            </ng-select>
+          </div>
+
+          <div class="mb-3">
+            <label for="observacion_e" class="form-label
+              ">Observación:</label>
+            <input
+              type="text"
+              id="observacion_e"
+              name="observacion_e"
+              class="form-control"
+              [(ngModel)]="editExposurePendingModel.observation"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Enviar</button>
+        </form>
+      </div>
+    </div>
   </ng-template>
 </div>

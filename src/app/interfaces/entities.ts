@@ -68,7 +68,8 @@ export let academicDegrees = [
 export let statusExposure = [
   { value: 0, label: 'Pendiente' },
   { value: 1, label: 'Aprobada' },
-  { value: 2, label: 'Rechazada' }
+  { value: 2, label: 'Rechazada' },
+  { value: 3, label: 'En Revisión' }
 ];
 
 export interface AuthorInsertItem {
@@ -132,6 +133,14 @@ export interface ExposureItem {
   authors: AuthorItem[],
   room: RoomsItem
 }
+
+export interface EditExposurePendingModel {
+  exposureId: number,
+  name: string,
+  researchLine: number,
+  observation: string
+}
+
 
 export interface AttendeeItem {
   attendeeId: number,

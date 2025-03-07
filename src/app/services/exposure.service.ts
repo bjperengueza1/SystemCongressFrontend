@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ApproveExposureModel, ExposureInsertItem, ExposureItem, RejectExposureModel} from '../interfaces/entities';
+import {ApproveExposureModel, EditExposurePendingModel, ExposureInsertItem, ExposureItem, RejectExposureModel} from '../interfaces/entities';
 import {ApiResponse} from '../interfaces/api-response';
 import { ConfigService } from './config.service';
 
@@ -63,6 +63,10 @@ export class ExposureService {
     return this.http.post(this.apiUrl, formDataToSend);
   }
 
+  editExposure(id: number, editExposurePendingModel: EditExposurePendingModel): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, editExposurePendingModel);
+  }
+
   //actualizar estado
   changeStatus(id: number, status: number): Observable<any> {
     const body = {statusExposure: status};
@@ -77,6 +81,10 @@ export class ExposureService {
   //rechazar exposicion
   rejectExposure(id: number, body:RejectExposureModel): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/reject`, body);
+  }
+
+  onReviewExposure(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/review`, {});
   }
 
   //download pdf file
