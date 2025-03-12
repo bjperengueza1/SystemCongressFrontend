@@ -32,7 +32,7 @@
         <th>Nombre</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
-        <th>Flater</th>
+        <th>Flayer</th>
         <th>Asistencia</th>
         <th>Ponencia</th>
         <th>Conferencia</th>
@@ -202,7 +202,7 @@
             minlength="3"
             pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
           />
-          
+
           <!-- Mensajes de error -->
           <div *ngIf="congressForm.controls['nombre']?.invalid && congressForm.controls['nombre']?.touched" class="text-danger">
             <small *ngIf="congressForm.controls['nombre']?.errors?.['required']">El nombre es requerido.</small>
@@ -210,7 +210,7 @@
             <small *ngIf="congressForm.controls['nombre']?.errors?.['pattern']">Solo se permiten letras y espacios.</small>
           </div>
         </div>
-        
+
         <div class="form-group mb-2">
           <label for="fechaInicio" class="form-label">Fecha Inicio</label>
           <input
