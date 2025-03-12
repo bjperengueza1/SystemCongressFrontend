@@ -2,7 +2,7 @@
 
   <!--Filtros -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="form-group w-10">
+    <div class="form-group w-50">
       <!-- Congreso-->
       <label for="congress" class="form-label
         ">Congreso:</label>
@@ -19,7 +19,7 @@
       >
       </ng-select>
     </div>
- 
+
     <div class="form-group w-50">
       <!-- Congreso-->
       <label for="researchLines" class="form-label
@@ -76,7 +76,7 @@
       <tr>
         <th>Congreso</th>
         <th>Nombre</th>
-        <th>Tipo</th>
+        <!-- <th>Tipo</th> -->
         <th>Línea de investigación</th>
         <th>Estado</th>
         <th>Inicio</th>
@@ -90,7 +90,7 @@
       <tr *ngFor="let exposure of response.items">
         <td>{{ exposure.congressName }}</td>
         <td>{{ exposure.name }}</td>
-        <td>{{ exposure.type | tipoExposicion }}</td>
+        <!-- <td>{{ exposure.type | tipoExposicion }}</td> -->
         <td>{{ exposure.researchLineLabel }}</td>
         <td>{{ exposure.statusLabelExposure }}</td>
         <td>{{ exposure.dateStart | formatearFecha }}</td>
@@ -263,7 +263,7 @@
               required
             />
           </div>
-          
+
           <div class="mb-3">
             <label for="fecha_fin" class="form-label">Fecha fin:</label>
             <input
