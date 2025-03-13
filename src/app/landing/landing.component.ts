@@ -126,7 +126,7 @@ export class LandingComponent implements OnInit {
         this.congress = data;
         this.startCountdown();
         this.actualizarDiasEvento();
-        this.congressService.getExposures(data.congressId, 1, this.pageSize).subscribe({
+        this.congressService.getExposuresActives(data.congressId, 1, this.pageSize).subscribe({
           next: (data) => {
             console.log(data);
             this.ponencias = data;

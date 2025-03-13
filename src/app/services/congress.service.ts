@@ -12,7 +12,7 @@ export class CongressService {
   private apiUrl: string = "";
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.apiUrl = configService.getApiUrl()+"api/Congress"; 
+    this.apiUrl = configService.getApiUrl()+"api/Congress";
   }
 
   // Obtener la lista de congresos y mapear propiedades
@@ -128,6 +128,12 @@ export class CongressService {
   getExposures(id: number, page: number, size: number): Observable<ApiResponse<ExposureItem>> {
     const params = {pageNumber: page.toString(), pageSize: size.toString() };
     return this.http.get<ApiResponse<ExposureItem>>(`${this.apiUrl}/${id}/exposures`, { params });
+
+  }
+
+  getExposuresActives(id: number, page: number, size: number): Observable<ApiResponse<ExposureItem>> {
+    const params = {pageNumber: page.toString(), pageSize: size.toString() };
+    return this.http.get<ApiResponse<ExposureItem>>(`${this.apiUrl}/${id}/exposures-approved`, { params });
 
   }
 
