@@ -97,6 +97,8 @@ export class LandingComponent implements OnInit {
   name = '';
 
   congress : CongressItem = this.initializeCongress();
+  canSubmitPonencia: boolean = false;
+  canRegisterAttendeePrev: boolean = false;
 
   counterDays: number = 0;
 
@@ -126,6 +128,10 @@ export class LandingComponent implements OnInit {
         this.congress = data;
         this.startCountdown();
         this.actualizarDiasEvento();
+        let today = new Date();
+        today.setHours(0,0,0,0);
+        this.canSubmitPonencia = new Date(this.congress.endDateRegistrationExposure) >= today;
+        this.canRegisterAttendeePrev = new Date(this.congress.endDateRegistrationAttendee) >= today;
         this.congressService.getExposuresActives(data.congressId, 1, this.pageSize).subscribe({
           next: (data) => {
             console.log(data);
@@ -139,7 +145,6 @@ export class LandingComponent implements OnInit {
   }
 
   startCountdown() {
-    console.log(this.congress.startDate)
     const congressDate = new Date(this.congress.startDate);
 
     const updateCountdown = () => {
@@ -193,7 +198,9 @@ export class LandingComponent implements OnInit {
       fileCertificateConference: "",
       fileCertificateExposure: "",
       fileFlayer: "",
-      minHours: 0, guid: '', congressId: 0, endDate: '', location: '', name: '', startDate: '', status: 0}
+      minHours: 0, guid: '', congressId: 0, endDate: '', endDateRegistrationExposure: '',
+      endDateNotificationApprove: '',
+      endDateRegistrationAttendee: '', location: '', name: '', startDate: '', status: 0}
   }
 
   private actualizarDiasEvento() {
@@ -227,7 +234,4 @@ export class LandingComponent implements OnInit {
     })
   }
 
-
-
-  //protected readonly event = event;
 }

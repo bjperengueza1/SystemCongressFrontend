@@ -5,7 +5,9 @@
     <div class="nav-links" [class.active]="isMenuOpen">
       <a href="#about" class="nav-link">Acerca de</a>
       <a href="#conferences" class="nav-link">Conferencias</a>
-      <a href="#submit" class="nav-link">Postular Ponencia</a>
+       @if(canSubmitPonencia){
+        <a href="#submit" class="nav-link">Postular Ponencia</a>
+       }
       <a href="#certificates" class="nav-link">Certificados</a>
       <a href="https://revistacodigocientifico.itslosandes.net/index.php/1/issue/archive" target="_blank" class="nav-link">Revista</a>
     </div>
@@ -73,7 +75,7 @@
               <h4>Recepción de Ponencias</h4>
 
             </div>
-            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+            <strong><p>Hasta el {{ congress.endDateRegistrationExposure | obtenerDia}} de {{ congress.endDateRegistrationExposure | obtenerMesNombre}}</p></strong>
           </div>
         </div>
 
@@ -85,7 +87,7 @@
               <h4>Notificación de Aceptación de Ponencias</h4>
 
             </div>
-            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+            <strong><p>Hasta el {{ congress.endDateNotificationApprove | obtenerDia}} de {{ congress.endDateNotificationApprove | obtenerMesNombre}}</p></strong>
           </div>
         </div>
 
@@ -96,7 +98,7 @@
             <div class="card-text">
               <h4>Registro de participantes</h4>
             </div>
-            <strong><p>Hasta el {{ congress.endDate | obtenerDia}} de {{ congress.endDate | obtenerMesNombre}}</p></strong>
+            <strong><p>Hasta el {{ congress.endDateRegistrationAttendee | obtenerDia}} de {{ congress.endDateRegistrationAttendee | obtenerMesNombre}}</p></strong>
           </div>
         </div>
 
@@ -179,28 +181,29 @@
             </div>
           </div>
 
-          <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
-            <div class="form-group" style="max-width: 300px;">
-              <input
-                type="email"
-                [id]="'email-' + conference.exposureId"
-                name="email"
-                [(ngModel)]="emailInputs[conference.exposureId]"
-                required
-                class="form-control"
-                placeholder="Ingresa tu correo para registrarte"
-              >
-            </div>
-            <button type="submit"
-                    class="btn"
-                    [disabled]="!emailInputs[conference.exposureId]">
-              Registrarme
-            </button>
-            <div *ngIf="submittedConferences[conference.exposureId]" class="success-message">
-              ¡Registro exitoso! Te enviaremos los detalles por correo.
-            </div>
-          </form>
-
+          @if(canRegisterAttendeePrev){
+            <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
+              <div class="form-group" style="max-width: 300px;">
+                <input
+                  type="email"
+                  [id]="'email-' + conference.exposureId"
+                  name="email"
+                  [(ngModel)]="emailInputs[conference.exposureId]"
+                  required
+                  class="form-control"
+                  placeholder="Ingresa tu correo para registrarte"
+                >
+              </div>
+              <button type="submit"
+                      class="btn"
+                      [disabled]="!emailInputs[conference.exposureId]">
+                Registrarme
+              </button>
+              <div *ngIf="submittedConferences[conference.exposureId]" class="success-message">
+                ¡Registro exitoso! Te enviaremos los detalles por correo.
+              </div>
+            </form>
+          }
         </div>
         <!-- Paginación usando ng-bootstrap -->
         <nav class="mt-4" *ngIf="ponencias.totalPages > 1">
@@ -236,15 +239,19 @@
           <!-- <strong>Fecha límite:</strong> 30 de junio, 2024 -->
         </p>
       </div>
-      <a href="{{urlRegistroPonencia}}"
-         target="_blank"
-         class="btn" style=" margin-bottom: 1rem;">
-        Enviar Propuesta de Ponencia
-      </a> <br>
-      <p>Descarga la plantilla <a href="https://drive.google.com/drive/folders/1HvCi34c8utRt-yqmo6k7yye6sWoO-BCI?usp=sharing"
-                                  target="_blank"
-                                  class="">
-        AQUI   </a> </p>
+      @if(canSubmitPonencia){
+        <a href="{{urlRegistroPonencia}}"
+          target="_blank"
+          class="btn" style=" margin-bottom: 1rem;">
+          Enviar Propuesta de Ponencia
+        </a>
+        <br>
+        <p>Descarga la plantilla
+          <a href="https://drive.google.com/drive/folders/1HvCi34c8utRt-yqmo6k7yye6sWoO-BCI?usp=sharing"
+              target="_blank">
+          AQUI</a>
+        </p>
+      }
     </section>
 
     <!-- About Section -->

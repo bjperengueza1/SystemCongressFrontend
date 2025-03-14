@@ -3,6 +3,9 @@ export interface CongressItem {
   name: string;
   startDate: string; // O usa Date si prefieres convertirla manualmente
   endDate: string;
+  endDateRegistrationExposure: string;
+  endDateNotificationApprove: string;
+  endDateRegistrationAttendee: string;
   location: string;
   minHours: number;
   guid: string;

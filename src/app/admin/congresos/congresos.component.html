@@ -212,6 +212,51 @@
         </div>
 
         <div class="form-group mb-2">
+          <label for="fechaFin" class="form-label">Fecha Fin Recepción de Recepción de Ponencias</label>
+          <input
+            type="date"
+            id="fechaFinRecepcionPoncencias"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.endDateRegistrationExposure"
+            name="fechaFin"
+            required
+          />
+          <div *ngIf="congressForm.controls['fechaFinRecepcionPoncencias']?.invalid && congressForm.controls['fechaFinRecepcionPoncencias']?.touched" class="text-danger">
+            <small>La fecha de fin de recepción de ponencias es requerida.</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-2">
+          <label for="fechaFin" class="form-label">Fecha Fin Notificación de Aprobaciones</label>
+          <input
+            type="date"
+            id="fechaFinNotificaciónAprobaciones"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.endDateNotificationApprove"
+            name="fechaFin"
+            required
+          />
+          <div *ngIf="congressForm.controls['fechaFinNotificaciónAprobaciones']?.invalid && congressForm.controls['fechaFinNotificaciónAprobaciones']?.touched" class="text-danger">
+            <small>La fecha de fin de notificación de aprobaciones es requerida.</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-2">
+          <label for="fechaFin" class="form-label">Fecha Fin Registro Asistentes </label>
+          <input
+            type="date"
+            id="endDateRegistrationAttendee"
+            class="form-control"
+            [(ngModel)]="selectedCongreso.endDateRegistrationAttendee"
+            name="fechaFin"
+            required
+          />
+          <div *ngIf="congressForm.controls['endDateRegistrationAttendee']?.invalid && congressForm.controls['endDateRegistrationAttendee']?.touched" class="text-danger">
+            <small>La fecha de fin de notificación de aprobaciones es requerida.</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-2">
           <label for="fechaInicio" class="form-label">Fecha Inicio</label>
           <input
             type="date"
