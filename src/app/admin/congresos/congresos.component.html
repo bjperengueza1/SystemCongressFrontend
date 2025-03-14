@@ -303,7 +303,7 @@
           </div>
         </div>
         <div class="form-group mb-3">
-          <label for="minHours" class="form-label">Horas Mínimas</label>
+          <label for="minHours" class="form-label">Asistencias Mínimas</label>
           <input
             type="number"
             id="minHours"
@@ -314,8 +314,8 @@
             min="1"
           />
           <div *ngIf="congressForm.controls['minHours']?.invalid && congressForm.controls['minHours']?.touched" class="text-danger">
-            <small *ngIf="congressForm.controls['minHours']?.errors?.['required']">Las horas mínimas son requeridas.</small>
-            <small *ngIf="congressForm.controls['minHours']?.errors?.['min']">Debe ser al menos 1 hora.</small>
+            <small *ngIf="congressForm.controls['minHours']?.errors?.['required']">La cantidad de asistencias mínimas son requeridas.</small>
+            <small *ngIf="congressForm.controls['minHours']?.errors?.['min']">Debe ser al menos 1.</small>
           </div>
         </div>
         <div class="modal-footer">

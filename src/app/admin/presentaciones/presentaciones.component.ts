@@ -35,8 +35,7 @@ import Swal from 'sweetalert2';
     NgbPagination,
     FormatearFechaPipe,
     NgSelectComponent,
-    TipoExposicionPipe,
-    PosicionAutorPipe
+    TipoExposicionPipe
 ],
   templateUrl: './presentaciones.component.html',
   styleUrl: './presentaciones.component.css'
@@ -66,6 +65,11 @@ export class PresentacionesComponent implements OnInit {
   congresses: CongressItem[] = [];
   researchLinesFilter = researchLines;
   researchLineFilter: number | null = null;
+  typesFilter = [
+    { value: 1, label: 'Ponencia' },
+    { value: 2, label: 'Conferencia' }
+  ];
+  typeFilter: number | null = null;
 
   constructor(
     private modalService: NgbModal,
@@ -111,7 +115,7 @@ export class PresentacionesComponent implements OnInit {
   }
 
   loadExposures2() {
-    this.exposureService.getExposures2(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter), Number(this.researchLineFilter)).subscribe({
+    this.exposureService.getExposures2(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter), Number(this.researchLineFilter), Number(this.typeFilter)).subscribe({
       next: (response) => {
         this.response = {
           ...response,
@@ -286,7 +290,7 @@ export class PresentacionesComponent implements OnInit {
   }
 
   downloadReport() {
-    this.exposureService.downloadReport(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter),Number(this.researchLineFilter)).subscribe({
+    this.exposureService.downloadReport(1, this.pageSize, this.searchTerm, Number(this.congressIdFilter),Number(this.researchLineFilter),Number(this.typeFilter)).subscribe({
       next: (response: any) => {
         const contentDisposition = response.headers.get('Content-Disposition');
         let fileName = 'Reporte.xlsx'; // Valor por defecto

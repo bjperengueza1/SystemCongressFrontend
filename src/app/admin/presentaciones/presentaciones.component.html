@@ -7,6 +7,7 @@
       <label for="congress" class="form-label
         ">Congreso:</label>
       <ng-select
+        id="congress"
         [items]="congresses"
         bindLabel="name"
         bindValue="congressId"
@@ -25,6 +26,7 @@
       <label for="researchLines" class="form-label
         ">Línea de Investigación:</label>
       <ng-select
+        id="researchLines"
         [items]="researchLinesFilter"
         bindLabel="label"
         bindValue="value"
