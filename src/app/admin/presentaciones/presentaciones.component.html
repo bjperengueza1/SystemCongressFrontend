@@ -2,7 +2,7 @@
 
   <!--Filtros -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="form-group w-50">
+    <div class="form-group w-25">
       <!-- Congreso-->
       <label for="congress" class="form-label
         ">Congreso:</label>
@@ -16,6 +16,24 @@
         (keyup)="loadFilterCongress($event)"
         (change)="loadExposures2()"
         [notFoundText]="'No se encontraron congresos'"
+        class="form-control"
+      >
+      </ng-select>
+    </div>
+
+    <div class="form-group w-25">
+      <!-- Tipo de exposición-->
+      <label for="type" class="form-label
+        ">Tipo de exposición:</label>
+      <ng-select
+        id="type"
+        [items]="typesFilter"
+        bindLabel="label"
+        bindValue="value"
+        placeholder="Selecciona un tipo de exposición"
+        [(ngModel)]="typeFilter"
+        (change)="loadExposures2()"
+        [notFoundText]="'No se encontraron tipo de exposición'"
         class="form-control"
       >
       </ng-select>
@@ -84,8 +102,9 @@
         <th>Inicio</th>
         <th>Fin</th>
         <th>Observación</th>
-        <th>Descargar presentación</th>
-        <th>Acciones</th>
+        <th class="text-center">Descargar presentación</th>
+        <th>Presentada</th>
+        <th class="text-center">Acciones</th>
       </tr>
       </thead>
       <tbody>
@@ -98,10 +117,21 @@
         <td>{{ exposure.dateStart | formatearFecha }}</td>
         <td>{{ exposure.dateEnd | formatearFecha }}</td>
         <td>{{ exposure.observation }}</td>
-        <td>
+        <td class="text-center">
           <button class="btn btn-sm btn-info" (click)="downloadSummary(exposure.exposureId,exposure.summaryFilePath)">
             Descargar
           </button>
+        </td>
+
+        <td class="px-4 py-2 relative text-center">
+          <div class="form-check form-switch text-center">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="exposure.presented == 'SI'"
+              (change)="changePresented($event, exposure.exposureId)"
+            />
+          </div>
         </td>
 
         <td class="border border-gray-300 px-4 py-2 relative">

@@ -56,7 +56,8 @@ export let researchLines = [
   { value: 5, label: 'Artes y Humanidades' },
   { value: 6, label: 'Actividad física y deportiva' },
   { value: 7, label: 'Servicios de protección, seguridad y transporte' },
-  { value: 8, label: 'Ingeniería, Industria y Construcción' }
+  { value: 8, label: 'Ingeniería, Industria y Construcción' },
+  { value: 9, label: 'Ciencias Juridicas, Políticas y Sociales' }
 ];
 
 export let academicDegrees = [
@@ -127,6 +128,7 @@ export interface ExposureItem {
   researchLine: number,
   researchLineLabel: string,
   type: number,
+  presented: string,
   guid: string,
   congressId: number,
   congressName: string,

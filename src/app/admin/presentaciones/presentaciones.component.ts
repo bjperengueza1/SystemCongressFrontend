@@ -313,10 +313,14 @@ export class PresentacionesComponent implements OnInit {
     });
   }
 
-
-
-
-
+  changePresented(event: any, exposureId: number) {
+    this.exposureService.changePresented(exposureId, event.target.checked == true ? "SI":"NO").subscribe({
+      next: (response) => {
+        this.loadExposures(1, this.pageSize, this.searchTerm);
+        this.alertService.showSuccess("Exitoso","Cambiado exitosamente");
+      }
+    })
+  }
 
   formatDate(isoDate: string): string {
     return isoDate.split('T')[0];

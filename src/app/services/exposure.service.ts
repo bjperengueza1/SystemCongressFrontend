@@ -100,4 +100,9 @@ export class ExposureService {
     const body = {email: email};
     return this.http.post(`${this.apiUrl}/${id}/register-previous`, body);
   }
+
+  changePresented(id: number, presented: string): Observable<any> {
+    const body = {presented: presented};
+    return this.http.put(`${this.apiUrl}/${id}/presented`, body);
+  }
 }
