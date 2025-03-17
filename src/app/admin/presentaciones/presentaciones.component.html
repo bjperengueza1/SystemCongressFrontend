@@ -110,7 +110,7 @@
       <tbody>
       <tr *ngFor="let exposure of response.items">
         <td>{{ exposure.congressName }}</td>
-        <td>{{ exposure.name }}</td>
+        <td>{{ exposure.name }} <br> {{exposure.guidCert}}</td>
         <td>{{ exposure.type | tipoExposicion }}</td>
         <td>{{ exposure.researchLineLabel }}</td>
         <td>{{ exposure.statusLabelExposure }}</td>
@@ -166,12 +166,12 @@
                   }
                 </li>
                 <li>
-                  @if (exposure.statusExposure == 3 || exposure.statusExposure == 0) {
+                  
                     <button class="btn btn-sm btn-info dropdown-item" (click)="openEditExposure(contentEditExposurePending,exposure)">
                       Editar
                     </button>
                     <hr class="dropdown-divider">
-                  }
+                  
                 </li>
                 <li>
                   @if (exposure.statusExposure == 3 || exposure.statusExposure == 1 || exposure.statusExposure == 0) {
@@ -291,7 +291,7 @@
               class="form-control"
               [(ngModel)]="approveExposureModel.dateStart"
               min="2024-05-05T07:00"
-              max="2024-05-09T23:59"
+              max="2026-05-09T23:59"
               required
             />
           </div>
@@ -305,7 +305,7 @@
               class="form-control"
               [(ngModel)]="approveExposureModel.dateEnd"
               min="2024-05-05T07:00"
-              max="2024-05-09T23:59"
+              max="2026-05-09T23:59"
               required
             />
           </div>
@@ -321,6 +321,16 @@
               name="observacion"
               class="form-control"
               [(ngModel)]="approveExposureModel.observation"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="urlAccess" class="form-label">Url de Acceso:</label>
+            <input
+              type="text"
+              id="urlAccess"
+              name="urlAccess"
+              class="form-control"
+              [(ngModel)]="approveExposureModel.urlAccess"
               required>
           </div>
           <button type="submit" class="btn btn-primary"  [disabled]="approveForm.invalid">Enviar</button>
@@ -405,6 +415,17 @@
               [(ngModel)]="editExposurePendingModel.observation"
               required>
           </div>
+          <div class="mb-3">
+            <label for="urlAccess_e" class="form-label">Url de Acceso:</label>
+            <input
+              type="text"
+              id="urlAccess_e"
+              name="urlAccess"
+              class="form-control"
+              [(ngModel)]="editExposurePendingModel.urlAccess"
+              required>
+          </div>
+
           <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Enviar</button>
         </form>
       </div>

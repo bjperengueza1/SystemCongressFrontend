@@ -70,14 +70,14 @@
 
     <!-- Campo para subir un archivo PDF -->
     <div class="mb-3">
-      <label for="file" class="form-label">Subir Archivo PDF:</label>
+      <label for="file" class="form-label">Subir Archivo PDF o Word:</label>
       <input
         type="file"
         class="form-control"
         id="file"
         name="file"
         (change)="onFileChange($event)"
-        accept=".pdf"
+        accept=".pdf,.doc,.docx"
         required>
     </div>
     @if(!fileValid){

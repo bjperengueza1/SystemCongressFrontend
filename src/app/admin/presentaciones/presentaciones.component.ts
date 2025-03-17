@@ -57,7 +57,7 @@ export class PresentacionesComponent implements OnInit {
 
   rejectExposureModel:RejectExposureModel = {exposureId : 0, observation : ""};
 
-  editExposurePendingModel: EditExposurePendingModel = {exposureId: 0, name: '', researchLine: 0, observation: ''};
+  editExposurePendingModel: EditExposurePendingModel = {exposureId: 0, name: '', researchLine: 0, observation: '', urlAccess: ''};
 
   roomsItems: RoomsItem[] = [];
 
@@ -219,7 +219,7 @@ export class PresentacionesComponent implements OnInit {
   }
 
   openEditExposure(content:any, exposure: ExposureItem) {
-    this.editExposurePendingModel = {exposureId: exposure.exposureId, name: exposure.name, researchLine: exposure.researchLine, observation: exposure.observation};
+    this.editExposurePendingModel = {exposureId: exposure.exposureId, name: exposure.name, researchLine: exposure.researchLine, observation: exposure.observation, urlAccess: exposure.urlAccess};
     this.modalService.open(content);
   }
 
@@ -286,7 +286,7 @@ export class PresentacionesComponent implements OnInit {
   }
 
   initializeApproveExposure():ApproveExposureModel  {
-    return {roomId: null, exposureId: 0,congressId: 0,dateEnd: '', dateStart: '', observation: ''}
+    return {roomId: null, exposureId: 0,congressId: 0,dateEnd: '', dateStart: '', observation: '', urlAccess: ''};
   }
 
   downloadReport() {

@@ -73,7 +73,7 @@ export class RegistroConferenciaComponent implements OnInit {
 
   onFileChange(event: any) {
     const file = event.target.files[0];
-    if (file && file.type === 'application/pdf') {
+    if (file && (file.type === 'application/pdf' || file.type === 'application/x-pdf' || file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
       this.exposureInsertItem.pdfFile = file;
       this.fileValid = true;
     } else {

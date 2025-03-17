@@ -130,20 +130,23 @@ export interface ExposureItem {
   type: number,
   presented: string,
   guid: string,
+  guidCert: string,
   congressId: number,
   congressName: string,
   dateStart: string,
   dateEnd: string,
   observation: string,
   authors: AuthorItem[],
-  room: RoomsItem
+  room: RoomsItem,
+  urlAccess: string
 }
 
 export interface EditExposurePendingModel {
   exposureId: number,
   name: string,
   researchLine: number,
-  observation: string
+  observation: string,
+  urlAccess: string
 }
 
 
@@ -187,6 +190,7 @@ export type ApproveExposureModel = {
   dateStart: string,
   dateEnd: string,
   observation: string,
+  urlAccess: string
 }
 
 export type RejectExposureModel = {
