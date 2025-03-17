@@ -179,6 +179,9 @@ export class PresentacionesComponent implements OnInit {
         this.loadExposures(1, this.pageSize, this.searchTerm);
         this.modalService.dismissAll();
         this.alertService.showSuccess("Exitoso","Aprobado exitosamente");
+      },
+      error: (err) => {
+        this.alertService.showValidationErrors(err.error.errors);
       }
     });
   }
