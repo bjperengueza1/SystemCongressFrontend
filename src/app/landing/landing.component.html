@@ -62,7 +62,7 @@
     </div>
 
     <!-- Sección derecha con las 4 tarjetas -->
-    <div class="right-section">
+    <div class="right-section" id="about">
       <h2 class="section-title">FECHAS IMPORTANTES</h2> <!-- Título agregado -->
 
       <div class="grid">
@@ -155,35 +155,23 @@
       <div *ngIf="!ponencias || ponencias.items.length === 0" style="text-align: center; color: #6b7280; font-size: 1.2em;">
         No existen conferencias disponibles actualmente.
       </div>
-      <div *ngIf="ponencias">
+      <div *ngIf="ponencias" class="conference-container">
         <div *ngFor="let conference of ponencias.items" class="conference-card">
-          <h3 style="color: #1f2937; margin-bottom: 0.5rem;">{{ conference.name }}</h3>
+          <h3 class="conference-title">{{ conference.name }}</h3>
+
+          <!-- Contenido informativo en el centro, alineado a la izquierda -->
           <div class="conference-details">
-            <div class="conference-info" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, auto); gap: 1rem;">
-              <p style="color: #4b5563; margin-bottom: 0.5rem;">
-                <strong>Ponente:</strong> {{ conference.authors[0].name }} - {{ conference.authors[0].academicDegree | obtenerGradoAcademicoNombre }}
-              </p>
-              <p style="color: #4b5563; margin-bottom: 0.5rem;">
-                <strong>Fecha:</strong> {{ conference.dateStart | formatearFecha }} | <strong>Hora:</strong> {{ conference.dateStart | obtenerHoraFormateada }}
-              </p>
-              <p style="color: #4b5563; margin-bottom: 0.5rem;">
-                <strong>Linea de Investigación:</strong> {{ conference.researchLine | lineaInvestigacion }}
-              </p>
-              <p style="color: #4b5563; margin-bottom: 0.5rem;">
-                <strong>Tipo:</strong> {{ conference.type | tipoExposicion }}
-              </p>
-              <p style="color: #4b5563; margin-bottom: 0.5rem;">
-                <strong>Sala:</strong> {{ conference.room.name }}
-              </p>
-              <p style="color: #4b5563; margin-bottom: -1rem;">
-                <strong>Capacidad:</strong> {{ conference.room.capacity }}
-              </p>
-            </div>
+            <p><strong>Ponente:</strong> {{ conference.authors[0].name }} - {{ conference.authors[0].academicDegree | obtenerGradoAcademicoNombre }}</p>
+            <p><strong>Fecha:</strong> {{ conference.dateStart | formatearFecha }} | <strong>Hora:</strong> {{ conference.dateStart | obtenerHoraFormateada }}</p>
+            <p><strong>Línea de Investigación:</strong> {{ conference.researchLine | lineaInvestigacion }}</p>
+            <p><strong>Tipo:</strong> {{ conference.type | tipoExposicion }}</p>
+            <p><strong>Sala:</strong> {{ conference.room.name }}</p>
+            <p><strong>Capacidad:</strong> {{ conference.room.capacity }}</p>
           </div>
 
           @if(canRegisterAttendeePrev){
-            <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm">
-              <div class="form-group" style="max-width: 300px;">
+            <form (ngSubmit)="onSubmit(conference.exposureId)" #form="ngForm" class="pre-register-form">
+              <div class="form-group">
                 <input
                   type="email"
                   [id]="'email-' + conference.exposureId"
@@ -255,7 +243,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section class="section">
       <h2 style="text-align: center; color: #1f2937; margin-bottom: 1rem;">Organizan</h2>
       <div class="about-section">
         <div class="about-card">

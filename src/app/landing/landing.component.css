@@ -116,37 +116,91 @@ body {
   margin-top: 0.5rem;
 }
 
+/* Estilos para el contenedor de conferencias */
+.conference-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre las tarjetas */
+  justify-content: center; /* Centra las tarjetas horizontalmente */
+}
+
+/* Estilos para las tarjetas de conferencias */
 .conference-card {
-  background-color: #ffffff; /* Fondo blanco para la tarjeta */
-  border: 1px solid #9c9c9c; /* Borde gris claro */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 1.5rem; /* Espaciado interno */
-  margin: 1rem; /* Margen entre tarjetas */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  transition: transform 0.2s; /* Efecto de transformación al pasar el mouse */
+  flex: 1 1 calc(33.333% - 40px); /* Ajusta el tamaño de las tarjetas para que quepan 3 por fila */
+  max-width: calc(33.333% - 40px); /* Asegura que no se desborden */
+  background-color: #ffffff;
+  border: 1px solid #9c9c9c;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column; /* Organiza el contenido en columna */
 }
 
 .conference-card:hover {
-  transform: scale(1.05); /* Aumenta ligeramente la tarjeta al pasar el mouse */
+  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
 }
 
+/* Estilos para el título de la conferencia */
+.conference-title {
+  font-size: 1.75rem; /* Tamaño del título */
+  color: #1f2937; /* Color del texto */
+  margin-bottom: 1rem; /* Espacio debajo del título */
+  text-align: left; /* Alineación a la izquierda */
+}
+
+/* Estilos para el contenido informativo */
 .conference-details {
-  margin-top: 1rem; /* Espaciado superior */
+  flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
+  text-align: left; /* Alineación a la izquierda */
+  margin-bottom: 1rem; /* Espacio debajo del contenido */
 }
 
-.conference-info {
-  display: grid; /* Utiliza grid para el diseño */
-  grid-template-columns: 1fr; /* Una columna por defecto */
-  gap: 0.5rem; /* Espacio entre elementos */
+.conference-details p {
+  margin: 0.5rem 0; /* Espacio entre los párrafos */
+  font-size: 0.9rem; /* Tamaño de la letra reducido */
+  color: #4b5563; /* Color del texto */
 }
 
-@media (min-width: 600px) {
-  .conference-info {
-    grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas más grandes */
-    grid-template-rows: repeat(3, auto); /* Filas automáticas */
+/* Estilos para el formulario de pre-registro */
+.pre-register-form {
+  margin-top: auto; /* Coloca el formulario en la parte inferior */
+  text-align: left; /* Alineación a la izquierda */
+}
+
+.pre-register-form .form-group {
+  margin-bottom: 1rem; /* Espacio debajo del input */
+}
+
+.pre-register-form .form-control {
+  width: 100%; /* Ancho completo */
+  padding: 8px 12px; /* Espaciado interno */
+  border: 1px solid #e5e7eb; /* Borde del input */
+  border-radius: 4px; /* Bordes redondeados */
+  font-size: 0.9rem; /* Tamaño de la letra reducido */
+}
+
+.pre-register-form .btn {
+  width: 100%; /* Ancho completo */
+  padding: 8px 12px; /* Espaciado interno */
+  font-size: 0.9rem; /* Tamaño de la letra reducido */
+}
+
+/* Estilos para el mensaje de éxito */
+.success-message {
+  color: #059669; /* Color del texto */
+  font-size: 0.9rem; /* Tamaño de la letra reducido */
+  margin-top: 0.5rem; /* Espacio arriba del mensaje */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .conference-card {
+    flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
+    max-width: 100%;
   }
 }
-
 .section {
   margin: 4rem 0;
 
@@ -369,7 +423,7 @@ body {
 
 .flayer-portada img {
   width: 100%; /* Reduce el tamaño de la imagen al 80% del contenedor */
-  max-width: 550px; /* Ajusta el tamaño máximo para que no sea muy grande */
+  max-width: 500px; /* Ajusta el tamaño máximo para que no sea muy grande */
   height: auto; /* Mantiene la proporción */
   display: block;
   margin: 0 auto;
@@ -523,6 +577,9 @@ footer {
 
 .footer-icons img:hover {
   transform: scale(1.1);
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Sombra blanca para resaltar */
+  filter: brightness(1.2); /* Aumenta el brillo del ícono */
 }
 
 /* Texto de derechos reservados */
