@@ -59,7 +59,7 @@ export class PresentacionesComponent implements OnInit {
 
   rejectExposureModel:RejectExposureModel = {exposureId : 0, observation : ""};
 
-  editExposurePendingModel: EditExposurePendingModel = {exposureId: 0, name: '', researchLine: 0, observation: '', urlAccess: ''};
+  editExposurePendingModel: EditExposurePendingModel = {exposureId: 0, roomId: 0, name: '', researchLine: 0, observation: '', urlAccess: ''};
 
   roomsItems: RoomsItem[] = [];
 
@@ -190,7 +190,7 @@ export class PresentacionesComponent implements OnInit {
 
   openApproveExposure(content:any, exposure: ExposureItem) {
     this.approveExposureModel = this.initializeApproveExposure();
-    this.congressService.getRoomsByCongress(exposure.congressId, 1, 100).subscribe({
+    this.congressService.getRoomsByCongress(exposure.congressId, 1, 200).subscribe({
       next: (response) => {
         this.roomsItems = response.items;
         this.approveExposureModel.congressId = exposure.congressId;
@@ -224,8 +224,14 @@ export class PresentacionesComponent implements OnInit {
   }
 
   openEditExposure(content:any, exposure: ExposureItem) {
-    this.editExposurePendingModel = {exposureId: exposure.exposureId, name: exposure.name, researchLine: exposure.researchLine, observation: exposure.observation, urlAccess: exposure.urlAccess};
-    this.modalService.open(content);
+    this.congressService.getRoomsByCongress(exposure.congressId, 1, 200).subscribe({
+      next: (response) => {
+        this.roomsItems = response.items;
+        this.editExposurePendingModel = {exposureId: exposure.exposureId, roomId: exposure.room.roomId, name: exposure.name, researchLine: exposure.researchLine, observation: exposure.observation, urlAccess: exposure.urlAccess};
+        this.modalService.open(content);
+      }
+    })
+    
   }
 
   editExposure(form: NgForm) {

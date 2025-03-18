@@ -143,6 +143,7 @@ export interface ExposureItem {
 
 export interface EditExposurePendingModel {
   exposureId: number,
+  roomId: number,
   name: string,
   researchLine: number,
   observation: string,

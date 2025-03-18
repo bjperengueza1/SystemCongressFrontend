@@ -110,7 +110,7 @@
       <tbody>
       <tr *ngFor="let exposure of response.items">
         <td>{{ exposure.congressName }}</td>
-        <td>{{ exposure.name }} <br> {{exposure.guidCert}}</td>
+        <td>{{ exposure.name }}</td>
         <td>{{ exposure.type | tipoExposicion }}</td>
         <td>{{ exposure.researchLineLabel }}</td>
         <td>{{ exposure.statusLabelExposure }}</td>
@@ -373,8 +373,23 @@
 
     <div class="modal-body">
       <div class="container mt-5">
-        <form #editForm="ngForm" (ngSubmit)="editExposure(editForm)" class="p-4 border
-        rounded shadow">
+        <form #editForm="ngForm" (ngSubmit)="editExposure(editForm)" class="p-4 border rounded shadow">
+          <div class="mb-3">
+            <label for="salaEdit" class="form-label">Sala:</label>
+            <ng-select
+              id="salaEdit"
+              name="salaEdit"
+              [items]="roomsItems"
+              bindLabel="name"
+              bindValue="roomId"
+              [(ngModel)]="editExposurePendingModel.roomId"
+              placeholder="Selecciona una sala"
+              [notFoundText]="'No se encontraron salas'"
+              required
+              class="form-control"
+            >
+            </ng-select>
+          </div>
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>
             <input
