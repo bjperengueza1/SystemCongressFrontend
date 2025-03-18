@@ -23,6 +23,7 @@ import {AlertService} from '../../services/alert.service';
 import {TipoExposicionPipe} from '../../pipes/tipo-exposicion.pipe';
 import { PosicionAutorPipe } from "../../pipes/posicion-autor.pipe";
 import Swal from 'sweetalert2';
+import {FormatearFechaHoraPipe} from '../../pipes/formatear-fecha-hora.pipe';
 
 
 @Component({
@@ -35,8 +36,9 @@ import Swal from 'sweetalert2';
     NgbPagination,
     FormatearFechaPipe,
     NgSelectComponent,
-    TipoExposicionPipe
-],
+    TipoExposicionPipe,
+    FormatearFechaHoraPipe
+  ],
   templateUrl: './presentaciones.component.html',
   styleUrl: './presentaciones.component.css'
 })

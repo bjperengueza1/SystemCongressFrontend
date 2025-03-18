@@ -114,8 +114,8 @@
         <td>{{ exposure.type | tipoExposicion }}</td>
         <td>{{ exposure.researchLineLabel }}</td>
         <td>{{ exposure.statusLabelExposure }}</td>
-        <td>{{ exposure.dateStart }}</td>
-        <td>{{ exposure.dateEnd }}</td>
+        <td>{{ exposure.dateStart | formatearFechaHora }}</td>
+        <td>{{ exposure.dateEnd | formatearFechaHora }}</td>
         <td>{{ exposure.observation }}</td>
         <td class="text-center">
           <button class="btn btn-sm btn-info" (click)="downloadSummary(exposure.exposureId,exposure.summaryFilePath)">
