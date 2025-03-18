@@ -150,7 +150,7 @@
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  @if (exposure.statusExposure == 0) {
+                  @if (exposure.statusExposure == 0 || exposure.statusExposure == 2) {
                     <button class="btn btn-sm btn-info dropdown-item" (click)="openApproveExposure(contentApproveExposure,exposure)">
                       Aprobar
                     </button>
@@ -166,12 +166,12 @@
                   }
                 </li>
                 <li>
-                  
+
                     <button class="btn btn-sm btn-info dropdown-item" (click)="openEditExposure(contentEditExposurePending,exposure)">
                       Editar
                     </button>
                     <hr class="dropdown-divider">
-                  
+
                 </li>
                 <li>
                   @if (exposure.statusExposure == 3 || exposure.statusExposure == 1 || exposure.statusExposure == 0) {

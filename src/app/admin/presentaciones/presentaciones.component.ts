@@ -41,7 +41,7 @@ import Swal from 'sweetalert2';
   styleUrl: './presentaciones.component.css'
 })
 export class PresentacionesComponent implements OnInit {
-  
+
   private domain = '';
 
   searchTerm: string = '';
