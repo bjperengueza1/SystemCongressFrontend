@@ -227,7 +227,7 @@ export class LandingComponent implements OnInit {
   }
 
   loadExposures(page: number, pageSize: number) {
-    this.congressService.getExposures(this.congress.congressId, page, pageSize).subscribe({
+    this.congressService.getExposuresActives(this.congress.congressId, page, pageSize).subscribe({
       next: (response) => {
         this.ponencias = response;
       }
