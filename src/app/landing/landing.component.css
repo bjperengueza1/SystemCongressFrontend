@@ -1,810 +1,853 @@
-/* Global styles */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  position: relative;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 5px;
-}
-
-/*NAVEGADOR*/
-.nav-menu {
-  background: linear-gradient(135deg, #F0F0F0, #1A1A1A);  padding: 1rem; /* Espaciado interno */
-}
-
-.nav-container {
-  display: flex; /* Utiliza flexbox */
-  align-items: center; /* Alinea elementos verticalmente */
-  justify-content: space-between; /* Espacio entre logo y enlaces */
-}
-
-.nav-logo img {
-  width: 30%; /* Ajusta el tamaño del logo */
-  height: auto; /* Mantiene la proporción del logo */
-}
-
-.nav-links {
-  display: flex; /* Disposición en fila */
-  gap: 1.5rem; /* Espacio entre enlaces */
-  font-size: 19px;
-}
-
-.nav-link {
-  color: #ffffff; /* Color del texto */
-  text-decoration: none; /* Sin subrayado */
-  transition: color 0.3s; /* Transición suave para el color */
-}
-
-.nav-link:hover {
-  color: #fbbf24; /* Color al pasar el mouse */
-}
-
-.nav-toggle {
-  display: none; /* Oculto por defecto */
-  flex-direction: column; /* Disposición vertical */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
-}
-
-.bar {
-  height: 3px; /* Grosor de las barras del menú hamburguesa */
-  width: 25px; /* Ancho de las barras */
-  background-color: #ffffff; /* Color de las barras */
-  margin: 4px 0; /* Espaciado entre las barras */
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* Oculta los enlaces en pantallas pequeñas */
-    flex-direction: column; /* Cambia a disposición vertical */
-    position: absolute; /* Posiciona el menú */
-    top: 60px; /* Espaciado desde la parte superior */
-    left: 0; /* Alinea a la izquierda */
-    background-color: #1f2937; /* Color de fondo del menú */
-    width: 100%; /* Ancho completo */
-    padding: 1rem 0; /* Espaciado interno */
-    z-index: 100; /* Asegura que esté encima */
+  /* Global styles */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    position: relative;
   }
 
-  .nav-links.active {
-    display: flex; /* Muestra el menú cuando está activo */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+
+  /*NAVEGADOR*/
+  .nav-menu {
+    background: linear-gradient(135deg, #F0F0F0, #1A1A1A);  padding: 1rem; /* Espaciado interno */
+  }
+
+  .nav-container {
+    display: flex; /* Utiliza flexbox */
+    align-items: center; /* Alinea elementos verticalmente */
+    justify-content: space-between; /* Espacio entre logo y enlaces */
+  }
+
+  .nav-logo img {
+    width: 30%; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+  }
+
+  .nav-links {
+    display: flex; /* Disposición en fila */
+    gap: 1.5rem; /* Espacio entre enlaces */
+    font-size: 19px;
+  }
+
+  .nav-link {
+    color: #ffffff; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s; /* Transición suave para el color */
+  }
+
+  .nav-link:hover {
+    color: #fbbf24; /* Color al pasar el mouse */
   }
 
   .nav-toggle {
-    display: flex; /* Muestra el menú hamburguesa */
+    display: none; /* Oculto por defecto */
+    flex-direction: column; /* Disposición vertical */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
   }
-}
 
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #2563eb;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.3s;
-}
+  .bar {
+    height: 3px; /* Grosor de las barras del menú hamburguesa */
+    width: 25px; /* Ancho de las barras */
+    background-color: #ffffff; /* Color de las barras */
+    margin: 4px 0; /* Espaciado entre las barras */
+  }
 
-.btn:hover {
-  background-color: #1d4ed8;
-}
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; /* Oculta los enlaces en pantallas pequeñas */
+      flex-direction: column; /* Cambia a disposición vertical */
+      position: absolute; /* Posiciona el menú */
+      top: 60px; /* Espaciado desde la parte superior */
+      left: 0; /* Alinea a la izquierda */
+      background-color: #1f2937; /* Color de fondo del menú */
+      width: 100%; /* Ancho completo */
+      padding: 1rem 0; /* Espaciado interno */
+      z-index: 100; /* Asegura que esté encima */
+    }
 
-.form-group {
-  margin-bottom: 1rem;
-}
+    .nav-links.active {
+      display: flex; /* Muestra el menú cuando está activo */
+    }
 
-.form-control {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  font-size: 1rem;
-}
+    .nav-toggle {
+      display: flex; /* Muestra el menú hamburguesa */
+    }
+  }
 
-.success-message {
-  color: #059669;
-  margin-top: 0.5rem;
-}
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
 
-.error-message {
-  color: #dc2626;
-  margin-top: 0.5rem;
-}
+  .btn:hover {
+    background-color: #1d4ed8;
+  }
 
-/* Estilos para el contenedor de conferencias */
-.conference-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Espacio entre las tarjetas */
-  justify-content: center; /* Centra las tarjetas horizontalmente */
-}
+  .form-group {
+    margin-bottom: 1rem;
+  }
 
-/* Estilos para las tarjetas de conferencias */
-.conference-card {
-  flex: 1 1 calc(33.333% - 40px); /* Ajusta el tamaño de las tarjetas para que quepan 3 por fila */
-  max-width: calc(33.333% - 40px); /* Asegura que no se desborden */
-  background-color: #ffffff;
-  border: 1px solid #9c9c9c;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  display: flex;
-  flex-direction: column; /* Organiza el contenido en columna */
-}
+  .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
 
-.conference-card:hover {
-  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
-}
+  .success-message {
+    color: #059669;
+    margin-top: 0.5rem;
+  }
 
-/* Estilos para el título de la conferencia */
-.conference-title {
-  font-size: 1.75rem; /* Tamaño del título */
-  color: #1f2937; /* Color del texto */
-  margin-bottom: 1rem; /* Espacio debajo del título */
-  text-align: left; /* Alineación a la izquierda */
-}
+  .error-message {
+    color: #dc2626;
+    margin-top: 0.5rem;
+  }
 
-/* Estilos para el contenido informativo */
-.conference-details {
-  flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
-  text-align: left; /* Alineación a la izquierda */
-  margin-bottom: 1rem; /* Espacio debajo del contenido */
-}
+  /* Estilos para el contenedor de conferencias */
+  .conference-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre las tarjetas */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+  }
 
-.conference-details p {
-  margin: 0.5rem 0; /* Espacio entre los párrafos */
-  font-size: 0.9rem; /* Tamaño de la letra reducido */
-  color: #4b5563; /* Color del texto */
-}
-
-/* Estilos para el formulario de pre-registro */
-.pre-register-form {
-  margin-top: auto; /* Coloca el formulario en la parte inferior */
-  text-align: left; /* Alineación a la izquierda */
-}
-
-.pre-register-form .form-group {
-  margin-bottom: 1rem; /* Espacio debajo del input */
-}
-
-.pre-register-form .form-control {
-  width: 100%; /* Ancho completo */
-  padding: 8px 12px; /* Espaciado interno */
-  border: 1px solid #e5e7eb; /* Borde del input */
-  border-radius: 4px; /* Bordes redondeados */
-  font-size: 0.9rem; /* Tamaño de la letra reducido */
-}
-
-.pre-register-form .btn {
-  width: 100%; /* Ancho completo */
-  padding: 8px 12px; /* Espaciado interno */
-  font-size: 0.9rem; /* Tamaño de la letra reducido */
-}
-
-/* Estilos para el mensaje de éxito */
-.success-message {
-  color: #059669; /* Color del texto */
-  font-size: 0.9rem; /* Tamaño de la letra reducido */
-  margin-top: 0.5rem; /* Espacio arriba del mensaje */
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
+  /* Estilos para las tarjetas de conferencias */
   .conference-card {
-    flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
-    max-width: 100%;
+    flex: 1 1 calc(33.333% - 40px); /* Ajusta el tamaño de las tarjetas para que quepan 3 por fila */
+    max-width: calc(33.333% - 40px); /* Asegura que no se desborden */
+    background-color: #ffffff;
+    border: 1px solid #9c9c9c;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column; /* Organiza el contenido en columna */
   }
-}
-.section {
-  margin: 4rem 0;
 
-}
+  .conference-card:hover {
+    transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+  }
 
-.hero-section {
-  background-color: #f8fafc;
-  padding: 4rem 0;
-  text-align: center;
-}
+  /* Estilos para el título de la conferencia */
+  .conference-title {
+    font-size: 1.75rem; /* Tamaño del título */
+    color: #1f2937; /* Color del texto */
+    margin-bottom: 1rem; /* Espacio debajo del título */
+    text-align: left; /* Alineación a la izquierda */
+  }
 
-/*ESTILOS PARA LAS IMAGENES DE LOS ORGANIZADORES*/
-.about-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  text-align: center;
-}
+  /* Estilos para el contenido informativo */
+  .conference-details {
+    flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
+    text-align: left; /* Alineación a la izquierda */
+    margin-bottom: 1rem; /* Espacio debajo del contenido */
+  }
 
-.about-card {
-  flex: 1 1 300px;
-  max-width: 350px;
-  padding: 1.5rem;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  .conference-details p {
+    margin: 0.5rem 0; /* Espacio entre los párrafos */
+    font-size: 0.9rem; /* Tamaño de la letra reducido */
+    color: #4b5563; /* Color del texto */
+  }
 
-.about-img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
+  /* Estilos para el formulario de pre-registro */
+  .pre-register-form {
+    margin-top: auto; /* Coloca el formulario en la parte inferior */
+    text-align: left; /* Alineación a la izquierda */
+  }
 
-@media (max-width: 768px) {
+  .pre-register-form .form-group {
+    margin-bottom: 1rem; /* Espacio debajo del input */
+  }
+
+  .pre-register-form .form-control {
+    width: 100%; /* Ancho completo */
+    padding: 8px 12px; /* Espaciado interno */
+    border: 1px solid #e5e7eb; /* Borde del input */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 0.9rem; /* Tamaño de la letra reducido */
+  }
+
+  .pre-register-form .btn {
+    width: 100%; /* Ancho completo */
+    padding: 8px 12px; /* Espaciado interno */
+    font-size: 0.9rem; /* Tamaño de la letra reducido */
+  }
+
+  /* Estilos para el mensaje de éxito */
+  .success-message {
+    color: #059669; /* Color del texto */
+    font-size: 0.9rem; /* Tamaño de la letra reducido */
+    margin-top: 0.5rem; /* Espacio arriba del mensaje */
+  }
+
+  /* Estilos para el contenedor de la paginación */
+  .pagination-container {
+    text-align: center; /* Centra la paginación horizontalmente */
+    padding: 1rem 0; /* Añade un poco de padding para separar la paginación de las cards */
+    margin-top: 2rem; /* Asegura que haya espacio entre las cards y la paginación */
+  }
+  
+  /* Estilos adicionales para la paginación si es necesario */
+  ngb-pagination {
+    display: inline-block;
+  }
+
+
+
+
+  /* Ajustes para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .conference-card {
+      flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
+      max-width: 100%;
+    }
+  }
+  .section {
+    margin: 4rem 0;
+
+  }
+
+  .hero-section {
+    background-color: #f8fafc;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  /*ESTILOS PARA LAS IMAGENES DE LOS ORGANIZADORES*/
   .about-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .about-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-section {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+
+
+
+
+
+  .certificates-section {
+    background: #f8fafc;
+    padding: 3rem 0;
+    text-align: center;
+
+  }
+
+  .certificates-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .event-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Espacio entre elementos */
+    margin-top: 20px;
+  }
+
+  .highlight-item {
+    background: white; /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 20px;
+    width: 150px; /* Ancho fijo, ajustable según necesidades */
+    text-align: center;
+    box-shadow: 10px 14px 12px rgba(0, 0, 0, 0.15); /* Sombra para efecto de elevación */
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    position: relative; /* Para posicionar la imagen arriba */
   }
-}
+
+  .highlight-item img {
+    width: 50px; /* Ajusta el tamaño de la imagen */
+    height: 50px;
+    position: absolute;
+    top:15px; /* Hace que la imagen sobresalga un poco de la caja */
+    background: white;
+    padding: 5px;
+  }
+
+  .highlight-item strong {
+    font-size: 1.8rem;
+    color: #1f2937;
+    margin-top: 40px; /* Ajusta el espacio debajo de la imagen */
+  }
+
+  .highlight-item span {
+    font-size: 1rem;
+    color: #4b5563;
+  }
 
 
+  .event-details {
+    margin-top: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
 
+  .detail-item strong {
+    color: #2563eb;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 
-
-.certificates-section {
-  background: #f8fafc;
-  padding: 3rem 0;
-  text-align: center;
-
-}
-
-.certificates-form {
-  max-width: 400px;
-  margin: 0 auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.event-highlights {
+/* Estilos para la lista de temas */
+.topics-list {
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* Espacio entre elementos */
-  margin-top: 20px;
-}
-
-.highlight-item {
-  background: white; /* Fondo blanco */
-  border-radius: 12px; /* Bordes redondeados */
-  padding: 20px;
-  width: 150px; /* Ancho fijo, ajustable según necesidades */
-  text-align: center;
-  box-shadow: 10px 14px 12px rgba(0, 0, 0, 0.15); /* Sombra para efecto de elevación */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative; /* Para posicionar la imagen arriba */
-}
-
-.highlight-item img {
-  width: 50px; /* Ajusta el tamaño de la imagen */
-  height: 50px;
-  position: absolute;
-  top:15px; /* Hace que la imagen sobresalga un poco de la caja */
-  background: white;
-  padding: 5px;
-}
-
-.highlight-item strong {
-  font-size: 1.8rem;
-  color: #1f2937;
-  margin-top: 40px; /* Ajusta el espacio debajo de la imagen */
-}
-
-.highlight-item span {
-  font-size: 1rem;
-  color: #4b5563;
-}
-
-
-.event-details {
-  margin-top: 3rem;
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 1rem;
-}
-
-.detail-item strong {
-  color: #2563eb;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.topics-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   gap: 1rem;
-  list-style: none;
-  padding: 0;
 }
 
 .topics-list li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height:   70px; /* Ajusta la altura según sea necesario */
-  border-radius: 10px; /* Hace que el elemento sea circular */
-  color: rgb(33, 33, 33); /* Color del texto */
-  font-size: 17px;
-  background-color: #ffffff; /* Color de fondo por defecto */
-  /* background-image: url('/logor.png');  Ruta de la imagen */
-
-  background-size: cover; /* Ajusta la imagen al tamaño del círculo */
-  background-position: center; /* Centra la imagen */
-  /*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);  Sombra para mejorar el contraste del texto */
-}
-
-.certificates-list {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(33, 33, 33); /* Color del texto */
-
-}
-
-.certificates-list li {
-  background: #f3f4f6;
-  padding: 0.75rem;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
-  color: #4b5563;
-}
-
-
-/*BOTONES REDES SOCIALES*/
-
-
-
-
-/* Countdown Styles */
-.countdown-container {
-  background: white; /* Fondo blanco */
-  border-radius: 50px; /* Bordes redondeados */
-  padding: 20px; /* Espaciado interno */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  display: flex;
-  flex-wrap: wrap; /* Hace que sea responsivo */
-  justify-content: center;
-  gap: 20px; /* Espacio entre elementos */
-  max-width: 600px; /* Ajusta el ancho máximo */
-  margin: 0 auto; /* Centrar en pantalla */
-}
-
-.countdown-item {
-  text-align: center;
-  flex: 1 1 120px; /* Hace que los elementos sean flexibles y responsivos */
-  min-width: 100px;
-  padding: 10px;
-  background: white; /* Color de fondo ligero */
+  position: relative; /* Para posicionar la card */
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.countdown-value {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #000000; /* Color oscuro para contraste */
+.topics-list li:hover {
+  background-color: #f9fafb;
+  transform: translateY(-5px);
 }
 
-.countdown-label {
-  font-size: 1rem;
-  color: #4b5563;
-  display: block;
-}
-
-
-.flayer-portada {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.flayer-portada img {
-  width: 100%; /* Reduce el tamaño de la imagen al 80% del contenedor */
-  max-width: 500px; /* Ajusta el tamaño máximo para que no sea muy grande */
-  height: auto; /* Mantiene la proporción */
-  display: block;
-  margin: 0 auto;
-}
-
-.logo {
-  position: fixed;
-  bottom: 10px; /* o top: 10px; para la esquina superior */
-  right: 10px; /* o left: 10px; para la esquina izquierda */
-  width: 100px; /* Ajusta el tamaño según lo necesites */
-  height: auto;
-}
-
-.hero-section {
-  position: relative;
-  background: url('/fondo1.png') no-repeat center center/cover;
-  height: 100vh; /* Ajusta según necesites */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white; /* Ajusta el color del texto según el contraste necesario */
-}
-
-.hero-section::before {
-  content: "";
+/* Estilos para la card que se despliega */
+.topic-card {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Capa oscura */
-  backdrop-filter: blur(5px); /* Efecto de desenfoque */
-  z-index: 1;
+  bottom: 100%; /* Coloca la card encima del <li> */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
-.hero-section .container {
-  position: relative;
-  z-index: 2; /* Asegura que el contenido esté sobre la capa oscura */
+.topics-list li:hover .topic-card {
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Diseño responsive para tablets y pantallas medianas */
-@media (max-width: 1024px) {
-  .hero-section {
-    height: auto; /* Permite que la sección crezca según el contenido */
-    padding: 50px 20px; /* Añade padding para mejorar la legibilidad */
-  }
+/* Estilos para el texto dentro de la card */
+.topic-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
 
-  .hero-section h1 {
-    font-size: 2.5rem; /* Reduce el tamaño del título */
-  }
-
-  .hero-section p {
-    font-size: 1.8rem; /* Ajusta el tamaño del texto descriptivo */
-    max-width: 90%; /* Evita que el texto sea demasiado ancho */
-  }
-
-  .countdown-container {
+  .certificates-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Permite que los elementos se acomoden si no caben */
-    gap: 10px;
-  }
-
-  .countdown-item {
-    flex: 1 1 45%; /* Permite que haya 2 elementos por fila */
-    text-align: center;
-  }
-}
-
-/* Diseño responsive para móviles */
-@media (max-width: 768px) {
-  .hero-section {
-    height: auto; /* Ajuste dinámico */
-    padding: 40px 15px;
-  }
-
-  .hero-section h1 {
-    font-size: 2rem; /* Reduce más el título en móviles */
-  }
-
-  .hero-section p {
-    font-size: 1.5rem; /* Ajusta el tamaño del párrafo */
-  }
-
-  .countdown-container {
-    flex-direction: column; /* Los elementos se apilan verticalmente */
     align-items: center;
+    justify-content: center;
+    color: rgb(33, 33, 33); /* Color del texto */
+
+  }
+
+  .certificates-list li {
+    background: #f3f4f6;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    color: #4b5563;
+  }
+
+
+  /*BOTONES REDES SOCIALES*/
+
+
+
+
+  /* Countdown Styles */
+  .countdown-container {
+    background: white; /* Fondo blanco */
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    display: flex;
+    flex-wrap: wrap; /* Hace que sea responsivo */
+    justify-content: center;
+    gap: 20px; /* Espacio entre elementos */
+    max-width: 600px; /* Ajusta el ancho máximo */
+    margin: 0 auto; /* Centrar en pantalla */
   }
 
   .countdown-item {
-    width: 100%; /* Ocupa el 100% en móviles */
+    text-align: center;
+    flex: 1 1 120px; /* Hace que los elementos sean flexibles y responsivos */
+    min-width: 100px;
+    padding: 10px;
+    background: white; /* Color de fondo ligero */
+    border-radius: 8px;
   }
 
   .countdown-value {
-    font-size: 2rem; /* Aumenta el tamaño del número */
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000; /* Color oscuro para contraste */
   }
 
   .countdown-label {
-    font-size: 1.2rem; /* Ajusta el tamaño del texto */
+    font-size: 1rem;
+    color: #4b5563;
+    display: block;
   }
-}
+
+
+  .flayer-portada {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .flayer-portada img {
+    width: 100%; /* Reduce el tamaño de la imagen al 80% del contenedor */
+    max-width: 500px; /* Ajusta el tamaño máximo para que no sea muy grande */
+    height: auto; /* Mantiene la proporción */
+    display: block;
+    margin: 0 auto;
+  }
+
+  .logo {
+    position: fixed;
+    bottom: 10px; /* o top: 10px; para la esquina superior */
+    right: 10px; /* o left: 10px; para la esquina izquierda */
+    width: 100px; /* Ajusta el tamaño según lo necesites */
+    height: auto;
+  }
+
+  .hero-section {
+    position: relative;
+    background: url('/fondo1.png') no-repeat center center/cover;
+    height: 100vh; /* Ajusta según necesites */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white; /* Ajusta el color del texto según el contraste necesario */
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Capa oscura */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque */
+    z-index: 1;
+  }
+
+  .hero-section .container {
+    position: relative;
+    z-index: 2; /* Asegura que el contenido esté sobre la capa oscura */
+  }
+
+  /* Diseño responsive para tablets y pantallas medianas */
+  @media (max-width: 1024px) {
+    .hero-section {
+      height: auto; /* Permite que la sección crezca según el contenido */
+      padding: 50px 20px; /* Añade padding para mejorar la legibilidad */
+    }
+
+    .hero-section h1 {
+      font-size: 2.5rem; /* Reduce el tamaño del título */
+    }
+
+    .hero-section p {
+      font-size: 1.8rem; /* Ajusta el tamaño del texto descriptivo */
+      max-width: 90%; /* Evita que el texto sea demasiado ancho */
+    }
+
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; /* Permite que los elementos se acomoden si no caben */
+      gap: 10px;
+    }
+
+    .countdown-item {
+      flex: 1 1 45%; /* Permite que haya 2 elementos por fila */
+      text-align: center;
+    }
+  }
+
+  /* Diseño responsive para móviles */
+  @media (max-width: 768px) {
+    .hero-section {
+      height: auto; /* Ajuste dinámico */
+      padding: 40px 15px;
+    }
+
+    .hero-section h1 {
+      font-size: 2rem; /* Reduce más el título en móviles */
+    }
+
+    .hero-section p {
+      font-size: 1.5rem; /* Ajusta el tamaño del párrafo */
+    }
+
+    .countdown-container {
+      flex-direction: column; /* Los elementos se apilan verticalmente */
+      align-items: center;
+    }
+
+    .countdown-item {
+      width: 100%; /* Ocupa el 100% en móviles */
+    }
+
+    .countdown-value {
+      font-size: 2rem; /* Aumenta el tamaño del número */
+    }
+
+    .countdown-label {
+      font-size: 1.2rem; /* Ajusta el tamaño del texto */
+    }
+  }
 
 
 
 
 
-/*FOOTER*/
-footer {
-  background: #222;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
+  /*FOOTER*/
+  footer {
+    background: #222;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
 
-/* Contenedor principal del footer */
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
-}
-
-/* Logo alineado a la izquierda */
-.footer-left img {
-  width: 300px;
-  max-width: 100%;
-}
-
-/* Información alineada a la derecha */
-.footer-right {
-  text-align: right;
-  max-width: 30%;
-}
-
-/* Íconos centrados */
-.footer-icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 15px 0;
-  flex-wrap: wrap;
-}
-
-.footer-icons img {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s;
-}
-
-.footer-icons img:hover {
-  transform: scale(1.1);
-  border-radius: 25px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Sombra blanca para resaltar */
-  filter: brightness(1.2); /* Aumenta el brillo del ícono */
-}
-
-/* Texto de derechos reservados */
-.footer-rights {
-  font-size: 14px;
-  margin-top: 10px;
-  opacity: 0.8;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
+  /* Contenedor principal del footer */
   .footer-container {
-    flex-direction: column;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
   }
 
-  .footer-left,
-  .footer-right {
-    max-width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
+  /* Logo alineado a la izquierda */
   .footer-left img {
-    width: 100px;
-  }
-}
-
-
-
-
-
-/*CSS PARA EL BOTON DE SUBIR PANTALLA*/
-.scroll-to-top {
-  position: fixed;
-  bottom: 88px;
-  right: 20px;
-  background-color: white; /* Color de fondo del botón */
-  color: black; /* Color del ícono o texto */
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s, background-color 0.3s;
-}
-
-.scroll-to-top:hover {
-  background-color: rgb(231, 231, 231); /* Color de fondo al pasar el cursor */
-  color:black; /* Color del ícono o texto al pasar el cursor */
-}
-
-
-
-
-
-
-/*RESPONSIVE*/
-/* Media Queries para Responsividad */
-@media (max-width: 900px) {
-  .topics-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
-  }
-}
-
-@media (max-width: 600px) {
-  .topics-list {
-    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+    width: 300px;
+    max-width: 100%;
   }
 
-  .topics-list li {
-    height: 120px; /* Ajusta la altura para pantallas pequeñas */
+  /* Información alineada a la derecha */
+  .footer-right {
+    text-align: right;
+    max-width: 30%;
   }
-}
 
-.container1 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 120px;
-  padding: 20px;
-}
+  /* Íconos centrados */
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
 
-/* Sección izquierda con la imagen de portada */
-.left-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
+  .footer-icons img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s;
+  }
 
-.portada-img {
-  max-width: 40px; /* Ajusta el tamaño de la imagen */
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
+  .footer-icons img:hover {
+    transform: scale(1.1);
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Sombra blanca para resaltar */
+    filter: brightness(1.2); /* Aumenta el brillo del ícono */
+  }
 
-/* Sección derecha con las tarjetas */
-.right-section {
-  flex: 2;
-  display: flex;
-  flex-direction: column; /* Cambiar de 'row' a 'column' */
-  align-items: center;
-}
+  /* Texto de derechos reservados */
+  .footer-rights {
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.8;
+  }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
 
-.card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  overflow: hidden;
-  border: 1px solid #ccc;
+    .footer-left,
+    .footer-right {
+      max-width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-}
+    .footer-left img {
+      width: 100px;
+    }
+  }
 
-.card-content {
-  padding: 15px;
-}
-.card:hover {
-  box-shadow:10px 14px 8px rgba(0, 0, 0, 0.2);
 
-}
 
-.icon {
-  width: 180px;
-  height: auto;
-  margin-bottom: 10px;
-}
 
-.card-text {
-  background: #2D6987;
-  color: white;
-  padding: 10px;
-}
 
-h4{
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
-}
-.section-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1f2937; /* Color similar al del fondo de las tarjetas */
-  margin-bottom: 20px;
-  text-align: center;
-}
+  /*CSS PARA EL BOTON DE SUBIR PANTALLA*/
+  .scroll-to-top {
+    position: fixed;
+    bottom: 88px;
+    right: 20px;
+    background-color: white; /* Color de fondo del botón */
+    color: black; /* Color del ícono o texto */
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s, background-color 0.3s;
+  }
 
-/* Diseño responsivo */
-@media (max-width: 1024px) {
+  .scroll-to-top:hover {
+    background-color: rgb(231, 231, 231); /* Color de fondo al pasar el cursor */
+    color:black; /* Color del ícono o texto al pasar el cursor */
+  }
+
+
+
+
+
+
+  /*RESPONSIVE*/
+  /* Media Queries para Responsividad */
+  @media (max-width: 900px) {
+    .topics-list {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+    }
+  }
+
+  @media (max-width: 600px) {
+    .topics-list {
+      grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+    }
+
+    .topics-list li {
+      height: 120px; /* Ajusta la altura para pantallas pequeñas */
+    }
+  }
+
   .container1 {
-    flex-direction: column;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 120px;
+    padding: 20px;
   }
 
+  /* Sección izquierda con la imagen de portada */
   .left-section {
-    order: 1;
-  }
-
-  .right-section {
-    order: 2;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
   .portada-img {
-    max-width: 250px;
+    max-width: 40px; /* Ajusta el tamaño de la imagen */
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
   }
-}
+
+  /* Sección derecha con las tarjetas */
+  .right-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column; /* Cambiar de 'row' a 'column' */
+    align-items: center;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #ccc;
+
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+  .card:hover {
+    box-shadow:10px 14px 8px rgba(0, 0, 0, 0.2);
+
+  }
+
+  .icon {
+    width: 180px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    background: #2D6987;
+    color: white;
+    padding: 10px;
+  }
+
+  h4{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f2937; /* Color similar al del fondo de las tarjetas */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Diseño responsivo */
+  @media (max-width: 1024px) {
+    .container1 {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .left-section {
+      order: 1;
+    }
+
+    .right-section {
+      order: 2;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .portada-img {
+      max-width: 250px;
+    }
+  }
 
 
 
-/* Botón flotante de WhatsApp */
-.whatsapp-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #25D366;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
-  z-index: 1000;
-}
+  /* Botón flotante de WhatsApp */
+  .whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    z-index: 1000;
+  }
 
-/* Icono de WhatsApp */
-.whatsapp-icon {
-  width: 35px;
-  height: 35px;
-}
+  /* Icono de WhatsApp */
+  .whatsapp-icon {
+    width: 35px;
+    height: 35px;
+  }
 
-/* Tooltip (mensaje emergente en hover) */
-.whatsapp-tooltip {
-  position: absolute;
-  bottom: 10px; /* Aparece arriba del botón */
-  right:70px;
-  background-color: #004d00;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 14px;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(110px);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  pointer-events: none;
-}
+  /* Tooltip (mensaje emergente en hover) */
+  .whatsapp-tooltip {
+    position: absolute;
+    bottom: 10px; /* Aparece arriba del botón */
+    right:70px;
+    background-color: #004d00;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(110px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    pointer-events: none;
+  }
 
-/* Mostrar el mensaje al pasar el mouse */
-.whatsapp-button:hover .whatsapp-tooltip {
-  opacity: 1;
-  transform: translateX(0);
-}
+  /* Mostrar el mensaje al pasar el mouse */
+  .whatsapp-button:hover .whatsapp-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+  }

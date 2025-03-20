@@ -149,7 +149,7 @@
 
 
     <!-- Conferences Section -->
-    <section id="conferences" class="section" style=" margin-bottom: 2rem;">
+    <section id="conferences" class="section" style="margin-bottom: 2rem; position: relative;">
       <h2 style="text-align: center; color: #1f2937; margin-bottom: 2em;">Conferencias Disponibles</h2>
 
       <div *ngIf="!ponencias || ponencias.items.length === 0" style="text-align: center; color: #6b7280; font-size: 1.2em;">
@@ -182,9 +182,7 @@
                   placeholder="Ingresa tu correo para registrarte"
                 >
               </div>
-              <button type="submit"
-                      class="btn"
-                      [disabled]="!emailInputs[conference.exposureId]">
+              <button type="submit" class="btn" [disabled]="!emailInputs[conference.exposureId]">
                 Registrarme
               </button>
               <div *ngIf="submittedConferences[conference.exposureId]" class="success-message">
@@ -194,7 +192,7 @@
           }
         </div>
         <!-- Paginación usando ng-bootstrap -->
-        <nav class="mt-4" *ngIf="ponencias.totalPages > 1">
+        <nav class="pagination-container" *ngIf="ponencias && ponencias.totalPages > 1">
           <ngb-pagination
             [collectionSize]="ponencias.totalItems"
             [(page)]="currentPage"
@@ -213,15 +211,60 @@
           Comparte tu conocimiento y experiencia con la comunidad. Buscamos presentaciones sobre:
         </p>
         <ul class="topics-list">
-          <li>Tecnológias de la Información y Comunicación</li>
-          <li>Educación Superior y Modalidades de Estudio</li>
-          <li>Administración, Marketing y Emprendimiento</li>
-          <li>Calidad e Innovación Educativa</li>
-          <li>Artes y Humanidades </li>
-          <li>Actividad Física y Deportiva </li>
-          <li>Servicios de Protección Seguridad y Transporte </li>
-          <li>Ingeniería, Industria y Construcción </li>
-          <li>Ciencias Jurídicas, Políticas y Sociales</li>
+          <li>
+            Tecnologías de la Información y Comunicación
+            <div class="topic-card">
+              <p>Explora cómo las TIC están transformando la educación y la sociedad.</p>
+            </div>
+          </li>
+          <li>
+            Educación Superior y Modalidades de Estudio
+            <div class="topic-card">
+              <p>Analiza los desafíos y oportunidades de la educación superior en la era digital.</p>
+            </div>
+          </li>
+          <li>
+            Administración, Marketing y Emprendimiento
+            <div class="topic-card">
+              <p>Descubre estrategias innovadoras para gestionar y emprender en el mundo actual.</p>
+            </div>
+          </li>
+          <li>
+            Calidad e Innovación Educativa
+            <div class="topic-card">
+              <p>Mejora la calidad educativa a través de la innovación y buenas prácticas.</p>
+            </div>
+          </li>
+          <li>
+            Artes y Humanidades
+            <div class="topic-card">
+              <p>Reflexiona sobre el papel de las artes y humanidades en la sociedad contemporánea.</p>
+            </div>
+          </li>
+          <li>
+            Actividad Física y Deportiva
+            <div class="topic-card">
+              <p>Promueve la importancia de la actividad física y el deporte en la salud.</p>
+            </div>
+          </li>
+          <li>
+            Servicios de Protección, Seguridad y Transporte
+            <div class="topic-card">
+              <p>Aborda los retos de los servicios esenciales en un mundo globalizado.</p>
+            </div>
+          </li>
+          <li>
+            Ingeniería, Industria y Construcción
+            <div class="topic-card">
+              <p>Innovación en ingeniería y construcción para un futuro sostenible.</p>
+            </div>
+          </li>
+          <li>
+            Ciencias Jurídicas, Políticas y Sociales
+            <div class="topic-card">
+              <p>Analiza las tendencias en derecho, política y ciencias sociales.</p>
+            </div>
+          </li>
         </ul>
         <p style="color: #4b5563; margin: 1.5rem 0;">
           <!-- <strong>Fecha límite:</strong> 30 de junio, 2024 -->
