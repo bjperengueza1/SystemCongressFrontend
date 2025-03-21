@@ -205,3 +205,14 @@ export type UserItem = {
   email: string,
   role: number
 }
+
+export type CertificateAttendanceDto = {
+  certificatesAttendanceId: number,
+  guid: string,
+  attendeeName: string,
+  attendeeEmail: string,
+  attendeeIDNumber: string,
+  congressName: string,
+  congressStartDate: string,
+  congressEndDate: string,
+}

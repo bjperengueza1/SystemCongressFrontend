@@ -2,7 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable, of} from 'rxjs';
 import {ApiResponse} from '../interfaces/api-response';
-import {CongressItem, ExposureItem, ListCongressCertificate, RoomsItem} from '../interfaces/entities';
+import {
+  CertificateAttendanceDto,
+  CongressItem,
+  ExposureItem,
+  ListCongressCertificate,
+  RoomsItem
+} from '../interfaces/entities';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -139,6 +145,11 @@ export class CongressService {
 
   sendInvitationConference(id: number, emails: string[]): Observable<any> {
     return this.http.post(`${this.apiUrl}/${id}/send-invitacion-conference`, emails);
+  }
+
+  getCertificatesAttendances(page: number, size: number, search: string): Observable<ApiResponse<CertificateAttendanceDto>> {
+    const params = {pageNumber: page.toString(), pageSize: size.toString(), search };
+    return this.http.get<ApiResponse<CertificateAttendanceDto>>(`${this.apiUrl}/list-certificates-attendance`, {params});
   }
 
 }

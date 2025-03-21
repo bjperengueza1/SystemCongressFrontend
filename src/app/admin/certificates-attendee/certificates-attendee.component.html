@@ -1,0 +1,76 @@
+<div>
+
+  <div *ngIf="response">
+    <!-- Selector para tamaño de página -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="form-group w-50">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar certificados..."
+          [(ngModel)]="searchTerm"
+          (input)="loadCertificates()"
+        />
+      </div>
+
+      <!-- Selector para tamaño de página -->
+      <div class="form-group">
+        <label for="pageSize" class="me-2">Elementos por página:</label>
+        <select id="pageSize" class="form-select d-inline-block w-auto"
+                [(ngModel)]="pageSize"
+                (change)="loadCertificates()">
+          <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tabla para mostrar la lista de congresos -->
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Documento de Identidad</th>
+        <th>Congreso</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let congress of response.items">
+        <td>{{ congress.guid }}</td>
+        <td>{{ congress.attendeeName }}</td>
+        <td>{{ congress.attendeeEmail }}</td>
+        <td>{{ congress.attendeeIDNumber }}</td>
+        <td>{{ congress.congressName }}</td>
+        <td>{{ congress.congressStartDate | formatearFecha }}</td>
+        <td>{{ congress.congressEndDate | formatearFecha }}</td>
+      </tr>
+      <!-- Mostrar mensaje si no hay congresos -->
+      <tr *ngIf="response.items.length === 0">
+        <td colspan="6" class="text-center">No hay registros disponibles.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginación usando ng-bootstrap -->
+    <nav class="mt-4" *ngIf="response.totalPages > 1">
+      <ngb-pagination
+        [collectionSize]="response.totalItems"
+        [(page)]="currentPage"
+        [pageSize]="pageSize"
+        (pageChange)="loadCertificates()">
+      </ngb-pagination>
+    </nav>
+  </div>
+
+  <!-- Spinner de carga -->
+  <div *ngIf="!response" class="text-center mt-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p>Cargando registro de certificados...</p>
+  </div>
+
+</div>

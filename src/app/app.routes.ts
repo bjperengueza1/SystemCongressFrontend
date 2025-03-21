@@ -14,6 +14,7 @@ import {BuscarCertificadosComponent} from './congresos/buscar-certificados/busca
 import {RegistroConferenciaComponent} from './congresos/registro-conferencia/registro-conferencia.component';
 import {CongressFormComponent} from './congress-form/congress-form.component';
 import { UsuariosComponent } from './admin/usuarios/usuarios.component';
+import {CertificatesAttendeeComponent} from './admin/certificates-attendee/certificates-attendee.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -27,6 +28,7 @@ export const routes: Routes = [
       { path: 'presentaciones', component: PresentacionesComponent, canActivate: [authGuard] },
       { path: 'asistentes', component: AsistentesComponent, canActivate: [authGuard] },
       { path: 'asistencias', component: AsistenciasComponent, canActivate: [authGuard] },
+      { path: 'certificados-asistencias', component: CertificatesAttendeeComponent, canActivate: [authGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [authGuard] },
     ]
   },
