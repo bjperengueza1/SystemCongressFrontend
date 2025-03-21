@@ -150,10 +150,10 @@
 
     <!-- Conferences Section -->
     <section id="conferences" class="section" style="margin-bottom: 2rem; position: relative;">
-      <h2 style="text-align: center; color: #1f2937; margin-bottom: 2em;">Conferencias Disponibles</h2>
+      <h2 style="text-align: center; color: #1f2937; margin-bottom: 2em;">Exposiciones Disponibles</h2>
 
       <div *ngIf="!ponencias || ponencias.items.length === 0" style="text-align: center; color: #6b7280; font-size: 1.2em;">
-        No existen conferencias disponibles actualmente.
+        No existen exposiciones disponibles actualmente.
       </div>
       <div *ngIf="ponencias" class="conference-container">
         <div *ngFor="let conference of ponencias.items" class="conference-card">
