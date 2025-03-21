@@ -191,16 +191,17 @@
             </form>
           }
         </div>
-        <!-- Paginación usando ng-bootstrap -->
-        <nav class="pagination-container" *ngIf="ponencias && ponencias.totalPages > 1">
-          <ngb-pagination
-            [collectionSize]="ponencias.totalItems"
-            [(page)]="currentPage"
-            [pageSize]="pageSize"
-            (pageChange)="loadExposures($event, pageSize)">
-          </ngb-pagination>
-        </nav>
+        
       </div>
+      <!-- Paginación usando ng-bootstrap -->
+      <nav class="pagination-container" *ngIf="ponencias && ponencias.totalPages > 1">
+        <ngb-pagination
+          [collectionSize]="ponencias.totalItems"
+          [(page)]="currentPage"
+          [pageSize]="pageSize"
+          (pageChange)="loadExposures($event, pageSize)">
+        </ngb-pagination>
+      </nav>
     </section>
 
     <!-- Submit Presentation Section -->
